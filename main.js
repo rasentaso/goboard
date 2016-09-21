@@ -106,10 +106,10 @@ Board.prototype.initialize = function(stage) {
     
     var didFirstClick = false;
     this.on('touchstart',function(event){
-    	alert('koko');
+    	window.alert('koko');
     })
     this.on('mousedown',function (event){
-     	alert('koko2');
+     	window.alert('koko2');
         _isDrag = true;
         var pos = event.data.getLocalPosition(this.parent);        
         var cellId = this.Pos2CellId(pos);        
