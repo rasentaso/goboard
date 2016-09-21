@@ -363,6 +363,7 @@ Stones.prototype.initialize = function(stage) {
     	alert('koko');
     })
     this.on('mousedown',function(event){
+    	    	alert('koko2');
         _isDrag = true;    
         _input_color = this.color;
         
