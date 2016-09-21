@@ -359,16 +359,16 @@ Stones.prototype.initialize = function(stage) {
     stage.addChild(this);
     this.interactive = true;
     this.buttonMode = true;
-    this.on('mousedown',function(event){
+    this.on('touchstart',function(event){
         _isDrag = true;    
         _input_color = this.color;
         
     });
-    this.on('mouseup',function(event){
+    this.on('touchend',function(event){
         _isDrag = false;
         _input_color = 'blank';
     });
-    this.on('mousemove',function (event){
+    this.on('touchmove',function (event){
         if(this.isHover){
             
         }
