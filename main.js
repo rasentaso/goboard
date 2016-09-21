@@ -360,15 +360,18 @@ Stones.prototype.initialize = function(stage) {
     this.interactive = true;
     this.buttonMode = true;
     this.on('touchstart',function(event){
+    	alert('koko');
+    })
+    this.on('mousedown',function(event){
         _isDrag = true;    
         _input_color = this.color;
         
     });
-    this.on('touchend',function(event){
+    this.on('mouseup',function(event){
         _isDrag = false;
         _input_color = 'blank';
     });
-    this.on('touchmove',function (event){
+    this.on('mousemove',function (event){
         if(this.isHover){
             
         }
