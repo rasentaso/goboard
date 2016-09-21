@@ -106,10 +106,14 @@ Board.prototype.initialize = function(stage) {
     
     var didFirstClick = false;
     this.on('touchstart',function(event){
-    	window.alert('koko');
+    	var test = new PIXI.Graphics();
+    	stage.addChild(test);
+    	test.beginFill(0x000000);
+	test.drawRect(100,100,200,200);
+	test.endFill();
+    	
     })
     this.on('mousedown',function (event){
-     	window.alert('koko2');
         _isDrag = true;
         var pos = event.data.getLocalPosition(this.parent);        
         var cellId = this.Pos2CellId(pos);        
