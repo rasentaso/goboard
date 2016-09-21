@@ -105,6 +105,9 @@ Board.prototype.initialize = function(stage) {
     this.buttonMode  = true;
     
     var didFirstClick = false;
+    this.on('touchstart',function(event){
+    	alert('koko');
+    })
     this.on('mousedown',function (event){
         _isDrag = true;
         var pos = event.data.getLocalPosition(this.parent);        
@@ -359,11 +362,8 @@ Stones.prototype.initialize = function(stage) {
     stage.addChild(this);
     this.interactive = true;
     this.buttonMode = true;
-    this.on('touchstart',function(event){
-    	alert('koko');
-    })
+  
     this.on('mousedown',function(event){
-    	    	alert('koko2');
         _isDrag = true;    
         _input_color = this.color;
         
