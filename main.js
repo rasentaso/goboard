@@ -113,7 +113,7 @@ Board.prototype.initialize = function(stage) {
     this.buttonMode  = true;
     
     var didFirstClick = false;
-/*    
+    
     this.on('touchstart',function (event){
         _debugtext.text = 'touchstart';
     });
@@ -123,7 +123,7 @@ Board.prototype.initialize = function(stage) {
     this.on('touchmove',function (event){
         _debugtext.text = 'touchmove';
     });
-*/          
+         
     this.on('mousedown',function (event){
         _isDrag = true;
         var pos = event.data.getLocalPosition(this.parent);        
