@@ -6,6 +6,7 @@ var _whites;
 var _blacks;
 var _isDrag;
 var _debug = false;
+var _debugtext;
 window.onload = function() {
     
 	var renderer = PIXI.autoDetectRenderer(800, 650, { antialias: true, backgroundColor: ColorCode('renderer') });
@@ -21,6 +22,11 @@ window.onload = function() {
     renderer.view.style.paddingRight = "0";
 
 	var stage = new PIXI.Container();
+    
+    _debugtext = new PIXI.Text('');
+    _debugtext.x = 100;
+    _debugtext.y = 100;
+    stage.addChild(_debugtext);
     
     _back = new Back(0,0,800,650,stage);
     
@@ -105,14 +111,17 @@ Board.prototype.initialize = function(stage) {
     this.buttonMode  = true;
     
     var didFirstClick = false;
-    this.on('touchstart',function(event){
-    	var test = new PIXI.Graphics();
-    	stage.addChild(test);
-    	test.beginFill(0x000000);
-	test.drawRect(100,100,200,200);
-	test.endFill();
-    	
-    })
+    
+    this.on('touchstart',function (event){
+        _debugtext.text = 'touchstart';
+    }
+    this.on('touchend',function (event){
+        _debugtext.text = 'touchend';
+    }
+    this.on('touchmove',function (event){
+        _debugtext.text = 'touchmove';
+    }
+            
     this.on('mousedown',function (event){
         _isDrag = true;
         var pos = event.data.getLocalPosition(this.parent);        
@@ -367,7 +376,6 @@ Stones.prototype.initialize = function(stage) {
     stage.addChild(this);
     this.interactive = true;
     this.buttonMode = true;
-  
     this.on('mousedown',function(event){
         _isDrag = true;    
         _input_color = this.color;
