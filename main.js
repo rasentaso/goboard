@@ -23,7 +23,7 @@ window.onload = function() {
 
 	var stage = new PIXI.Container();
     
-    _debugtext = new PIXI.Text('');
+    _debugtext = new PIXI.Text('aaa');
     _debugtext.x = 100;
     _debugtext.y = 100;
     stage.addChild(_debugtext);
