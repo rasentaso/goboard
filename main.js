@@ -34,6 +34,7 @@ window.onload = function() {
     _debugtext = new PIXI.Text('aaa');
     _debugtext.x = 0;
     _debugtext.y = 0;
+    _debugtext.text = 'bbb';
     stage.addChild(_debugtext);
     
     _guide = new Guide(stage);
