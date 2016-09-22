@@ -22,12 +22,12 @@ window.onload = function() {
     renderer.view.style.paddingRight = "0";
 
 	var stage = new PIXI.Container();
-/*    
+    
     _debugtext = new PIXI.Text('aaa');
     _debugtext.x = 100;
     _debugtext.y = 100;
     stage.addChild(_debugtext);
-*/    
+    
     _back = new Back(0,0,800,650,stage);
     
     _board = new Board(stage);
@@ -120,7 +120,7 @@ Board.prototype.initialize = function(stage) {
     });
     this.on('touchmove',function (event){
         _debugtext.text = 'touchmove';
-   /          
+*/          
     this.on('mousedown',function (event){
         _isDrag = true;
         var pos = event.data.getLocalPosition(this.parent);        
