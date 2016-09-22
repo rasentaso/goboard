@@ -120,6 +120,7 @@ Board.prototype.initialize = function(stage) {
     });
     this.on('touchmove',function (event){
         _debugtext.text = 'touchmove';
+    });
 */          
     this.on('mousedown',function (event){
         _isDrag = true;
