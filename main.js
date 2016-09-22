@@ -114,13 +114,13 @@ Board.prototype.initialize = function(stage) {
     
     this.on('touchstart',function (event){
         _debugtext.text = 'touchstart';
-    }
+    });
     this.on('touchend',function (event){
         _debugtext.text = 'touchend';
-    }
+    });
     this.on('touchmove',function (event){
         _debugtext.text = 'touchmove';
-    }
+    });
             
     this.on('mousedown',function (event){
         _isDrag = true;
