@@ -32,8 +32,8 @@ window.onload = function() {
     _board.refreshBoard();
     
     _debugtext = new PIXI.Text('aaa');
-    _debugtext.x = 100;
-    _debugtext.y = 100;
+    _debugtext.x = 0;
+    _debugtext.y = 0;
     stage.addChild(_debugtext);
     
     _guide = new Guide(stage);
