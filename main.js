@@ -23,20 +23,17 @@ window.onload = function() {
 
 	var stage = new PIXI.Container();
     
-
+    _debugtext = new PIXI.Text('');
+    _debugtext.x = 100;
+    _debugtext.y = 100;
+    stage.addChild(_debugtext);
     
     _back = new Back(0,0,800,650,stage);
     
     _board = new Board(stage);
     _board.setUp(40,20,585,13);
     _board.refreshBoard();
-    
-    _debugtext = new PIXI.Text('aaa');
-    _debugtext.x = 0;
-    _debugtext.y = 0;
 
-    stage.addChild(_debugtext);
-    
     _guide = new Guide(stage);
 
     _whites = new Stones(stage);
@@ -73,29 +70,35 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
     this.beginFill(ColorCode('back',0,0));
     this.drawRect(xpos,ypos,width,height);
     this.endFill();  
-    this.on('mousedown',function(event){
-    });    
-    this.on('mouseup',function (event){
+    
+    var cursorUp = function(event){
         _isDrag = false;   
-        _input_color = 'blank';        
-    });
-    this.on('mousemove',function (event){
-        if(this.isHover){
-            _guide.clear();    
-            if(_isDrag && _input_color !== 'blank'){  
-                var pos = event.data.getLocalPosition(this.parent);        
+        _input_color = 'blank';    
+        this.deleteMove();
+        _guide.clear();
+    }
+    var cursorMove = function(event){
+        var pos = event.data.getLocalPosition(this.parent);  
+        if(this.containsPoint(pos)){  
+            if(_isDrag){  
                 _guide.refreshGuide(pos);                            
             }
         }
-    });
-    this.on('mouseover',function (event){
-        this.isHover = true;
-    });
-    this.on('mouseout',function (event){
-        this.isHover = false;
-    });
+    }
+    this.on('mouseup',cursorUp);
+    this.on('touchend',cursorUp);
+    this.on('mousemove',cursorMove);
+    this.on('touchmove',cursorMove);
     
 };
+
+Back.prototype.deleteMove = function(){
+
+    for(var i = 0; i < _board.movingIds.length; ++i){
+        _board.cells[_board.movingIds[i]].stone = 'blank';                
+    }
+    _board.movingIds = [];
+}
 
 //
 // Board
@@ -115,20 +118,10 @@ Board.prototype.initialize = function(stage) {
     
     var didFirstClick = false;
     
-    this.on('touchstart',function (event){
-        _debugtext.text = 'touchstart';
-    });
-    this.on('touchend',function (event){
-        _debugtext.text = 'touchend';
-    });
-    this.on('touchmove',function (event){
-        _debugtext.text = 'touchmove';
-    });
-         
-    this.on('mousedown',function (event){
+    var cursorDown = function(event){
         _isDrag = true;
         var pos = event.data.getLocalPosition(this.parent);        
-        var cellId = this.Pos2CellId(pos);        
+        var cellId = this.Pos2CellId(pos);
         if(!didFirstClick){    
             didFirstClick = true;
             setTimeout( function() {
@@ -140,7 +133,7 @@ Board.prototype.initialize = function(stage) {
                 this.movingIds[0] = cellId;
                 this.refreshBoard();
             }
-            
+
         }else{
             //double click
             didFirstClick = false ;
@@ -152,14 +145,12 @@ Board.prototype.initialize = function(stage) {
                 this.checkSumi[cellId] = true;
                 this.getConnectedMoveIds(cellId);                
                 this.refreshBoard();
-                
+
             }            
         }
-        _guide.refreshGuide(pos);   
-        
-    });
-    
-    this.on('mouseup',function (event){
+        _guide.refreshGuide(pos);       
+    }
+    var cursorUp = function(event){
         _isDrag = false;
         var pos = event.data.getLocalPosition(this.parent);                
         var cellId = this.Pos2CellId(pos);
@@ -174,25 +165,29 @@ Board.prototype.initialize = function(stage) {
             this.rollBackMove();
         }
         this.refreshBoard();        
-        _guide.clear();             
-    });  
-    this.on('mousemove',function (event){
-        if(this.isHover){
+        _guide.clear();                     
+    }  
+    var cursorMove = function(event){
+        var pos = event.data.getLocalPosition(this.parent);        
+        if(this.containsPoint(pos)){
             _guide.clear();    
             if(_isDrag){  
-                var pos = event.data.getLocalPosition(this.parent);        
                 _guide.refreshGuide(pos);                            
             }
-        }
-    });
-    this.on('mouseover',function (event){
-        this.isHover = true;
-    });
-    this.on('mouseout',function (event){
-        this.isHover = false;
-    });    
+        }        
+    }
+            
+    this.on('mousedown',cursorDown);
+    this.on('touchstart',cursorDown);
+    this.on('mouseup',cursorUp);
+    this.on('touchend',cursorUp);
+    this.on('mousemove',cursorMove);
+    this.on('touchmove',cursorMove);
     
 };
+
+
+
 Board.prototype.setUp = function(xpos,ypos,length,tract){
     
     this.xpos   = xpos; 
@@ -379,27 +374,21 @@ Stones.prototype.initialize = function(stage) {
     stage.addChild(this);
     this.interactive = true;
     this.buttonMode = true;
-    this.on('mousedown',function(event){
+
+    var cursorDown = function(event){
         _isDrag = true;    
-        _input_color = this.color;
-        
-    });
-    this.on('mouseup',function(event){
+        _input_color = this.color;        
+    }
+
+    var cursorUp = function(event){
         _isDrag = false;
-        _input_color = 'blank';
-    });
-    this.on('mousemove',function (event){
-        if(this.isHover){
+        _input_color = 'blank';        
+    }
+    this.on('mousedown',cursorDown);
+    this.on('touchstart',cursorDown);
+    this.on('mouseup',cursorUp);    
+    this.on('touchend',cursorUp);    
             
-        }
-    });
-    this.on('mouseover',function (event){
-        this.isHover = true;
-    });
-    this.on('mouseout',function (event){
-        this.isHover = false;
-    });    
-    
 }
 
 Stones.prototype.setUp = function(xpos,ypos,color){
