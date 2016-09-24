@@ -24,17 +24,19 @@ window.onload = function() {
     
 	var stage = new PIXI.Container();
     
-    _debugtext = new PIXI.Text('');
-    _debugtext.x = 100;
-    _debugtext.y = 100;
-    stage.addChild(_debugtext);
     
     _back = new Back(0,0,displayWidth,displayHeight,stage);
+
     
     _board = new Board(stage);
     _board.setUp(40,20,585,9);
     _board.refreshBoard();
 
+        _debugtext = new PIXI.Text('');
+    _debugtext.x = 100;
+    _debugtext.y = 100;
+    _debugtext.text = displayWidth;
+    stage.addChild(_debugtext);
     _guide = new Guide(stage);
 
     _whites = new Stones(stage);
