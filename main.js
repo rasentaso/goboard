@@ -14,8 +14,8 @@ window.onload = function() {
 	var renderer = PIXI.autoDetectRenderer(displayWidth,displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
     document.body.appendChild(renderer.view);
     renderer.view.style.display = "block";
-//    renderer.view.style.width = "1900px";
-    renderer.view.style.width = displayWidth + 'px';
+    renderer.view.style.width = "1900px";
+//    renderer.view.style.width = displayWidth + 'px';
     renderer.view.style.marginTop = "40px";
     renderer.view.style.marginLeft = "auto";
     renderer.view.style.marginRight = "auto";
