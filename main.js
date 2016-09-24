@@ -9,18 +9,19 @@ var _debug = false;
 var _debugtext;
 window.onload = function() {
     
-	var renderer = PIXI.autoDetectRenderer(800, 650, { antialias: true, backgroundColor: ColorCode('renderer') });
-
-
+    var displayWidth = window.parent.screen.availWidth;
+    var displayHeight = window.parent.screen.availHeight;
+	var renderer = PIXI.autoDetectRenderer(displayWidth,displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
     document.body.appendChild(renderer.view);
     renderer.view.style.display = "block";
-    renderer.view.style.width = "800px";
+//    renderer.view.style.width = "1900px";
+    renderer.view.style.width = displayWidth + 'px';
     renderer.view.style.marginTop = "40px";
     renderer.view.style.marginLeft = "auto";
     renderer.view.style.marginRight = "auto";
     renderer.view.style.paddingLeft = "0";
     renderer.view.style.paddingRight = "0";
-
+    
 	var stage = new PIXI.Container();
     
     _debugtext = new PIXI.Text('');
@@ -28,20 +29,20 @@ window.onload = function() {
     _debugtext.y = 100;
     stage.addChild(_debugtext);
     
-    _back = new Back(0,0,800,650,stage);
+    _back = new Back(0,0,displayWidth,displayHeight,stage);
     
     _board = new Board(stage);
-    _board.setUp(40,20,585,13);
+    _board.setUp(40,20,585,9);
     _board.refreshBoard();
 
     _guide = new Guide(stage);
 
     _whites = new Stones(stage);
-    _whites.setUp(680,70,'white');
+    _whites.setUp(680,50,100,100,'white');
     _whites.refreshStones();
     
     _blacks = new Stones(stage);
-    _blacks.setUp(680,170,'black');
+    _blacks.setUp(680,170,100,100,'black');
     _blacks.refreshStones();
 
 	// run the render loop
@@ -391,18 +392,20 @@ Stones.prototype.initialize = function(stage) {
             
 }
 
-Stones.prototype.setUp = function(xpos,ypos,color){
+Stones.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
 
-    this.xpos  = xpos;
-    this.ypos  = ypos;
-    this.color = color;
+    this.xpos    = xpos;
+    this.ypos    = ypos;
+    this.xlength = xlength;
+    this.ylength = ylength;
+    this.color   = color;
     
 }
 
 Stones.prototype.refreshStones = function(){
     
     this.beginFill(ColorCode(this.color));
-    this.drawCircle(this.xpos,this.ypos,_board.cell_half_length);
+    this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
     this.endFill();
      
 }
