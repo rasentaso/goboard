@@ -9,8 +9,8 @@ var _debug = false;
 var _debugtext;
 window.onload = function() {
     
-    var displayWidth = window.parent.screen.availWidth;
-    var displayHeight = window.parent.screen.availHeight;
+    var displayWidth = window.parent.screen.availWidth * window.devicePixelRatio;
+    var displayHeight = window.parent.screen.availHeight * window.devicePixelRatio;
 	var renderer = PIXI.autoDetectRenderer(displayWidth,displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
     document.body.appendChild(renderer.view);
     renderer.view.style.display = "block";
