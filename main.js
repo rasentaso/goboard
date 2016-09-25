@@ -23,12 +23,10 @@ window.onload = function() {
     renderer.view.style.paddingRight = "0";
     
 	var stage = new PIXI.Container();
-    
-    
     _back = new Back(0,0,displayWidth,displayHeight,stage);
 
     _board = new Board(stage);
-    _board.setUp(40,20,585,9);
+    _board.setUp(0,0,displayWidth / 2,9);
     _board.refreshBoard();
 
 /*
@@ -39,6 +37,7 @@ window.onload = function() {
     stage.addChild(_debugtext);
     _guide = new Guide(stage);
 */
+/*
     _whites = new Stones(stage);
     _whites.setUp(680,50,100,100,'white');
     _whites.refreshStones();
@@ -46,6 +45,7 @@ window.onload = function() {
     _blacks = new Stones(stage);
     _blacks.setUp(680,170,100,100,'black');
     _blacks.refreshStones();
+*/
 	// run the render loop
 	animate();
 	function animate() {        
