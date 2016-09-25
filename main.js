@@ -9,14 +9,11 @@ var _debug = false;
 var _debugtext;
 window.onload = function() {
 
-    var displayWidth = 630;
-    var displayHeight = 630
-//    var displayWidth = window.parent.screen.availWidth * window.devicePixelRatio;
-//    var displayHeight = window.parent.screen.availHeight * window.devicePixelRatio;
+    var displayWidth = window.parent.screen.availWidth * window.devicePixelRatio;
+    var displayHeight = window.parent.screen.availHeight * window.devicePixelRatio;
 	var renderer = PIXI.autoDetectRenderer(displayWidth,displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
 
     document.body.appendChild(renderer.view);
-/*
     renderer.view.style.display = "block";
 //  renderer.view.style.width = "1900px";
     renderer.view.style.width = displayWidth + 'px';
@@ -25,12 +22,12 @@ window.onload = function() {
     renderer.view.style.marginRight = "auto";
     renderer.view.style.paddingLeft = "0";
     renderer.view.style.paddingRight = "0";
-*/    
+    
 	var stage = new PIXI.Container();
     _back = new Back(0,0,displayWidth,displayHeight,stage);
 
     _board = new Board(stage);
-    _board.setUp(0,0,displayWidth,9);
+    _board.setUp(0,0,displayWidth / 2 * 1.5,9);
     _board.refreshBoard();
 
 /*
