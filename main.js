@@ -26,7 +26,7 @@ window.onload = function() {
     _back = new Back(0,0,displayWidth,displayHeight,stage);
 
     _board = new Board(stage);
-    _board.setUp(0,0,displayWidth / 2,9);
+    _board.setUp(0,0,displayWidth / 1.5,9);
     _board.refreshBoard();
 
 /*
