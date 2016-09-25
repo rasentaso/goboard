@@ -25,10 +25,10 @@ window.onload = function() {
     renderer.view.style.paddingRight = "0";
     
 	var stage = new PIXI.Container();
-    _back = new Back(10,10,displayWidth,displayHeight,stage);
+    _back = new Back(0,0,displayWidth + 20,displayHeight + 20,stage);
 
     _board = new Board(stage);
-    _board.setUp(0,0,displayWidth,9);
+    _board.setUp(10,10,displayWidth,9);
     _board.refreshBoard();
 
 
