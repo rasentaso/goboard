@@ -218,7 +218,7 @@ Board.prototype.refreshBoard = function(){
 	this.lineStyle(1, ColorCode('line'), 1);
 
     this.drawRect(this.xpos,this.ypos,this.length,this.length);
-    for(var i = 0; i < this.tract; ++i){
+    for(var i = 0; i < 4; ++i){
         this.moveTo(this.xpos +  this.cell_half_length + (i * this.cell_length),
                         this.ypos +  this.cell_half_length);
         this.lineTo(this.xpos +  this.cell_half_length + (i * this.cell_length),
