@@ -26,17 +26,17 @@ window.onload = function() {
     _back = new Back(0,0,displayWidth,displayHeight,stage);
 
     _board = new Board(stage);
-    _board.setUp(0,0,displayWidth / 2 * 1.5,9);
+    _board.setUp(0,0,displayWidth / 1.5,9);
     _board.refreshBoard();
 
-/*
+
     _debugtext = new PIXI.Text('');
     _debugtext.x = 100;
     _debugtext.y = 100;
     _debugtext.text = displayWidth + '-' + displayHeight + '-' + window.devicePixelRatio;
     stage.addChild(_debugtext);
     _guide = new Guide(stage);
-*/
+
 /*
     _whites = new Stones(stage);
     _whites.setUp(680,50,100,100,'white');
