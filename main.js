@@ -39,7 +39,7 @@ window.onload = function() {
 */
     _guide = new Guide(stage);
 
-/*
+
     _whites = new Stones(stage);
     _whites.setUp(680,50,100,100,'white');
     _whites.refreshStones();
@@ -47,7 +47,7 @@ window.onload = function() {
     _blacks = new Stones(stage);
     _blacks.setUp(680,170,100,100,'black');
     _blacks.refreshStones();
-*/
+
 	// run the render loop
 	animate();
 	function animate() {        
