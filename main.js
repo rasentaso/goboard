@@ -226,6 +226,7 @@ Board.prototype.refreshBoard = function(){
                         this.ypos +  this.cell_half_length + (i * this.cell_length));        
     }    
     this.endFill();
+	this.lineStyle(0);
     
     for(var i = 0; i < this.cells.length; ++i){
         
