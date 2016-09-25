@@ -17,8 +17,8 @@ window.onload = function() {
 //  renderer.view.style.width = "1900px";
     renderer.view.style.width = displayWidth + 'px';
     renderer.view.style.marginTop = "40px";
-    renderer.view.style.marginLeft = "auto";
-    renderer.view.style.marginRight = "auto";
+    renderer.view.style.marginLeft = "0";
+    renderer.view.style.marginRight = "0";
     renderer.view.style.paddingLeft = "0";
     renderer.view.style.paddingRight = "0";
     
