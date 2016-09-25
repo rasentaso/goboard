@@ -212,7 +212,7 @@ Board.prototype.refreshBoard = function(){
 
     this.clear();
 	this.beginFill(ColorCode('board'));
-	this.lineStyle(1, ColorCode('line'), 1);
+	this.lineStyle(2, ColorCode('line'), 1);
 
     this.drawRect(this.xpos,this.ypos,this.length,this.length);
     for(var i = 0; i < this.tract; ++i){
