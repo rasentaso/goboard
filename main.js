@@ -27,16 +27,17 @@ window.onload = function() {
     
     _back = new Back(0,0,displayWidth,displayHeight,stage);
 
-    
+/*    
     _board = new Board(stage);
     _board.setUp(40,20,585,9);
     _board.refreshBoard();
-
+*/
         _debugtext = new PIXI.Text('');
     _debugtext.x = 100;
     _debugtext.y = 100;
     _debugtext.text = displayWidth + '-' + displayHeight + '-' + window.devicePixelRatio;
     stage.addChild(_debugtext);
+/*
     _guide = new Guide(stage);
 
     _whites = new Stones(stage);
@@ -46,7 +47,7 @@ window.onload = function() {
     _blacks = new Stones(stage);
     _blacks.setUp(680,170,100,100,'black');
     _blacks.refreshStones();
-
+*/
 	// run the render loop
 	animate();
 	function animate() {        
