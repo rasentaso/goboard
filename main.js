@@ -31,12 +31,13 @@ window.onload = function() {
     _board.setUp(0,0,displayWidth,9);
     _board.refreshBoard();
 
-
+/*
     _debugtext = new PIXI.Text('');
     _debugtext.x = 100;
     _debugtext.y = 100;
     _debugtext.text = displayWidth + '-' + displayHeight + '-' + window.devicePixelRatio;
     stage.addChild(_debugtext);
+*/
     _guide = new Guide(stage);
 
 /*
