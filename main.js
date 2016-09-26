@@ -70,6 +70,7 @@ function initPostion(){
         _init_boardXPos  = 0;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
         _init_stonesLen  = _init_boardYPos / 2;
+        console.log(_init_stonesLen);
         _init_blacksXPos = _displayWidth / 2 - _init_stonesLen / 2;
         _init_blacksYPos = _init_boardYPos / 2 - _init_stonesLen / 2;        
         _init_whitesXPos = _init_boardLen - _init_stonesLen - 30;
