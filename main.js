@@ -26,7 +26,7 @@ window.onload = function() {
     _back = new Back(0,0,displayWidth,displayHeight,stage);
 
     _board = new Board(stage);
-    _board.setUp(displayWidth  * 0.2,0,displayWidth  * 0.6,9);
+    _board.setUp(displayWidth  * 0.1,0,displayWidth  * 0.9,9);
     _board.refreshBoard();
 
 /*
@@ -40,11 +40,11 @@ window.onload = function() {
 
 
     _whites = new Stones(stage);
-    _whites.setUp(0,50,displayWidth  * 0.2,100,'white');
+    _whites.setUp(0,50,displayWidth  * 0.1,100,'white');
     _whites.refreshStones();
     
     _blacks = new Stones(stage);
-    _blacks.setUp(displayWidth  * 0.8,170,displayWidth  * 0.2,100,'black');
+    _blacks.setUp(displayWidth  * 0.9,170,displayWidth  * 0.1,100,'black');
     _blacks.refreshStones();
 
 	// run the render loop
