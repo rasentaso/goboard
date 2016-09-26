@@ -21,12 +21,21 @@ window.onload = function() {
     renderer.view.style.marginRight = "auto";
     renderer.view.style.paddingLeft = "0";
     renderer.view.style.paddingRight = "0";
-    
+
 	var stage = new PIXI.Container();
     _back = new Back(0,0,displayWidth,displayHeight,stage);
 
+    var smaller,larger;
+    if(displayWidth < displayHeight){
+        smaller = displayWidth;
+        larget  = displayHeight;
+    }else{
+        smaller = displayHeight;
+        larget  = displayWidth;
+    }
+    var boardLen  = GetAdjustValue(smaller,larger);    
     _board = new Board(stage);
-    _board.setUp(displayWidth  * 0.15,0,displayWidth  * 0.7,9);
+    _board.setUp(boardLen  * 0.15,0,boardLen,9);
     _board.refreshBoard();
 
 /*
@@ -38,13 +47,12 @@ window.onload = function() {
 */
     _guide = new Guide(stage);
 
-
     _whites = new Stones(stage);
-    _whites.setUp(0,50,displayWidth  * 0.15,100,'white');
+    _whites.setUp(0,50,boardLen  * 0.15,100,'white');
     _whites.refreshStones();
     
     _blacks = new Stones(stage);
-    _blacks.setUp(displayWidth  * 0.85,170,displayWidth  * 0.15,100,'black');
+    _blacks.setUp(boardLen  * 0.85,170,boardLen  * 0.15,100,'black');
     _blacks.refreshStones();
 
 	// run the render loop
@@ -55,6 +63,11 @@ window.onload = function() {
     }
     
 };
+
+function adjustBoardSize(smaller,larger){
+    smaller *= 1.3;
+    return smaller - larger < ? smaller : larger;
+}
 
 //
 // Back
