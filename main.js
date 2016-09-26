@@ -1,3 +1,14 @@
+var _displayWidth;
+var _displayHeight;
+var _init_boardLen;
+var _init_boardXPos;
+var _init_boardYPos;
+var _init_stonesLen;
+var _init_whitesXPos;
+var _init_whitesYPos;
+var _init_blacksXPos;
+var _init_blacksYPos;
+
 var _input_color = 'blank';
 var _back;
 var _board;
@@ -9,8 +20,8 @@ var _debug = false;
 var _debugtext;
 window.onload = function() {
 
-    var displayWidth  = screen.availWidth * window.devicePixelRatio;
-    var displayHeight = screen.availHeight * window.devicePixelRatio;
+    _displayWidth  = screen.availWidth  * window.devicePixelRatio;
+    _displayHeight = screen.availHeight * window.devicePixelRatio;
 	var renderer = PIXI.autoDetectRenderer(displayWidth,displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
 
     document.body.appendChild(renderer.view);
@@ -23,41 +34,23 @@ window.onload = function() {
     renderer.view.style.paddingRight = "0";
 
 	var stage = new PIXI.Container();
-    _back = new Back(0,0,displayWidth,displayHeight,stage);
-
-    var boardLen;
-    var boardXPos;
-    var boardYPos;
-    if(displayWidth < displayHeight){
-        boardLen  = adjustBoardSize(displayWidth,displayHeight); 
-        boardXPos = 0;
-        boardYPos = displayHeight / 2 - boardLen / 2;
-    }else{
-        boardLen  = adjustBoardSize(displayHeight,displayWidth);    
-        boardXPos = displayWidth / 2 - boardLen / 2;;
-        boardYPos = 0;        
-    }
+    _back = new Back(0,0,_displayWidth,_displayHeight,stage);
+    
+    initPostion();
     
     _board = new Board(stage);
-    _board.setUp(boardXPos,boardYPos,boardLen,9);
+    _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,9);
     _board.refreshBoard();
 
-/*
-    _debugtext = new PIXI.Text('');
-    _debugtext.x = 100;
-    _debugtext.y = 100;
-    _debugtext.text = displayWidth + '-' + displayHeight + '-' + window.devicePixelRatio;
-    stage.addChild(_debugtext);
-*/
     _guide = new Guide(stage);
 
-    _whites = new Stones(stage);
-    _whites.setUp(0,50,boardLen  * 0.15,100,'white');
-    _whites.refreshStones();
-    
     _blacks = new Stones(stage);
-    _blacks.setUp(boardLen  * 0.85,170,boardLen  * 0.15,100,'black');
+    _blacks.setUp(_init_blacksXPos,_init_blacksYPos,_init_stonesLen,_init_stonesLen,'black');
     _blacks.refreshStones();
+    
+    _whites = new Stones(stage);
+    _whites.setUp(_init_whitesXPos,_init_whitesYPos,_init_stonesLen,_init_stonesLen,'white');
+    _whites.refreshStones();    
 
 	// run the render loop
 	animate();
@@ -67,6 +60,30 @@ window.onload = function() {
     }
     
 };
+
+function initPostion(){
+
+    _init_stonesLen  = 100;
+    
+    if(_displayWidth < _displayHeight){
+        _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
+        _init_boardXPos  = 0;
+        _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
+        _init_blacksXPos = 0;
+        _init_blacksYPos = 0;        
+        _init_whiteXPos  = _init_boardLen - _init_stonesLen;
+        _init_whiteYPos  = _displayHeight / 2 + _init_boardLen / 2;
+    }else{
+        _init_boardLen   = adjustBoardSize(_displayHeight,_displayWidth);    
+        _init_boardXPos  = _displayWidth / 2 - _init_boardLen / 2;
+        _init_boardYPos  = 0;        
+        _init_blacksXPos = 0;
+        _init_blacksYPos = 0;        
+        _init_whiteXPos  = 0;
+        _init_whiteYPos  = 0;
+    }
+
+}
 
 function adjustBoardSize(smaller,larger){
     expansion = smaller * 1.3;
