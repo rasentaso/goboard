@@ -22,11 +22,11 @@ window.onload = function() {
 
     _displayWidth  = screen.availWidth  * window.devicePixelRatio;
     _displayHeight = screen.availHeight * window.devicePixelRatio;
-	var renderer = PIXI.autoDetectRenderer(displayWidth,displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
+	var renderer = PIXI.autoDetectRenderer(_displayWidth,_displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
 
     document.body.appendChild(renderer.view);
     renderer.view.style.display = "block";
-    renderer.view.style.width = displayWidth + 'px';
+    renderer.view.style.width = _displayWidth + 'px';
     renderer.view.style.marginTop = "0px";
     renderer.view.style.marginLeft = "auto";
     renderer.view.style.marginRight = "auto";
