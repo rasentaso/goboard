@@ -25,17 +25,21 @@ window.onload = function() {
 	var stage = new PIXI.Container();
     _back = new Back(0,0,displayWidth,displayHeight,stage);
 
-    var smaller,larger;
+    var boardLen;
+    var boardXPos;
+    var boardYPos;
     if(displayWidth < displayHeight){
-        smaller = displayWidth;
-        larger  = displayHeight;
+        boardLen  = adjustBoardSize(displayWidth,displayHeight); 
+        boardXPos = 0;
+        boardYPos = displayHeight / 2 - boardLen / 2;
     }else{
-        smaller = displayHeight;
-        larger  = displayWidth;
+        boardLen  = adjustBoardSize(displayHeight,displayWidth);    
+        boardXPos = displayWidth / 2 - boardLen / 2;;
+        boardYPos = 0;        
     }
-    var boardLen  = adjustBoardSize(smaller,larger);    
+    
     _board = new Board(stage);
-    _board.setUp(0,displayHeight / 2 - boardLen / 2,boardLen,9);
+    _board.setUp(boardXPos,boardYPos,boardLen,9);
     _board.refreshBoard();
 
 /*
