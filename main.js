@@ -28,12 +28,12 @@ window.onload = function() {
     var smaller,larger;
     if(displayWidth < displayHeight){
         smaller = displayWidth;
-        larget  = displayHeight;
+        larger  = displayHeight;
     }else{
         smaller = displayHeight;
-        larget  = displayWidth;
+        larger  = displayWidth;
     }
-    var boardLen  = GetAdjustValue(smaller,larger);    
+    var boardLen  = adjustBoardSize(smaller,larger);    
     _board = new Board(stage);
     _board.setUp(boardLen  * 0.15,0,boardLen,9);
     _board.refreshBoard();
@@ -65,6 +65,8 @@ window.onload = function() {
 };
 
 function adjustBoardSize(smaller,larger){
+    console.log(smaller);
+    console.log(larger);
     smaller *= 1.3;
     return smaller - larger < 0 ? smaller : larger;
 }
