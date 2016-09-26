@@ -47,11 +47,11 @@ window.onload = function() {
     _blacks = new Stones(stage);
     _blacks.setUp(_init_blacksXPos,_init_blacksYPos,_init_stonesLen,_init_stonesLen,'black');
     _blacks.refreshStones();
-    
+/*    
     _whites = new Stones(stage);
     _whites.setUp(_init_whitesXPos,_init_whitesYPos,_init_stonesLen,_init_stonesLen,'white');
     _whites.refreshStones();    
-
+*/
 	// run the render loop
 	animate();
 	function animate() {        
