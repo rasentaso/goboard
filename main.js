@@ -20,12 +20,8 @@ var _debug = false;
 var _debugtext;
 window.onload = function() {
 
-    _displayWidth  = screen.availWidth  * window.devicePixelRatio;
-    _displayHeight = screen.availHeight  * window.devicePixelRatio;
-    console.log(_displayWidth);
-    console.log(_displayHeight);
-    console.log(innerWidth);
-    console.log(innerHeight);
+    _displayWidth  = innerWidth;
+    _displayHeight = innerHeight;
 	var renderer = PIXI.autoDetectRenderer(_displayWidth,_displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
 
     document.body.appendChild(renderer.view);
