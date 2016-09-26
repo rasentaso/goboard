@@ -20,8 +20,8 @@ var _debug = false;
 var _debugtext;
 window.onload = function() {
 
-    _displayWidth  = window.innerWidth  * window.devicePixelRatio;
-    _displayHeight = window.innerHeight * window.devicePixelRatio;
+    _displayWidth  = screen.availWidth  * window.devicePixelRatio;
+    _displayHeight = screen.availHeight * window.devicePixelRatio;
 	var renderer = PIXI.autoDetectRenderer(_displayWidth,_displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
 
     document.body.appendChild(renderer.view);
