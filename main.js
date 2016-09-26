@@ -63,7 +63,7 @@ window.onload = function() {
 
 function initPostion(){
 
-    _init_stonesLen  = 100;
+    _init_stonesLen  = 200;
     
     if(_displayWidth < _displayHeight){
         _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
