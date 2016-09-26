@@ -47,11 +47,11 @@ window.onload = function() {
     _blacks = new Stones(stage);
     _blacks.setUp(_init_blacksXPos,_init_blacksYPos,_init_stonesLen,_init_stonesLen,'black');
     _blacks.refreshStones();
-/*    
+    
     _whites = new Stones(stage);
     _whites.setUp(_init_whitesXPos,_init_whitesYPos,_init_stonesLen,_init_stonesLen,'white');
     _whites.refreshStones();    
-*/
+
 	// run the render loop
 	animate();
 	function animate() {        
@@ -71,16 +71,16 @@ function initPostion(){
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
         _init_blacksXPos = 0;
         _init_blacksYPos = 0;        
-        _init_whiteXPos  = _init_boardLen - _init_stonesLen;
-        _init_whiteYPos  = _displayHeight / 2 + _init_boardLen / 2;
+        _init_whitesXPos  = _init_boardLen - _init_stonesLen;
+        _init_whitesYPos  = _displayHeight / 2 + _init_boardLen / 2;
     }else{
         _init_boardLen   = adjustBoardSize(_displayHeight,_displayWidth);    
         _init_boardXPos  = _displayWidth / 2 - _init_boardLen / 2;
         _init_boardYPos  = 0;        
         _init_blacksXPos = 0;
         _init_blacksYPos = 0;        
-        _init_whiteXPos  = 0;
-        _init_whiteYPos  = 0;
+        _init_whitesXPos  = 0;
+        _init_whitesYPos  = 0;
     }
 
 }
