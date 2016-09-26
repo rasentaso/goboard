@@ -69,11 +69,11 @@ function initPostion(){
         _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
         _init_boardXPos  = 0;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
-        _init_stonesLen  = _init_boardLen * 0.1;
-        _init_blacksXPos = 30;
-        _init_blacksYPos = 30;        
-        _init_whitesXPos  = _init_boardLen - _init_stonesLen - 30;
-        _init_whitesYPos  = _displayHeight / 2 + _init_boardLen / 2 + 30;
+        _init_stonesLen  = _init_boardYPos / 2;
+        _init_blacksXPos = _displayWidth / 2 - _init_stonesLen / 2;
+        _init_blacksYPos = _init_boardYPos / 2 - _init_stonesLen / 2;        
+        _init_whitesXPos = _init_boardLen - _init_stonesLen - 30;
+        _init_whitesYPos = _displayHeight / 2 + _init_boardLen / 2 + 30;
     }else{
         _init_boardLen   = adjustBoardSize(_displayHeight,_displayWidth);    
         _init_boardXPos  = _displayWidth / 2 - _init_boardLen / 2;
