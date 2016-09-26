@@ -35,7 +35,7 @@ window.onload = function() {
     }
     var boardLen  = adjustBoardSize(smaller,larger);    
     _board = new Board(stage);
-    _board.setUp(0,0,boardLen,9);
+    _board.setUp(0,displayHeight / 2 - boardLen / 2,boardLen,9);
     _board.refreshBoard();
 
 /*
