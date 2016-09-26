@@ -66,7 +66,7 @@ window.onload = function() {
 
 function adjustBoardSize(smaller,larger){
     smaller *= 1.3;
-    return smaller - larger < ? smaller : larger;
+    return smaller - larger < 0 ? smaller : larger;
 }
 
 //
