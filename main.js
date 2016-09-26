@@ -21,7 +21,7 @@ var _debugtext;
 window.onload = function() {
 
     _displayWidth  = screen.availWidth  * window.devicePixelRatio;
-    _displayHeight = screen.availHeight * window.devicePixelRatio;
+    _displayHeight = window.innerHeight * window.devicePixelRatio;
 	var renderer = PIXI.autoDetectRenderer(_displayWidth,_displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
 
     document.body.appendChild(renderer.view);
