@@ -1,6 +1,3 @@
-var _displayWidth;
-var _displayHeight;
-
 var _input_color = 'blank';
 var _back;
 var _board;
@@ -13,8 +10,8 @@ var _isDrag;
 var _debug = false;
 window.onload = function() {
 
-    _displayWidth  = innerWidth;
-    _displayHeight = innerHeight;
+    var _displayWidth  = innerWidth;
+    var _displayHeight = innerHeight;
 	var renderer = PIXI.autoDetectRenderer(_displayWidth,
                                            _displayHeight,
                                            { antialias: true, backgroundColor: ColorCode('renderer') });
@@ -26,9 +23,6 @@ window.onload = function() {
     renderer.view.style.marginRight = "auto";
     renderer.view.style.paddingLeft = "0";
     renderer.view.style.paddingRight = "0";
-
-	var stage = new PIXI.Container();
-    _back = new Back(0,0,_displayWidth,_displayHeight,stage);
 
     var _init_boardLen;
     var _init_boardXPos;
@@ -61,6 +55,9 @@ window.onload = function() {
         _init_blacksXPos  = _init_boardXPos + _init_boardLen + _init_boardXPos / 2 - _init_stonesLen / 2;;
         _init_blacksYPos  = _displayHeight / 2 - _init_stonesLen / 2;;
     }
+
+    var stage = new PIXI.Container();
+    _back = new Back(0,0,_displayWidth,_displayHeight,stage);
     
     _board = new Board(stage);
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,9);
