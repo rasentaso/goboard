@@ -17,7 +17,6 @@ var _whites;
 var _blacks;
 var _isDrag;
 var _debug = false;
-var _debugtext;
 window.onload = function() {
 
     _displayWidth  = innerWidth;
@@ -44,13 +43,13 @@ window.onload = function() {
 
     _guide = new Guide(stage);
 
-    _blacks = new Stones(stage);
+    _blacks = new StoneFactory(stage);
     _blacks.setUp(_init_blacksXPos,_init_blacksYPos,_init_stonesLen,_init_stonesLen,'black');
-    _blacks.refreshStones();
+    _blacks.refreshStoneFactory();
    
-    _whites = new Stones(stage);
+    _whites = new StoneFactory(stage);
     _whites.setUp(_init_whitesXPos,_init_whitesYPos,_init_stonesLen,_init_stonesLen,'white');
-    _whites.refreshStones();    
+    _whites.refreshStoneFactory();    
 
 	// run the render loop
 	animate();
@@ -63,9 +62,8 @@ window.onload = function() {
 
 function initPostion(){
 
-    
-    
     if(_displayWidth < _displayHeight){
+        //縦長
         _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
         _init_boardXPos  = _displayWidth  / 2 - _init_boardLen / 2;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
@@ -75,6 +73,7 @@ function initPostion(){
         _init_whitesXPos = _displayWidth / 2 - _init_stonesLen / 2;
         _init_whitesYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2 - _init_stonesLen / 2;
     }else{
+        //横長
         _init_boardLen   = adjustBoardSize(_displayHeight,_displayWidth);    
         _init_boardXPos  = _displayWidth / 2 - _init_boardLen / 2;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;;        
@@ -400,15 +399,15 @@ Board.prototype.getConnectedMoveIds = function(orgId){
 }
 
 //
-// Stones
+// StoneFactory
 //
-function Stones() {
+function StoneFactory() {
     this.initialize.apply(this, arguments);
 }
-Stones.prototype = Object.create(PIXI.Graphics.prototype);
-Stones.prototype.constructor = Stones;
+StoneFactory.prototype = Object.create(PIXI.Graphics.prototype);
+StoneFactory.prototype.constructor = StoneFactory;
 
-Stones.prototype.initialize = function(stage) {
+StoneFactory.prototype.initialize = function(stage) {
 
     PIXI.Graphics.call(this);
     stage.addChild(this);
@@ -431,7 +430,7 @@ Stones.prototype.initialize = function(stage) {
             
 }
 
-Stones.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
+StoneFactory.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
 
     this.xpos    = xpos;
     this.ypos    = ypos;
@@ -441,7 +440,7 @@ Stones.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
     
 }
 
-Stones.prototype.refreshStones = function(){
+StoneFactory.prototype.refreshStoneFactory = function(){
     
     this.beginFill(ColorCode(this.color));
     this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
