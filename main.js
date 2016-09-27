@@ -471,10 +471,10 @@ StoneStack.prototype.initialize = function(stage) {
     this.interactive = true;
     this.buttonMode = true;
     this.count = 1;
-    this.text = new PIXI.Text('test');
-    this.text.x = 30;
-    this.text.y = 30;
-    stage.addChild(this.text);
+    this.label = new PIXI.Text('test');
+    this.label.x =0;
+    this.label.y =0;
+    stage.addChild(this.label);
     
     var cursorDown = function(event){
         _isDrag = true;    
@@ -508,6 +508,8 @@ StoneStack.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
 
     this.xpos    = xpos;
     this.ypos    = ypos;
+    this.label.x = xpos;
+    this.label.y = ypos;
     this.xlength = xlength;
     this.ylength = ylength;
     this.color   = color;
