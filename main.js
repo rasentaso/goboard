@@ -490,8 +490,8 @@ StoneStack.prototype.initialize = function(stage) {
         }
         if(_board.movingIds.length > 0 &&
            _board.cells[_board.movingIds[0]].stone === this.color){
-            for(var i = 0; i < this.movingIds.length; ++i){
-                this.cells[this.movingIds[i]].stone = 'blank';        
+            for(var i = 0; i < _board.movingIds.length; ++i){
+                _board.cells[_board.movingIds[i]].stone = 'blank';        
             }            
             this.count += _board.movingIds.length;                        
         }
