@@ -12,7 +12,7 @@ window.onload = function() {
 
     var _displayWidth  = innerWidth;
     var _displayHeight = innerHeight;
-	var renderer = PIXI.autoDetectRenderer(_displayWidth,
+    var renderer = PIXI.autoDetectRenderer(_displayWidth,
                                            _displayHeight,
                                            { antialias: true, backgroundColor: ColorCode('renderer') });
     document.body.appendChild(renderer.view);
@@ -164,12 +164,9 @@ Board.prototype.initialize = function(stage) {
     this.interactive = true;
     this.buttonMode  = true;
 
-/*
-    var didFirstClick = false;
-*/   
     var timer;
     var cursorDown = function(event){
-
+        
         _isDrag = true;    
         var interval = 500;
         var pos = event.data.getLocalPosition(this.parent);        
@@ -188,46 +185,11 @@ Board.prototype.initialize = function(stage) {
         }.bind(this), interval ) ;
 
         if(this.cells[cellId].stone !== 'blank'){
-    
             //move start
             this.movingIds[0] = cellId;
             this.refresh();
         }
-        _guide.refresh(pos);       
-
-        
-/*
-        _isDrag = true;
-        var pos = event.data.getLocalPosition(this.parent);        
-        var cellId = this.Pos2CellId(pos);
-        if(!didFirstClick){    
-            didFirstClick = true;
-            setTimeout( function() {
-                didFirstClick = false ;
-            }, 350 ) ;
-
-            if(this.cells[cellId].stone !== 'blank'){
-                //move start
-                this.movingIds[0] = cellId;
-                this.refresh();
-            }
-
-        }else{
-            //double click
-            didFirstClick = false ;
-            if(this.cells[cellId].stone !== 'blank'){
-
-                //複数選択
-                this.movingIds[0] = cellId;                
-                this.checkSumi = [];  
-                this.checkSumi[cellId] = true;
-                this.getConnectedMoveIds(cellId);                
-                this.refresh();
-
-            }            
-        }
-        _guide.refresh(pos);       
-*/
+        _guide.refresh(pos);               
     }
     var cursorUp = function(event){
         clearTimeout(timer);        
