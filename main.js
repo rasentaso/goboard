@@ -54,11 +54,11 @@ window.onload = function() {
     _whites.refreshStoneFactory();    
 
     _whiteStack = new StoneStack(stage);
-    _whiteStack.setUp(_init_whitesXPos + 100,_init_whitesYPos,_init_stonesLen,_init_stonesLen,'white');
+    _whiteStack.setUp(_init_whitesXPos + 200,_init_whitesYPos,_init_stonesLen,_init_stonesLen,'white');
     _whiteStack.refreshStoneStack();
 
     _blackStack = new StoneStack(stage);
-    _blackStack.setUp(_init_blacksXPos + 100,_init_blacksYPos,_init_stonesLen,_init_stonesLen,'black');
+    _blackStack.setUp(_init_blacksXPos + 200,_init_blacksYPos,_init_stonesLen,_init_stonesLen,'black');
     _blackStack.refreshStoneStack();
     
     
