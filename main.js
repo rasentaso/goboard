@@ -481,7 +481,11 @@ StoneStack.prototype.initialize = function(stage) {
     stage.addChild(this.label);
     
     var cursorDown = function(event){
-        _isDrag = true;    
+        _isDrag = true;  
+        if(this.count > 0){
+            _input_color = this.color;        
+            --this.count;
+        }
     }
     var cursorUp = function(event){
         _isDrag = false;        
