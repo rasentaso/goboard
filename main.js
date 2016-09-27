@@ -15,6 +15,8 @@ var _board;
 var _guide;
 var _whites;
 var _blacks;
+var _whiteStack;
+var _blackStack;
 var _isDrag;
 var _debug = false;
 window.onload = function() {
@@ -51,6 +53,11 @@ window.onload = function() {
     _whites.setUp(_init_whitesXPos,_init_whitesYPos,_init_stonesLen,_init_stonesLen,'white');
     _whites.refreshStoneFactory();    
 
+    _whiteStack = new StoneStack(stage);
+    _whiteStack.setUp(300,300,50,50,'white');
+    _whiteStack.refreshStoneStack();
+    
+    
 	// run the render loop
 	animate();
 	function animate() {        
@@ -441,6 +448,73 @@ StoneFactory.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
 }
 
 StoneFactory.prototype.refreshStoneFactory = function(){
+    
+    this.beginFill(ColorCode(this.color));
+    this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
+    this.endFill();
+     
+}
+
+//
+// StoneStack
+//
+function StoneStack() {
+    this.initialize.apply(this, arguments);
+}
+StoneStack.prototype = Object.create(PIXI.Graphics.prototype);
+StoneStack.prototype.constructor = StoneStack;
+StoneStack.prototype.initialize = function(stage) {
+
+    PIXI.Graphics.call(this);
+    stage.addChild(this);
+    
+    this.interactive = true;
+    this.buttonMode = true;
+    this.count = 0;
+    this.text = new PIXI.Text('test');
+    this.text.x = 30;
+    this.text.y = 30;
+    stage.addChild(this.text);
+    
+    var cursorDown = function(event){
+        _isDrag = true;    
+        _input_color = this.color;        
+    }
+    var cursorUp = function(event){
+        _isDrag = false;
+        var pos = event.data.getLocalPosition(this.parent);                
+        var cellId = this.Pos2CellId(pos);
+        
+        if(_input_color !== 'blank' && _input_color === this.color){      
+            ++this.count;
+            _input_color = 'blank';
+        }
+        if(_board.movingIds.length > 0 &&
+           _board.cells[_board.movingIds[0]].stone === this.color){
+            this.count += _board.movingIds.length;
+        }
+        _board.movingIds = [];        
+        this.refreshStoneStack();        
+        _guide.clear();                     
+    }
+    this.on('mousedown',cursorDown);
+    this.on('touchstart',cursorDown);
+    this.on('mouseup',cursorUp);    
+    this.on('touchend',cursorUp);    
+            
+}
+
+StoneStack.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
+
+    this.xpos    = xpos;
+    this.ypos    = ypos;
+    this.xlength = xlength;
+    this.ylength = ylength;
+    this.color   = color;
+    
+}
+
+StoneStack.prototype.refreshStoneStack = function(){
     
     this.beginFill(ColorCode(this.color));
     this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
