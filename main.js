@@ -18,7 +18,7 @@ var _blacks;
 var _whiteStack;
 var _blackStack;
 var _isDrag;
-var _debug = true;
+var _debug = false;
 window.onload = function() {
 
     _displayWidth  = innerWidth;
