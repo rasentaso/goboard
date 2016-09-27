@@ -474,7 +474,7 @@ StoneStack.prototype.initialize = function(stage) {
     this.text = new PIXI.Text('test');
     this.text.x = 30;
     this.text.y = 30;
-    stage.addChild(this.t);
+    stage.addChild(this.text);
     
     var cursorDown = function(event){
         _isDrag = true;    
