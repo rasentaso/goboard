@@ -476,8 +476,8 @@ StoneStack.prototype.initialize = function(stage) {
     this.buttonMode = true;
     this.count = 0;
     this.label = new PIXI.Text('test');
-    this.label.x =0;
-    this.label.y =0;
+    this.label.x = 0;
+    this.label.y = 0;
     stage.addChild(this.label);
     
     var cursorDown = function(event){
