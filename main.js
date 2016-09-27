@@ -1,13 +1,5 @@
 var _displayWidth;
 var _displayHeight;
-var _init_boardLen;
-var _init_boardXPos;
-var _init_boardYPos;
-var _init_stonesLen;
-var _init_whitesXPos;
-var _init_whitesYPos;
-var _init_blacksXPos;
-var _init_blacksYPos;
 
 var _input_color = 'blank';
 var _back;
@@ -24,7 +16,6 @@ window.onload = function() {
     _displayWidth  = innerWidth;
     _displayHeight = innerHeight;
 	var renderer = PIXI.autoDetectRenderer(_displayWidth,_displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
-
     document.body.appendChild(renderer.view);
     renderer.view.style.display = "block";
     renderer.view.style.width = _displayWidth + 'px';
@@ -36,8 +27,38 @@ window.onload = function() {
 
 	var stage = new PIXI.Container();
     _back = new Back(0,0,_displayWidth,_displayHeight,stage);
+
+    var _init_boardLen;
+    var _init_boardXPos;
+    var _init_boardYPos;
+    var _init_stonesLen;
+    var _init_whitesXPos;
+    var _init_whitesYPos;
+    var _init_blacksXPos;
+    var _init_blacksYPos;
     
-    initPostion();
+    if(_displayWidth < _displayHeight){
+        //縦長
+        _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
+        _init_boardXPos  = _displayWidth  / 2 - _init_boardLen / 2;
+        _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
+        _init_stonesLen  = _init_boardYPos / 2;
+        _init_blacksXPos = _displayWidth / 2 - _init_stonesLen / 2;
+        _init_blacksYPos = _init_boardYPos / 2 - _init_stonesLen / 2;        
+        _init_whitesXPos = _displayWidth / 2 - _init_stonesLen / 2;
+        _init_whitesYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2 - _init_stonesLen / 2;
+    }else{
+        //横長
+        _init_boardLen   = adjustBoardSize(_displayHeight,_displayWidth);    
+        _init_boardXPos  = _displayWidth / 2 - _init_boardLen / 2;
+        _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;;        
+        _init_stonesLen  = _init_boardXPos / 2;
+        _init_whitesXPos = _init_boardXPos / 2 - _init_stonesLen / 2;      ;
+        _init_whitesYPos = _displayHeight / 2 - _init_stonesLen / 2;        
+        _init_blacksXPos  = _init_boardXPos + _init_boardLen + _init_boardXPos / 2 - _init_stonesLen / 2;;
+        _init_blacksYPos  = _displayHeight / 2 - _init_stonesLen / 2;;
+    }
+    
     
     _board = new Board(stage);
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,9);
@@ -73,27 +94,6 @@ window.onload = function() {
 
 function initPostion(){
 
-    if(_displayWidth < _displayHeight){
-        //縦長
-        _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
-        _init_boardXPos  = _displayWidth  / 2 - _init_boardLen / 2;
-        _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
-        _init_stonesLen  = _init_boardYPos / 2;
-        _init_blacksXPos = _displayWidth / 2 - _init_stonesLen / 2;
-        _init_blacksYPos = _init_boardYPos / 2 - _init_stonesLen / 2;        
-        _init_whitesXPos = _displayWidth / 2 - _init_stonesLen / 2;
-        _init_whitesYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2 - _init_stonesLen / 2;
-    }else{
-        //横長
-        _init_boardLen   = adjustBoardSize(_displayHeight,_displayWidth);    
-        _init_boardXPos  = _displayWidth / 2 - _init_boardLen / 2;
-        _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;;        
-        _init_stonesLen  = _init_boardXPos / 2;
-        _init_whitesXPos = _init_boardXPos / 2 - _init_stonesLen / 2;      ;
-        _init_whitesYPos = _displayHeight / 2 - _init_stonesLen / 2;        
-        _init_blacksXPos  = _init_boardXPos + _init_boardLen + _init_boardXPos / 2 - _init_stonesLen / 2;;
-        _init_blacksYPos  = _displayHeight / 2 - _init_stonesLen / 2;;
-    }
 
 }
 
