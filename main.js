@@ -485,8 +485,8 @@ StoneStack.prototype.initialize = function(stage) {
         if(this.count > 0){
             _input_color = this.color;        
             --this.count;
-            this.refreshStoneStack();        
         }
+        this.refreshStoneStack();        
     }
     var cursorUp = function(event){
         _isDrag = false;        
