@@ -471,9 +471,9 @@ StoneStack.prototype.initialize = function(stage) {
     this.interactive = true;
     this.buttonMode = true;
     this.count = 0;
-    this.t = new PIXI.Text('test');
-    this.t.x = 30;
-    this.t.y = 30;
+    this.text = new PIXI.Text('test');
+    this.text.x = 30;
+    this.text.y = 30;
     stage.addChild(this.t);
     
     var cursorDown = function(event){
@@ -518,7 +518,7 @@ StoneStack.prototype.refreshStoneStack = function(){
     
     this.beginFill(ColorCode(this.color));
     this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
-    this.t.text = '0';
+    this.text.text = '0';
     this.endFill();
      
 }
