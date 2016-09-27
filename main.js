@@ -520,7 +520,7 @@ StoneStack.prototype.refreshStoneStack = function(){
     
     this.beginFill(ColorCode(this.color));
     this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
-    this.text.text = this.count;
+    this.label.text = this.count;
     this.endFill();
      
 }
