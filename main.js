@@ -163,10 +163,39 @@ Board.prototype.initialize = function(stage) {
     
     this.interactive = true;
     this.buttonMode  = true;
-    
+
+/*
     var didFirstClick = false;
-    
+*/   
+    var timer;
     var cursorDown = function(event){
+
+        _isDrag = true;    
+        var interval = 500;
+        var pos = event.data.getLocalPosition(this.parent);        
+        var cellId = this.Pos2CellId(pos);
+        timer = setTimeout( function() {
+            //長押し
+            if(this.cells[cellId].stone !== 'blank'){
+                //複数選択
+                this.movingIds[0] = cellId;                
+                this.checkSumi = [];  
+                this.checkSumi[cellId] = true;
+                this.getConnectedMoveIds(cellId);                
+                this.refresh();
+            } 
+            _guide.refresh(pos);       
+        }, interval ) ;
+
+        if(this.cells[cellId].stone !== 'blank'){
+            //move start
+            this.movingIds[0] = cellId;
+            this.refresh();
+        }
+        _guide.refresh(pos);       
+
+        
+/*
         _isDrag = true;
         var pos = event.data.getLocalPosition(this.parent);        
         var cellId = this.Pos2CellId(pos);
@@ -197,8 +226,10 @@ Board.prototype.initialize = function(stage) {
             }            
         }
         _guide.refresh(pos);       
+*/
     }
     var cursorUp = function(event){
+        clearTimeout(timer);        
         _isDrag = false;
         var pos = event.data.getLocalPosition(this.parent);                
         var cellId = this.Pos2CellId(pos);
@@ -216,6 +247,7 @@ Board.prototype.initialize = function(stage) {
         _guide.clear();                     
     }  
     var cursorMove = function(event){
+        clearTimeout(timer);
         var pos = event.data.getLocalPosition(this.parent);        
         if(this.containsPoint(pos)){
             _guide.clear();    
@@ -529,7 +561,6 @@ StoneStack.prototype.refresh = function(){
     this.endFill();
      
 }
-
 
 //
 // Guide
