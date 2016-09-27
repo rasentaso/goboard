@@ -18,7 +18,7 @@ var _blacks;
 var _whiteStack;
 var _blackStack;
 var _isDrag;
-var _debug = false;
+var _debug = true;
 window.onload = function() {
 
     _displayWidth  = innerWidth;
@@ -485,10 +485,7 @@ StoneStack.prototype.initialize = function(stage) {
         _input_color = this.color;        
     }
     var cursorUp = function(event){
-        _isDrag = false;
-        var pos = event.data.getLocalPosition(this.parent);                
-        var cellId = this.Pos2CellId(pos);
-        
+        _isDrag = false;        
         if(_input_color !== 'blank' && _input_color === this.color){      
             ++this.count;
             _input_color = 'blank';
@@ -497,6 +494,7 @@ StoneStack.prototype.initialize = function(stage) {
            _board.cells[_board.movingIds[0]].stone === this.color){
             this.count += _board.movingIds.length;
         }
+        
         _board.movingIds = [];        
         this.refreshStoneStack();        
         _guide.clear();                     
