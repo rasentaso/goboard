@@ -12,7 +12,7 @@ window.onload = function() {
 
     var _displayWidth  = innerWidth;
     var _displayHeight = innerHeight;
-    var renderer = PIXI.autoDetectRenderer(_displayWidth,
+	var renderer = PIXI.autoDetectRenderer(_displayWidth,
                                            _displayHeight,
                                            { antialias: true, backgroundColor: ColorCode('renderer') });
     document.body.appendChild(renderer.view);
@@ -490,9 +490,11 @@ StoneStack.prototype.initialize = function(stage) {
         }
         if(_board.movingIds.length > 0 &&
            _board.cells[_board.movingIds[0]].stone === this.color){
-            this.count += _board.movingIds.length;            
+            for(var i = 0; i < this.movingIds.length; ++i){
+                this.cells[this.movingIds[i]].stone = 'blank';        
+            }            
+            this.count += _board.movingIds.length;                        
         }
-        
         _board.movingIds = [];        
         this.refresh();        
         _guide.clear();                     
