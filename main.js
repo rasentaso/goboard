@@ -15,7 +15,9 @@ window.onload = function() {
 
     _displayWidth  = innerWidth;
     _displayHeight = innerHeight;
-	var renderer = PIXI.autoDetectRenderer(_displayWidth,_displayHeight, { antialias: true, backgroundColor: ColorCode('renderer') });
+	var renderer = PIXI.autoDetectRenderer(_displayWidth,
+                                           _displayHeight,
+                                           { antialias: true, backgroundColor: ColorCode('renderer') });
     document.body.appendChild(renderer.view);
     renderer.view.style.display = "block";
     renderer.view.style.width = _displayWidth + 'px';
@@ -37,6 +39,7 @@ window.onload = function() {
     var _init_blacksXPos;
     var _init_blacksYPos;
     
+    //縦横判定
     if(_displayWidth < _displayHeight){
         //縦長
         _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
@@ -59,28 +62,27 @@ window.onload = function() {
         _init_blacksYPos  = _displayHeight / 2 - _init_stonesLen / 2;;
     }
     
-    
     _board = new Board(stage);
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,9);
-    _board.refreshBoard();
+    _board.refresh();
 
     _guide = new Guide(stage);
 
     _blacks = new StoneFactory(stage);
     _blacks.setUp(_init_blacksXPos,_init_blacksYPos,_init_stonesLen,_init_stonesLen,'black');
-    _blacks.refreshStoneFactory();
+    _blacks.refresh();
    
     _whites = new StoneFactory(stage);
     _whites.setUp(_init_whitesXPos,_init_whitesYPos,_init_stonesLen,_init_stonesLen,'white');
-    _whites.refreshStoneFactory();    
+    _whites.refresh();    
 
     _whiteStack = new StoneStack(stage);
     _whiteStack.setUp(_init_whitesXPos + 200,_init_whitesYPos,_init_stonesLen,_init_stonesLen,'white');
-    _whiteStack.refreshStoneStack();
+    _whiteStack.refresh();
 
     _blackStack = new StoneStack(stage);
     _blackStack.setUp(_init_blacksXPos + 200,_init_blacksYPos,_init_stonesLen,_init_stonesLen,'black');
-    _blackStack.refreshStoneStack();
+    _blackStack.refresh();
     
     
 	// run the render loop
@@ -130,7 +132,7 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
         var pos = event.data.getLocalPosition(this.parent);  
         if(this.containsPoint(pos)){  
             if(_isDrag){  
-                _guide.refreshGuide(pos);                            
+                _guide.refresh(pos);                            
             }
         }
     }
@@ -180,7 +182,7 @@ Board.prototype.initialize = function(stage) {
             if(this.cells[cellId].stone !== 'blank'){
                 //move start
                 this.movingIds[0] = cellId;
-                this.refreshBoard();
+                this.refresh();
             }
 
         }else{
@@ -193,11 +195,11 @@ Board.prototype.initialize = function(stage) {
                 this.checkSumi = [];  
                 this.checkSumi[cellId] = true;
                 this.getConnectedMoveIds(cellId);                
-                this.refreshBoard();
+                this.refresh();
 
             }            
         }
-        _guide.refreshGuide(pos);       
+        _guide.refresh(pos);       
     }
     var cursorUp = function(event){
         _isDrag = false;
@@ -213,7 +215,7 @@ Board.prototype.initialize = function(stage) {
         }else{
             this.rollBackMove();
         }
-        this.refreshBoard();        
+        this.refresh();        
         _guide.clear();                     
     }  
     var cursorMove = function(event){
@@ -221,7 +223,7 @@ Board.prototype.initialize = function(stage) {
         if(this.containsPoint(pos)){
             _guide.clear();    
             if(_isDrag){  
-                _guide.refreshGuide(pos);                            
+                _guide.refresh(pos);                            
             }
         }        
     }
@@ -253,7 +255,7 @@ Board.prototype.setUp = function(xpos,ypos,length,tract){
     }
     
 }
-Board.prototype.refreshBoard = function(){
+Board.prototype.refresh = function(){
 
     this.clear();
 	this.beginFill(ColorCode('board'));
@@ -451,7 +453,7 @@ StoneFactory.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
     
 }
 
-StoneFactory.prototype.refreshStoneFactory = function(){
+StoneFactory.prototype.refresh = function(){
     
     this.beginFill(ColorCode(this.color));
     this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
@@ -486,7 +488,7 @@ StoneStack.prototype.initialize = function(stage) {
             _input_color = this.color;        
             --this.count;
         }
-        this.refreshStoneStack();        
+        this.refresh();        
     }
     var cursorUp = function(event){
         _isDrag = false;        
@@ -500,7 +502,7 @@ StoneStack.prototype.initialize = function(stage) {
         }
         
         _board.movingIds = [];        
-        this.refreshStoneStack();        
+        this.refresh();        
         _guide.clear();                     
     }
     this.on('mousedown',cursorDown);
@@ -522,7 +524,7 @@ StoneStack.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
     
 }
 
-StoneStack.prototype.refreshStoneStack = function(){
+StoneStack.prototype.refresh = function(){
     
     this.beginFill(ColorCode(this.color));
     this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
@@ -548,7 +550,7 @@ Guide.prototype.initialize = function(stage) {
     
 }
 
-Guide.prototype.refreshGuide = function(pos){
+Guide.prototype.refresh = function(pos){
     
     this.clear();   
     if(_input_color !== 'blank'){
