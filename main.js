@@ -474,7 +474,7 @@ StoneStack.prototype.initialize = function(stage) {
     
     this.interactive = true;
     this.buttonMode = true;
-    this.count = 1;
+    this.count = 0;
     this.label = new PIXI.Text('test');
     this.label.x =0;
     this.label.y =0;
@@ -485,6 +485,7 @@ StoneStack.prototype.initialize = function(stage) {
         if(this.count > 0){
             _input_color = this.color;        
             --this.count;
+            this.refreshStoneStack();        
         }
     }
     var cursorUp = function(event){
