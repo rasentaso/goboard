@@ -185,9 +185,10 @@ Board.prototype.initialize = function(stage) {
                 this.refresh();
             } 
             _guide.refresh(pos);       
-        }, interval ) ;
+        }.bind(this), interval ) ;
 
         if(this.cells[cellId].stone !== 'blank'){
+    
             //move start
             this.movingIds[0] = cellId;
             this.refresh();
