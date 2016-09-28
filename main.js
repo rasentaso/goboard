@@ -181,9 +181,6 @@ Board.prototype.initialize = function(stage) {
         var interval = 500;
         var pos = event.data.getLocalPosition(this.parent);        
         var cellId = this.Pos2CellId(pos);
-        this.sabun_x = this.PosX2CellPosSabunX(x);
-        this.sabun_y = this.PosY2CellPosSabunY(y);
-        
         timer = setTimeout( function() {
             //長押し
             if(this.cells[cellId].stone !== 'blank'){
@@ -194,8 +191,6 @@ Board.prototype.initialize = function(stage) {
                 this.getConnectedMoveIds(cellId);                
                 this.refresh();
             } 
-            pos.x -= this.sabun_x;
-            pos.y -= this.sabun_y;
             _guide.refresh(pos);       
         }.bind(this), interval ) ;
 
@@ -204,14 +199,9 @@ Board.prototype.initialize = function(stage) {
             this.movingIds[0] = cellId;
             this.refresh();
         }
-        pos.x -= this.sabun_x;
-        pos.y -= this.sabun_y;        
         _guide.refresh(pos);               
     }
     var cursorUp = function(event){
-        this.sabun_x = 0;
-        this.sabun_y = 0;
-        
         clearTimeout(timer);        
         _isDrag = false;
         var pos = event.data.getLocalPosition(this.parent);                
@@ -235,8 +225,6 @@ Board.prototype.initialize = function(stage) {
         if(this.containsPoint(pos)){
             _guide.clear();    
             if(_isDrag){  
-                pos.x -= this.sabun_x;
-                pos.y -= this.sabun_y;                        
                 _guide.refresh(pos);                            
             }
         }        
@@ -386,13 +374,6 @@ Board.prototype.CellId2CellY = function(cellId){
 Board.prototype.Pos2CellId = function(pos){
     return this.CellXY2CellId(this.PosX2CellX(pos.x),this.PosY2CellY(pos.y));
 }
-Board.prototype.PosX2CellPosSabunX = function(x){
-    return (x - this.xpos) % this.cell_length;
-}
-Board.prototype.PosY2CellPosSabunY = function(y){
-    return (y - this.ypos) % this.cell_length;
-}
-
 Board.prototype.getConnectedMoveIds = function(orgId){
     
     var cellX = this.CellId2CellX(orgId);
