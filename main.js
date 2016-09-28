@@ -181,6 +181,9 @@ Board.prototype.initialize = function(stage) {
         var interval = 500;
         var pos = event.data.getLocalPosition(this.parent);        
         var cellId = this.Pos2CellId(pos);
+        this.sabun_x = this.PosX2CellPosSabunX(x);
+        this.sabun_y = this.PosY2CellPosSabunY(y);
+        
         timer = setTimeout( function() {
             //長押し
             if(this.cells[cellId].stone !== 'blank'){
@@ -191,6 +194,8 @@ Board.prototype.initialize = function(stage) {
                 this.getConnectedMoveIds(cellId);                
                 this.refresh();
             } 
+            pos.x -= this.sabun_x;
+            pos.y -= this.sabun_y;
             _guide.refresh(pos);       
         }.bind(this), interval ) ;
 
@@ -199,9 +204,14 @@ Board.prototype.initialize = function(stage) {
             this.movingIds[0] = cellId;
             this.refresh();
         }
+        pos.x -= this.sabun_x;
+        pos.y -= this.sabun_y;        
         _guide.refresh(pos);               
     }
     var cursorUp = function(event){
+        this.sabun_x = 0;
+        this.sabun_y = 0;
+        
         clearTimeout(timer);        
         _isDrag = false;
         var pos = event.data.getLocalPosition(this.parent);                
@@ -225,6 +235,8 @@ Board.prototype.initialize = function(stage) {
         if(this.containsPoint(pos)){
             _guide.clear();    
             if(_isDrag){  
+                pos.x -= this.sabun_x;
+                pos.y -= this.sabun_y;                        
                 _guide.refresh(pos);                            
             }
         }        
@@ -590,8 +602,8 @@ Guide.prototype.refresh = function(pos){
             var sabunX = moveCellX - rootCellX;
             var sabunY = moveCellY - rootCellY;
             this.beginFill(ColorCode(_board.cells[_board.movingIds[i]].stone),0.5);
-            this.drawCircle(pos.x - _board.PosX2CellPosSabunX(pos.x) + sabunX * _board.cell_length,
-                            pos.y - _board.PosY2CellPosSabunY(pos.y) + sabunY * _board.cell_length,
+            this.drawCircle(pos.x + sabunX * _board.cell_length,
+                            pos.y + sabunY * _board.cell_length,
                             _board.cell_half_length);    
             this.endFill();  
         } 
