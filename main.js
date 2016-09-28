@@ -75,13 +75,14 @@ window.onload = function() {
     _whites.setUp(_init_whitesXPos,_init_whitesYPos,_init_radius,'white');
     _whites.refresh();    
 
-    _whiteStack = new StoneStack(stage);
-    _whiteStack.setUp(_init_whitesXPos + 200,_init_whitesYPos,_init_radius,'white');
-    _whiteStack.refresh();
-
     _blackStack = new StoneStack(stage);
     _blackStack.setUp(_init_blacksXPos + 200,_init_blacksYPos,_init_radius,'black');
     _blackStack.refresh();
+
+    _whiteStack = new StoneStack(stage);
+    _whiteStack.setUp(_init_whitesXPos + 200,_init_whitesYPos,_init_radius,'white');
+    _whiteStack.refresh();
+    
     
     
 	// run the render loop
@@ -477,19 +478,19 @@ StoneStack.prototype.initialize = function(stage) {
     var cursorDown = function(event){
         _isDrag = true;  
         if(this.count > 0){
-            _input_color = this.color;        
+            _input_color = this.rever_color;        
             --this.count;
         }
         this.refresh();        
     }
     var cursorUp = function(event){
         _isDrag = false;        
-        if(_input_color !== 'blank' && _input_color === this.color){      
+        if(_input_color !== 'blank' && _input_color === this.reverse_color){      
             ++this.count;
             _input_color = 'blank';
         }
         if(_board.movingIds.length > 0 &&
-           _board.cells[_board.movingIds[0]].stone === this.color){
+           _board.cells[_board.movingIds[0]].stone === this.reverse_color){
             for(var i = 0; i < _board.movingIds.length; ++i){
                 _board.cells[_board.movingIds[i]].stone = 'blank';        
             }            
@@ -514,13 +515,8 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
     this.label.y = ypos - radius / 1.5;
     this.radius  = radius;
     this.color   = color;
-    var reverse_color;
-    if(color === 'white'){
-        reverse_color = 'black';
-    }else if(color === 'black'){
-        reverse_color = 'white';
-    }
-    
+    if(color === 'white')this.reverse_color = 'black';
+    else if(color === 'black')this.reverse_color = 'white';
     var style = {
         fontFamily : 'Arial',
         fontSize : radius + 'px',        
@@ -539,7 +535,7 @@ StoneStack.prototype.refresh = function(){
     this.drawCircle(this.xpos, this.ypos, this.radius);    
     this.label.text = ' ' + this.count;
     this.endFill();
-     
+    
 }
 
 //
