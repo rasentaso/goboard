@@ -448,7 +448,8 @@ StoneFactory.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
 StoneFactory.prototype.refresh = function(){
     
     this.beginFill(ColorCode(this.color));
-    this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
+//    this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
+    this.drawCircle(this.xpos, this.ypos, 100);
     this.endFill();
      
 }
