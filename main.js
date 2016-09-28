@@ -449,7 +449,7 @@ StoneFactory.prototype.setUp = function(xpos,ypos,radius,color){
 StoneFactory.prototype.refresh = function(){
     
     this.beginFill(ColorCode(this.color));
-    this.drawCircle(this.xpos, this.ypos, 100);
+    this.drawCircle(this.xpos, this.ypos, this.radius);
     this.endFill();
      
 }
@@ -521,7 +521,7 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
 StoneStack.prototype.refresh = function(){
     
     this.beginFill(ColorCode(this.color));
-    this.drawCircle(this.xpos, this.ypos, 100);    
+    this.drawCircle(this.xpos, this.ypos, this.radius);    
     this.label.text = ' ' + this.count;
     this.endFill();
      
