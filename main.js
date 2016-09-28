@@ -32,6 +32,10 @@ window.onload = function() {
     var _init_whitesYPos;
     var _init_blacksXPos;
     var _init_blacksYPos;
+    var _init_whitesStackXPos;
+    var _init_whitesStackYPos;
+    var _init_blacksStackXPos;
+    var _init_blacksStackYPos;
     
     //縦横判定
     if(_displayWidth < _displayHeight){
@@ -41,9 +45,14 @@ window.onload = function() {
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
         _init_radius     = _init_boardYPos / 3;
         _init_blacksXPos = _displayWidth / 2 - _init_radius * 2;
-        _init_blacksYPos = _init_boardYPos / 2;       
+        _init_blacksYPos = _init_boardYPos / 2;      
+        _init_blacksStackXPos = _displayWidth / 2 + _init_radius * 2;
+        _init_blacksStackYPos = _init_boardYPos / 2;      
         _init_whitesXPos = _displayWidth / 2 + _init_radius * 2;
         _init_whitesYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
+        _init_whitesStackXPos = _displayWidth / 2 - _init_radius * 2;
+        _init_whitesStackYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
+        
     }else{
         //横長
 /*
@@ -76,14 +85,12 @@ window.onload = function() {
     _whites.refresh();    
 
     _blackStack = new StoneStack(stage);
-    _blackStack.setUp(_init_blacksXPos + 200,_init_blacksYPos,_init_radius,'black');
+    _blackStack.setUp(_init_blacksStackXPos,_init_blacksStackXPosYPos,_init_radius,'black');
     _blackStack.refresh();
 
     _whiteStack = new StoneStack(stage);
-    _whiteStack.setUp(_init_whitesXPos + 200,_init_whitesYPos,_init_radius,'white');
+    _whiteStack.setUp(_init_whitesStackXPos,_init_whitesStackYPos,_init_radius,'white');
     _whiteStack.refresh();
-    
-    
     
 	// run the render loop
 	animate();
