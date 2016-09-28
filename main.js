@@ -510,8 +510,8 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
 
     this.xpos    = xpos;
     this.ypos    = ypos;
-    this.label.x = xpos - radius;
-    this.label.y = ypos - radius;
+    this.label.x = xpos - radius / 2;
+    this.label.y = ypos - radius / 2;
     this.radius  = radius;
     this.color   = color;
 
