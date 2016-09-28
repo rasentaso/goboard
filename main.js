@@ -590,8 +590,8 @@ Guide.prototype.refresh = function(pos){
             var sabunX = moveCellX - rootCellX;
             var sabunY = moveCellY - rootCellY;
             this.beginFill(ColorCode(_board.cells[_board.movingIds[i]].stone),0.5);
-            this.drawCircle(pos.x + _board.PosX2CellPosSabunX(pos.x) + sabunX * _board.cell_length,
-                            pos.y + _board.PosY2CellPosSabunY(pos.y) + sabunY * _board.cell_length,
+            this.drawCircle(pos.x - _board.PosX2CellPosSabunX(pos.x) + sabunX * _board.cell_length,
+                            pos.y - _board.PosY2CellPosSabunY(pos.y) + sabunY * _board.cell_length,
                             _board.cell_half_length);    
             this.endFill();  
         } 
