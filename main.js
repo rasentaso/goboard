@@ -478,7 +478,7 @@ StoneStack.prototype.initialize = function(stage) {
     var cursorDown = function(event){
         _isDrag = true;  
         if(this.count > 0){
-            _input_color = this.rever_color;        
+            _input_color = this.reverse_color;        
             --this.count;
         }
         this.refresh();        
