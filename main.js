@@ -466,30 +466,13 @@ StoneStack.prototype.initialize = function(stage) {
 
     PIXI.Graphics.call(this);
     stage.addChild(this);
+
+    this.label = new PIXI.Text();
+    stage.addChild(this.label);
     
     this.interactive = true;
     this.buttonMode = true;
     this.count = 0;
-    var style = {
-        fontFamily : 'Arial',
-        fontSize : '100px',
-        fontStyle : 'italic',
-        fontWeight : 'bold',
-        fill : '#F7EDCA',
-        stroke : '#4a1850',
-        strokeThickness : 5,
-        dropShadow : true,
-        dropShadowColor : '#000000',
-        dropShadowAngle : Math.PI / 6,
-        dropShadowDistance : 6,
-        wordWrap : true,
-        wordWrapWidth : 440
-
-    };    
-    this.label = new PIXI.Text('test',style);
-    this.label.x = 0;
-    this.label.y = 0;
-    stage.addChild(this.label);
     
     var cursorDown = function(event){
         _isDrag = true;  
@@ -531,6 +514,23 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
     this.label.y = ypos;
     this.radius  = radius;
     this.color   = color;
+
+    var style = {
+        fontFamily : 'Arial',
+        fontSize : '100px',
+        fontStyle : 'italic',
+        fontWeight : 'bold',
+        fill : '#F7EDCA',
+        stroke : '#4a1850',
+        strokeThickness : 5,
+        dropShadow : true,
+        dropShadowColor : '#000000',
+        dropShadowAngle : Math.PI / 6,
+        dropShadowDistance : 6,
+        wordWrap : true,
+        wordWrapWidth : 440
+    };    
+    this.label.setStyle(style);
     
 }
 
