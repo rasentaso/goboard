@@ -520,7 +520,7 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
 
 StoneStack.prototype.refresh = function(){
     
-    this.lineStyle(2, ColorCode(this.color), 1);    
+    this.lineStyle(4, ColorCode(this.color), 1);    
     this.drawCircle(this.xpos, this.ypos, this.radius);    
     this.label.text = ' ' + this.count;
     this.endFill();
