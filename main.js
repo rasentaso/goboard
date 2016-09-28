@@ -514,25 +514,21 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
     this.label.y = ypos - radius / 1.5;
     this.radius  = radius;
     this.color   = color;
-
+    var reverse_color;
+    if(color === 'white'){
+        reverse_color = 'black';
+    }else if(color === 'black'){
+        reverse_color = 'white';
+    }
+    
     var style = {
         fontFamily : 'Arial',
         fontSize : '100px',
         fontStyle : 'italic',
         fontWeight : 'bold',
-//        fill : '#F7EDCA',
-        fill : ColorCode(color),        
-        stroke : '#4a1850',
-        strokeThickness : 5
-/*
-        dropShadow : true,
-//        dropShadowColor : '#000000',
-        dropShadowColor : 0xFF0000,        
-        dropShadowAngle : Math.PI / 6,
-        dropShadowDistance : 6,
-        wordWrap : true,
-        wordWrapWidth : 440
-*/
+        fill : ColorCode(reverse_color),        
+//        stroke : '#4a1850',
+//        strokeThickness : 5
     };    
     this.label.setStyle(style);
     
