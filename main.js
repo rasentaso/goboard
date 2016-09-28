@@ -522,7 +522,7 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
         fontSize : radius + 'px',        
         fontStyle : 'italic',
         fontWeight : 'bold',
-        fill : ColorCode(reverse_color),   
+        fill : ColorCode(this.reverse_color),   
     };    
     this.label.setStyle(style);
     
