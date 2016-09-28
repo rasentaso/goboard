@@ -472,7 +472,7 @@ StoneStack.prototype.initialize = function(stage) {
     this.count = 0;
     var style = {
         fontFamily : 'Arial',
-        fontSize : '36px',
+        fontSize : '100px',
         fontStyle : 'italic',
         fontWeight : 'bold',
         fill : '#F7EDCA'
