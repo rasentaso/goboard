@@ -307,6 +307,7 @@ Board.prototype.canMovePut = function(pos){
         if(this.movingIds.indexOf(destCellId) === -1 &&
            this.cells[destCellId].stone !== 'blank') return false;
     }
+    
     return true;
 }
 
@@ -332,9 +333,10 @@ Board.prototype.commitMove = function(pos){
         srcCellY += amountCellY;
         var destCellId = this.CellXY2CellId(srcCellX,srcCellY);
         
-        this.cells[destCellId].stone = this.cells[this.movingIds[i]].stone;        
-        this.cells[this.movingIds[i]].stone = 'blank';        
-        
+        if(this.movingIds.indexOf(destCellId) === -1){
+            this.cells[destCellId].stone = this.cells[this.movingIds[i]].stone;        
+            this.cells[this.movingIds[i]].stone = 'blank';                    
+        }
     }
     
     this.movingIds = [];
