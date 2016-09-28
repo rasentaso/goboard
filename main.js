@@ -181,6 +181,8 @@ Board.prototype.initialize = function(stage) {
         var interval = 500;
         var pos = event.data.getLocalPosition(this.parent);        
         var cellId = this.Pos2CellId(pos);
+        this.sabunX = this.PosDiffCellPosX(pos.x);
+        this.sabunY = this.PosDiffCellPosY(pos.y);
         timer = setTimeout( function() {
             //長押し
             if(this.cells[cellId].stone !== 'blank'){
@@ -191,6 +193,8 @@ Board.prototype.initialize = function(stage) {
                 this.getConnectedMoveIds(cellId);                
                 this.refresh();
             } 
+            pos.x -= this.sabunX;
+            pos.y -= this.sabunY;
             _guide.refresh(pos);       
         }.bind(this), interval ) ;
 
@@ -199,6 +203,8 @@ Board.prototype.initialize = function(stage) {
             this.movingIds[0] = cellId;
             this.refresh();
         }
+        pos.x -= this.sabunX;
+        pos.y -= this.sabunY;        
         _guide.refresh(pos);               
     }
     var cursorUp = function(event){
@@ -225,6 +231,8 @@ Board.prototype.initialize = function(stage) {
         if(this.containsPoint(pos)){
             _guide.clear();    
             if(_isDrag){  
+                pos.x -= this.sabunX;
+                pos.y -= this.sabunY;                
                 _guide.refresh(pos);                            
             }
         }        
@@ -374,6 +382,15 @@ Board.prototype.CellId2CellY = function(cellId){
 Board.prototype.Pos2CellId = function(pos){
     return this.CellXY2CellId(this.PosX2CellX(pos.x),this.PosY2CellY(pos.y));
 }
+Board.prototype.PosDiffCellPosX = function(pos){
+    var cellX = this.PosX2CellX(pos.x);
+    return pos.x - (this.xpos + cellX * this.cell_length + this.cell_half_length);
+}
+Board.prototype.PosDiffCellPosY = function(pos){
+    var cellY = this.PosY2CellY(pos.y);
+    return pos.y - (this.ypos + cellY * this.cell_length + this.cell_half_length);
+}
+
 Board.prototype.getConnectedMoveIds = function(orgId){
     
     var cellX = this.CellId2CellX(orgId);
