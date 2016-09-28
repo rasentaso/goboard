@@ -304,7 +304,8 @@ Board.prototype.canMovePut = function(pos){
         if(srcCellY < 0 || srcCellY >= this.tract) return false;    //範囲外
         
         var destCellId = this.CellXY2CellId(srcCellX,srcCellY);
-        if(this.cells[destCellId].stone !== 'blank') return false;
+        if(this.movingIds.indexOf(destCellId) === -1 &&
+           this.cells[destCellId].stone !== 'blank') return false;
     }
     return true;
 }
