@@ -303,9 +303,9 @@ Board.prototype.canMovePut = function(pos){
         if(srcCellX < 0 || srcCellX >= this.tract) return false;    //範囲外
         if(srcCellY < 0 || srcCellY >= this.tract) return false;    //範囲外
         
-        var destCellId = this.CellXY2CellId(srcCellX,srcCellY);
-        if(this.movingIds.indexOf(destCellId) === -1 &&
-           this.cells[destCellId].stone !== 'blank') return false;
+        var destCellId = this.CellXY2CellId(srcCellX,srcCellY);        
+        if(this.movingIds.indexOf(destCellId) !== -1) continue ;    //移動先が移動中 OK 
+        if(this.cells[destCellId].stone !== 'blank') return false;  //移動先が既存   NG
     }
     
     return true;
@@ -325,16 +325,19 @@ Board.prototype.commitMove = function(pos){
     var amountCellX    = destRootCellX - srcRootCellX;     //移動量
     var amountCellY    = destRootCellY - srcRootCellY;     //移動量
 
+    var destinationIds = [];
     for(var i = 0; i < this.movingIds.length; ++i){
         
         var srcCellX   = this.CellId2CellX(this.movingIds[i]);
         var srcCellY   = this.CellId2CellY(this.movingIds[i]);
         srcCellX += amountCellX;
         srcCellY += amountCellY;
-        var destCellId = this.CellXY2CellId(srcCellX,srcCellY);
-        
-        if(this.movingIds.indexOf(destCellId) === -1){
-            this.cells[destCellId].stone = this.cells[this.movingIds[i]].stone;        
+        var destCellId = this.CellXY2CellId(srcCellX,srcCellY);        
+        this.cells[destCellId].stone = this.cells[this.movingIds[i]].stone;       
+        destinationIds.push(destCellId);
+    }
+    for(var i = 0; i < this.movingIds.length; ++i){
+        if(destinationIds.indexOf(this.movingIds[i]) === -1){
             this.cells[this.movingIds[i]].stone = 'blank';                    
         }
     }
