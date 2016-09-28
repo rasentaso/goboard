@@ -55,7 +55,7 @@ window.onload = function() {
         
     }else{
         //横長
-/*
+
         _init_boardLen   = adjustBoardSize(_displayHeight,_displayWidth);    
         _init_boardXPos  = _displayWidth / 2 - _init_boardLen / 2;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;;        
@@ -64,7 +64,7 @@ window.onload = function() {
         _init_whitesYPos = _displayHeight / 2 - _init_stonesLen / 2;        
         _init_blacksXPos  = _init_boardXPos + _init_boardLen + _init_boardXPos / 2 - _init_stonesLen / 2;;
         _init_blacksYPos  = _displayHeight / 2 - _init_stonesLen / 2;
-*/
+
     }
 
     var stage = new PIXI.Container();
