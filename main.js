@@ -511,8 +511,8 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
 
     this.xpos    = xpos;
     this.ypos    = ypos;
-    this.label.x = xpos - radius / 1.5;
-    this.label.y = ypos - radius / 1.5;
+    this.label.x = xpos;
+    this.label.y = ypos;
     this.radius  = radius;
     this.color   = color;
     if(color === 'white')this.reverse_color = 'black';
