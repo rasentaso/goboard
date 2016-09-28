@@ -523,12 +523,11 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
     
     var style = {
         fontFamily : 'Arial',
-        fontSize : '100px',
+//        fontSize : '100px',
+        fontSize : radius * 10 + 'px',        
         fontStyle : 'italic',
         fontWeight : 'bold',
-        fill : ColorCode(reverse_color),        
-//        stroke : '#4a1850',
-//        strokeThickness : 5
+        fill : ColorCode(reverse_color),   
     };    
     this.label.setStyle(style);
     
