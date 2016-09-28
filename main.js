@@ -27,7 +27,7 @@ window.onload = function() {
     var _init_boardLen;
     var _init_boardXPos;
     var _init_boardYPos;
-    var _init_stonesLen;
+    var _init_radius;
     var _init_whitesXPos;
     var _init_whitesYPos;
     var _init_blacksXPos;
@@ -39,21 +39,23 @@ window.onload = function() {
         _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
         _init_boardXPos  = _displayWidth  / 2 - _init_boardLen / 2;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
-        _init_stonesLen  = _init_boardYPos / 3;
+        _init_radius     = _init_boardYPos / 3;
         _init_blacksXPos = _displayWidth / 3;
         _init_blacksYPos = _init_boardYPos / 2;       
         _init_whitesXPos = _displayWidth / 3 * 2;
         _init_whitesYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
     }else{
         //横長
+/*
         _init_boardLen   = adjustBoardSize(_displayHeight,_displayWidth);    
         _init_boardXPos  = _displayWidth / 2 - _init_boardLen / 2;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;;        
-        _init_stonesLen  = _init_boardXPos / 2;
+        _init_radius     = _init_boardXPos / 2;
         _init_whitesXPos = _init_boardXPos / 2 - _init_stonesLen / 2;      ;
         _init_whitesYPos = _displayHeight / 2 - _init_stonesLen / 2;        
         _init_blacksXPos  = _init_boardXPos + _init_boardLen + _init_boardXPos / 2 - _init_stonesLen / 2;;
-        _init_blacksYPos  = _displayHeight / 2 - _init_stonesLen / 2;;
+        _init_blacksYPos  = _displayHeight / 2 - _init_stonesLen / 2;
+*/
     }
 
     var stage = new PIXI.Container();
@@ -66,19 +68,19 @@ window.onload = function() {
     _guide = new Guide(stage);
 
     _blacks = new StoneFactory(stage);
-    _blacks.setUp(_init_blacksXPos,_init_blacksYPos,_init_stonesLen,_init_stonesLen,'black');
+    _blacks.setUp(_init_blacksXPos,_init_blacksYPos,_init_radius,'black');
     _blacks.refresh();
    
     _whites = new StoneFactory(stage);
-    _whites.setUp(_init_whitesXPos,_init_whitesYPos,_init_stonesLen,_init_stonesLen,'white');
+    _whites.setUp(_init_whitesXPos,_init_whitesYPos,_init_radius,'white');
     _whites.refresh();    
 
     _whiteStack = new StoneStack(stage);
-    _whiteStack.setUp(_init_whitesXPos + 200,_init_whitesYPos,_init_stonesLen,_init_stonesLen,'white');
+    _whiteStack.setUp(_init_whitesXPos + 200,_init_whitesYPos,_init_radius,'white');
     _whiteStack.refresh();
 
     _blackStack = new StoneStack(stage);
-    _blackStack.setUp(_init_blacksXPos + 200,_init_blacksYPos,_init_stonesLen,_init_stonesLen,'black');
+    _blackStack.setUp(_init_blacksXPos + 200,_init_blacksYPos,_init_radius,'black');
     _blackStack.refresh();
     
     
@@ -435,12 +437,11 @@ StoneFactory.prototype.initialize = function(stage) {
             
 }
 
-StoneFactory.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
+StoneFactory.prototype.setUp = function(xpos,ypos,radius,color){
 
     this.xpos    = xpos;
     this.ypos    = ypos;
-    this.xlength = xlength;
-    this.ylength = ylength;
+    this.radius  = radius;
     this.color   = color;
     
 }
@@ -448,7 +449,6 @@ StoneFactory.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
 StoneFactory.prototype.refresh = function(){
     
     this.beginFill(ColorCode(this.color));
-//    this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
     this.drawCircle(this.xpos, this.ypos, 100);
     this.endFill();
      
@@ -507,14 +507,13 @@ StoneStack.prototype.initialize = function(stage) {
             
 }
 
-StoneStack.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
+StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
 
     this.xpos    = xpos;
     this.ypos    = ypos;
     this.label.x = xpos;
     this.label.y = ypos;
-    this.xlength = xlength;
-    this.ylength = ylength;
+    this.radius  = radius;
     this.color   = color;
     
 }
@@ -522,7 +521,7 @@ StoneStack.prototype.setUp = function(xpos,ypos,xlength,ylength,color){
 StoneStack.prototype.refresh = function(){
     
     this.beginFill(ColorCode(this.color));
-    this.drawRoundedRect(this.xpos,this.ypos,this.xlength,this.ylength);
+    this.drawCircle(this.xpos, this.ypos, 100);    
     this.label.text = ' ' + this.count;
     this.endFill();
      
