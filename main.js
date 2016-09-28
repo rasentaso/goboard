@@ -374,6 +374,13 @@ Board.prototype.CellId2CellY = function(cellId){
 Board.prototype.Pos2CellId = function(pos){
     return this.CellXY2CellId(this.PosX2CellX(pos.x),this.PosY2CellY(pos.y));
 }
+Board.prototype.PosX2CellPosSabunX = function(x){
+    return (x - this.xpos) % this.cell_length;
+}
+Board.prototype.PosY2CellPosSabunY = function(y){
+    return (y - this.ypos) % this.cell_length;
+}
+
 Board.prototype.getConnectedMoveIds = function(orgId){
     
     var cellX = this.CellId2CellX(orgId);
@@ -583,8 +590,8 @@ Guide.prototype.refresh = function(pos){
             var sabunX = moveCellX - rootCellX;
             var sabunY = moveCellY - rootCellY;
             this.beginFill(ColorCode(_board.cells[_board.movingIds[i]].stone),0.5);
-            this.drawCircle(pos.x + sabunX * _board.cell_length,
-                            pos.y + sabunY * _board.cell_length,
+            this.drawCircle(pos.x + _board.PosX2CellPosSabunX(pos.x) + sabunX * _board.cell_length,
+                            pos.y + _board.PosY2CellPosSabunY(pos.y) + sabunY * _board.cell_length,
                             _board.cell_half_length);    
             this.endFill();  
         } 
