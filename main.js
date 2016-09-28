@@ -525,7 +525,7 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
         strokeThickness : 5,
         dropShadow : true,
 //        dropShadowColor : '#000000',
-        dropShadowColor : 0x000000,        
+        dropShadowColor : 0xFFFFFF,        
         dropShadowAngle : Math.PI / 6,
         dropShadowDistance : 6,
         wordWrap : true,
