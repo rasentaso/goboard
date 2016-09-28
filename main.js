@@ -42,8 +42,8 @@ window.onload = function() {
         _init_stonesLen  = _init_boardYPos / 2;
         _init_blacksXPos = _displayWidth / 3;
         _init_blacksYPos = _init_boardYPos / 2;       
-        _init_whitesXPos = _displayWidth / 2 - _init_stonesLen / 2;
-        _init_whitesYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2 - _init_stonesLen / 2;
+        _init_whitesXPos = _displayWidth / 3 * 2;
+        _init_whitesYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
     }else{
         //横長
         _init_boardLen   = adjustBoardSize(_displayHeight,_displayWidth);    
