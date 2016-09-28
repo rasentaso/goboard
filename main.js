@@ -85,7 +85,7 @@ window.onload = function() {
     _whites.refresh();    
 
     _blackStack = new StoneStack(stage);
-    _blackStack.setUp(_init_blacksStackXPos,_init_blacksStackXPos,_init_radius,'black');
+    _blackStack.setUp(_init_blacksStackXPos,_init_blacksStackYPos,_init_radius,'black');
     _blackStack.refresh();
 
     _whiteStack = new StoneStack(stage);
