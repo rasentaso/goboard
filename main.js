@@ -475,8 +475,7 @@ StoneStack.prototype.initialize = function(stage) {
         fontSize : '100px',
         fontStyle : 'italic',
         fontWeight : 'bold',
-        fill : '#F7EDCA'
-/*
+        fill : '#F7EDCA',
         stroke : '#4a1850',
         strokeThickness : 5,
         dropShadow : true,
@@ -485,7 +484,7 @@ StoneStack.prototype.initialize = function(stage) {
         dropShadowDistance : 6,
         wordWrap : true,
         wordWrapWidth : 440
-*/
+
     };    
     this.label = new PIXI.Text('test',style);
     this.label.x = 0;
