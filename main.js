@@ -520,7 +520,7 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
     var style = {
         fontFamily : 'Arial',
         fontSize : radius + 'px',        
-        fontStyle : 'italic',
+        fontStyle : 'normal',
         fontWeight : 'bold',
         fill : ColorCode(this.reverse_color),   
     };    
