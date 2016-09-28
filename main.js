@@ -470,7 +470,24 @@ StoneStack.prototype.initialize = function(stage) {
     this.interactive = true;
     this.buttonMode = true;
     this.count = 0;
-    this.label = new PIXI.Text('test');
+    var style = {
+        fontFamily : 'Arial',
+        fontSize : '36px',
+        fontStyle : 'italic',
+        fontWeight : 'bold',
+        fill : '#F7EDCA'
+/*
+        stroke : '#4a1850',
+        strokeThickness : 5,
+        dropShadow : true,
+        dropShadowColor : '#000000',
+        dropShadowAngle : Math.PI / 6,
+        dropShadowDistance : 6,
+        wordWrap : true,
+        wordWrapWidth : 440
+*/
+    };    
+    this.label = new PIXI.Text('test',style);
     this.label.x = 0;
     this.label.y = 0;
     stage.addChild(this.label);
