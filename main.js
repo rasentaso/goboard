@@ -521,9 +521,10 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
         fontStyle : 'italic',
         fontWeight : 'bold',
 //        fill : '#F7EDCA',
-        fill : 0xFF0000,        
+        fill : ColorCode(color),        
         stroke : '#4a1850',
-        strokeThickness : 5,
+        strokeThickness : 5
+/*
         dropShadow : true,
 //        dropShadowColor : '#000000',
         dropShadowColor : 0xFF0000,        
@@ -531,6 +532,7 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
         dropShadowDistance : 6,
         wordWrap : true,
         wordWrapWidth : 440
+*/
     };    
     this.label.setStyle(style);
     
