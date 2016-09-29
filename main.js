@@ -125,8 +125,8 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
     this.endFill();  
     
     var cursorUp = function(event){
-        _board.sabunX = 0;
-        _board.sabunY = 0;
+        _board.diffX = 0;
+        _board.diffY = 0;
         _isDrag = false;   
         _input_color = 'blank';    
         this.deleteMove();
@@ -170,8 +170,8 @@ Board.prototype.initialize = function(stage) {
     
     this.interactive = true;
     this.buttonMode  = true;
-    this.sabunX = 0;
-    this.sabunY = 0;
+    this.diffX = 0;
+    this.diffY = 0;
 
     var timer;
     var cursorDown = function(event){
@@ -221,8 +221,8 @@ Board.prototype.initialize = function(stage) {
         }
         this.refresh();        
         _guide.clear();
-        this.sabunX = 0;
-        this.sabunY = 0;
+        this.diffX = 0;
+        this.diffY = 0;
         
     }  
     var cursorMove = function(event){
