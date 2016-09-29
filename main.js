@@ -7,7 +7,6 @@ var _blacks;
 var _whiteStack;
 var _blackStack;
 var _isDrag;
-var _debugTxt;
 
 var _debug = false;
 window.onload = function() {
@@ -74,10 +73,6 @@ window.onload = function() {
     _board = new Board(stage);
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,9);
     _board.refresh();
-_debugTxt = new PIXI.Text('test5');
-_debugTxt.x = 100;
-_debugTxt.y = 300;
-stage.addChild(_debugTxt);
 
     _guide = new Guide(stage);
 
@@ -210,7 +205,6 @@ Board.prototype.initialize = function(stage) {
         }
         pos.x -= this.sabunX;
         pos.y -= this.sabunY;        
-_debugTxt.text = 'down ' + pos.x;
         
         _guide.refresh(pos);               
     }
@@ -243,7 +237,6 @@ _debugTxt.text = 'down ' + pos.x;
             if(_isDrag){  
                 pos.x -= this.sabunX;
                 pos.y -= this.sabunY;
-                _debugTxt.text = 'move ' + pos.x;
                 _guide.refresh(pos);                            
             }
         }        
@@ -610,7 +603,6 @@ Guide.prototype.refresh = function(pos){
             var sabunX = moveCellX - rootCellX;
             var sabunY = moveCellY - rootCellY;
             this.beginFill(ColorCode(_board.cells[_board.movingIds[i]].stone),0.5);
-_debugTxt.text += 'ref ' + pos.x;
             this.drawCircle(pos.x + sabunX * _board.cell_length,
                             pos.y + sabunY * _board.cell_length,
                             _board.cell_half_length);    
