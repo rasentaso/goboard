@@ -130,6 +130,8 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
     this.endFill();  
     
     var cursorUp = function(event){
+        _board.sabunX = 0;
+        _board.sabunY = 0;
         _isDrag = false;   
         _input_color = 'blank';    
         this.deleteMove();
@@ -139,6 +141,8 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
         var pos = event.data.getLocalPosition(this.parent);  
         if(this.containsPoint(pos)){  
             if(_isDrag){  
+                pos.x -= _board.sabunX;
+                pos.y -= _board.sabunY;                        
                 _guide.refresh(pos);                            
             }
         }
