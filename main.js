@@ -181,6 +181,8 @@ Board.prototype.initialize = function(stage) {
         var interval = 500;
         var pos = event.data.getLocalPosition(this.parent);        
         var cellId = this.Pos2CellId(pos);
+_debugTxt.text = ' ' + pos.x;
+        
         this.sabunX = this.PosDiffCellPosX(pos.x);
         this.sabunY = this.PosDiffCellPosY(pos.y);
         timer = setTimeout( function() {
@@ -384,7 +386,6 @@ Board.prototype.Pos2CellId = function(pos){
 }
 Board.prototype.PosDiffCellPosX = function(pos){
     var cellX = this.PosX2CellX(pos.x);
-_debugTxt.text = ' ' + pos.x + ' ' + cellX + ' ' + this.cell_length + ' ' + this.cell_half_length;
 
     return pos.x - (this.xpos + cellX * this.cell_length + this.cell_half_length);
 }
