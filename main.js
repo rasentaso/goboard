@@ -206,6 +206,8 @@ Board.prototype.initialize = function(stage) {
         }
         pos.x -= this.sabunX;
         pos.y -= this.sabunY;        
+_debugTxt.text = 'down ' + this.sabunX;
+        
         _guide.refresh(pos);               
     }
     var cursorUp = function(event){
@@ -237,7 +239,7 @@ Board.prototype.initialize = function(stage) {
             if(_isDrag){  
                 pos.x -= this.sabunX;
                 pos.y -= this.sabunY;
-                _debugTxt.text = ' ' + this.sabunX;
+                _debugTxt.text = 'move ' + this.sabunX;
                 _guide.refresh(pos);                            
             }
         }        
