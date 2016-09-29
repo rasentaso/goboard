@@ -182,8 +182,8 @@ Board.prototype.initialize = function(stage) {
         var pos = event.data.getLocalPosition(this.parent);        
         var cellId = this.Pos2CellId(pos);
         
-        this.sabunX = this.PosDiffCellPosX(pos.x);
-        this.sabunY = this.PosDiffCellPosY(pos.y);
+        this.sabunX = this.PosDiffCellPosX(pos);
+        this.sabunY = this.PosDiffCellPosY(pos);
         timer = setTimeout( function() {
             //長押し
             if(this.cells[cellId].stone !== 'blank'){
@@ -384,10 +384,7 @@ Board.prototype.Pos2CellId = function(pos){
     return this.CellXY2CellId(this.PosX2CellX(pos.x),this.PosY2CellY(pos.y));
 }
 Board.prototype.PosDiffCellPosX = function(pos){
-_debugTxt.text = 'a ' + pos.x;
-    
     var cellX = this.PosX2CellX(pos.x);
-
     return pos.x - (this.xpos + cellX * this.cell_length + this.cell_half_length);
 }
 Board.prototype.PosDiffCellPosY = function(pos){
