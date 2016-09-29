@@ -606,6 +606,7 @@ Guide.prototype.refresh = function(pos){
             var sabunX = moveCellX - rootCellX;
             var sabunY = moveCellY - rootCellY;
             this.beginFill(ColorCode(_board.cells[_board.movingIds[i]].stone),0.5);
+_debugTxt.text += 'ref ' + pos.x;
             this.drawCircle(pos.x + sabunX * _board.cell_length,
                             pos.y + sabunY * _board.cell_length,
                             _board.cell_half_length);    
