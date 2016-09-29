@@ -136,7 +136,9 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
         var pos = event.data.getLocalPosition(this.parent);  
         if(this.containsPoint(pos)){  
             if(_isDrag){  
-                _guide.refresh(pos.x - _board.diffX, pos.y - board.diffY);                            
+//                _guide.refresh(pos.x - _board.diffX, pos.y - board.diffY);                            
+                _guide.refresh(pos.x, pos.y);                            
+                
             }
         }
     }
