@@ -136,9 +136,7 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
         var pos = event.data.getLocalPosition(this.parent);  
         if(this.containsPoint(pos)){  
             if(_isDrag){  
-                pos.x -= _board.sabunX;
-                pos.y -= _board.sabunY;                        
-                _guide.refresh(pos);                            
+                _guide.refresh(pos.x - _board.sabunX, pos.y - board.sabunY);                            
             }
         }
     }
@@ -195,7 +193,7 @@ Board.prototype.initialize = function(stage) {
                 this.getConnectedMoveIds(cellId);                
                 this.refresh();
             } 
-            _guide.refresh(pos);       
+            _guide.refresh(pos.x - this.sabunX, pos.y - this.sabunY);                            
         }.bind(this), interval ) ;
 
         if(this.cells[cellId].stone !== 'blank'){
@@ -203,10 +201,8 @@ Board.prototype.initialize = function(stage) {
             this.movingIds[0] = cellId;
             this.refresh();
         }
-        pos.x -= this.sabunX;
-        pos.y -= this.sabunY;        
+        _guide.refresh(pos.x - this.sabunX, pos.y - this.sabunY);                            
         
-        _guide.refresh(pos);               
     }
     var cursorUp = function(event){
         clearTimeout(timer);        
@@ -235,9 +231,7 @@ Board.prototype.initialize = function(stage) {
         if(this.containsPoint(pos)){
             _guide.clear();    
             if(_isDrag){  
-                pos.x -= this.sabunX;
-                pos.y -= this.sabunY;
-                _guide.refresh(pos);                            
+                _guide.refresh(pos.x - this.sabunX, pos.y - this.sabunY);                            
             }
         }        
     }
@@ -587,12 +581,12 @@ Guide.prototype.initialize = function(stage) {
     
 }
 
-Guide.prototype.refresh = function(pos){
+Guide.prototype.refresh = function(x,y){
     
     this.clear();   
     if(_input_color !== 'blank'){
         this.beginFill(ColorCode(_input_color),0.5);
-        this.drawCircle(pos.x,pos.y,_board.cell_half_length);            
+        this.drawCircle(x,y,_board.cell_half_length);            
         this.endFill();        
     }else if(_board.movingIds.length > 0){       
         var rootCellX  = _board.CellId2CellX(_board.movingIds[0]);
@@ -603,8 +597,8 @@ Guide.prototype.refresh = function(pos){
             var sabunX = moveCellX - rootCellX;
             var sabunY = moveCellY - rootCellY;
             this.beginFill(ColorCode(_board.cells[_board.movingIds[i]].stone),0.5);
-            this.drawCircle(pos.x + sabunX * _board.cell_length,
-                            pos.y + sabunY * _board.cell_length,
+            this.drawCircle(x + sabunX * _board.cell_length,
+                            y + sabunY * _board.cell_length,
                             _board.cell_half_length);    
             this.endFill();  
         } 
