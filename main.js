@@ -183,7 +183,7 @@ Board.prototype.initialize = function(stage) {
         var cellId = this.Pos2CellId(pos);
         this.sabunX = this.PosDiffCellPosX(pos.x);
         this.sabunY = this.PosDiffCellPosY(pos.y);
-_debugTxt.text = this.sabunX;
+_debugTxt.text = ' ' + this.sabunX;
         timer = setTimeout( function() {
             //長押し
             if(this.cells[cellId].stone !== 'blank'){
