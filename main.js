@@ -74,7 +74,7 @@ window.onload = function() {
     _board = new Board(stage);
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,9);
     _board.refresh();
-_debugTxt = new PIXI.Text('test3');
+_debugTxt = new PIXI.Text('test4');
 _debugTxt.x = 100;
 _debugTxt.y = 100;
 stage.addChild(_debugTxt);
@@ -206,7 +206,7 @@ Board.prototype.initialize = function(stage) {
         }
         pos.x -= this.sabunX;
         pos.y -= this.sabunY;        
-_debugTxt.text = 'down ' + this.sabunX;
+_debugTxt.text = 'down ' + pos.x;
         
         _guide.refresh(pos);               
     }
@@ -239,7 +239,7 @@ _debugTxt.text = 'down ' + this.sabunX;
             if(_isDrag){  
                 pos.x -= this.sabunX;
                 pos.y -= this.sabunY;
-                _debugTxt.text = 'move ' + this.sabunX;
+                _debugTxt.text = 'move ' + pos.x;
                 _guide.refresh(pos);                            
             }
         }        
