@@ -136,7 +136,7 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
         var pos = event.data.getLocalPosition(this.parent);  
         if(this.containsPoint(pos)){  
             if(_isDrag){  
-                _guide.refresh(pos.x - _board.sabunX, pos.y - board.sabunY);                            
+                _guide.refresh(pos.x - _board.diffX, pos.y - board.diffY);                            
             }
         }
     }
@@ -181,8 +181,8 @@ Board.prototype.initialize = function(stage) {
         var pos = event.data.getLocalPosition(this.parent);        
         var cellId = this.Pos2CellId(pos);
         
-        this.sabunX = this.PosDiffCellPosX(pos);
-        this.sabunY = this.PosDiffCellPosY(pos);
+        this.diffX = this.PosDiffCellPosX(pos);
+        this.diffY = this.PosDiffCellPosY(pos);
         timer = setTimeout( function() {
             //長押し
             if(this.cells[cellId].stone !== 'blank'){
@@ -193,7 +193,7 @@ Board.prototype.initialize = function(stage) {
                 this.getConnectedMoveIds(cellId);                
                 this.refresh();
             } 
-            _guide.refresh(pos.x - this.sabunX, pos.y - this.sabunY);                            
+            _guide.refresh(pos.x - this.diffX, pos.y - this.diffY);                            
         }.bind(this), interval ) ;
 
         if(this.cells[cellId].stone !== 'blank'){
@@ -201,7 +201,7 @@ Board.prototype.initialize = function(stage) {
             this.movingIds[0] = cellId;
             this.refresh();
         }
-        _guide.refresh(pos.x - this.sabunX, pos.y - this.sabunY);                            
+        _guide.refresh(pos.x - this.diffX, pos.y - this.diffY);                            
         
     }
     var cursorUp = function(event){
@@ -231,7 +231,7 @@ Board.prototype.initialize = function(stage) {
         if(this.containsPoint(pos)){
             _guide.clear();    
             if(_isDrag){  
-                _guide.refresh(pos.x - this.sabunX, pos.y - this.sabunY);                            
+                _guide.refresh(pos.x - this.diffX, pos.y - this.diffY);                            
             }
         }        
     }
