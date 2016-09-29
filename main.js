@@ -232,8 +232,7 @@ Board.prototype.initialize = function(stage) {
             if(_isDrag){  
                 pos.x -= this.sabunX;
                 pos.y -= this.sabunY;
-                this.sabunX = 0;
-                this.sabunY = 0;
+                _debugTxt.text = ' ' + this.sabunX;
                 _guide.refresh(pos);                            
             }
         }        
