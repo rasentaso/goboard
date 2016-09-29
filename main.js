@@ -7,6 +7,7 @@ var _blacks;
 var _whiteStack;
 var _blackStack;
 var _isDrag;
+var _dtxt;
 
 var _debug = false;
 window.onload = function() {
@@ -73,6 +74,11 @@ window.onload = function() {
     _board = new Board(stage);
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,9);
     _board.refresh();
+    
+_dtxt = new PIXI.Text('');
+_dtxt.x = 100;
+_dtxt.y = 300;
+stage.addChild(_dtxt);
 
     _guide = new Guide(stage);
 
@@ -136,9 +142,8 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
         var pos = event.data.getLocalPosition(this.parent);  
         if(this.containsPoint(pos)){  
             if(_isDrag){  
-//                _guide.refresh(pos.x - _board.diffX, pos.y - board.diffY);                            
-                _guide.refresh(pos.x, pos.y);                            
-                
+                _dtxt.text = ' ' + _board.diffX;
+                _guide.refresh(pos.x - _board.diffX, pos.y - board.diffY);                                            
             }
         }
     }
