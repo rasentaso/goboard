@@ -75,8 +75,8 @@ window.onload = function() {
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,9);
     _board.refresh();
 _debugTxt = new PIXI.Text('test');
-_debugTxt.x = 0;
-_debugTxt.y = 0;
+_debugTxt.x = 100;
+_debugTxt.y = 100;
 stage.addChild(_debugTxt);
 
     _guide = new Guide(stage);
