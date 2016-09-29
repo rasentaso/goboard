@@ -7,6 +7,8 @@ var _blacks;
 var _whiteStack;
 var _blackStack;
 var _isDrag;
+var _debugTxt;
+
 var _debug = false;
 window.onload = function() {
 
@@ -55,7 +57,6 @@ window.onload = function() {
         
     }else{
         //横長
-
         _init_boardLen   = adjustBoardSize(_displayHeight,_displayWidth);    
         _init_boardXPos  = _displayWidth / 2 - _init_boardLen / 2;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;;        
@@ -73,6 +74,10 @@ window.onload = function() {
     _board = new Board(stage);
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,9);
     _board.refresh();
+_debugTxt = new PIXI.Text('');
+_debugTxt.x = 0;
+_debugTxt.y = 0;
+stage.addChild(_debugTxt);
 
     _guide = new Guide(stage);
 
@@ -100,11 +105,6 @@ window.onload = function() {
     }
     
 };
-
-function initPostion(){
-
-
-}
 
 function adjustBoardSize(smaller,larger){
     expansion = smaller * 1.3;
@@ -183,6 +183,7 @@ Board.prototype.initialize = function(stage) {
         var cellId = this.Pos2CellId(pos);
         this.sabunX = this.PosDiffCellPosX(pos.x);
         this.sabunY = this.PosDiffCellPosY(pos.y);
+_debugTxt.text = this.sabunX;
         timer = setTimeout( function() {
             //長押し
             if(this.cells[cellId].stone !== 'blank'){
