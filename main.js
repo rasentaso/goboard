@@ -194,8 +194,6 @@ Board.prototype.initialize = function(stage) {
                 this.getConnectedMoveIds(cellId);                
                 this.refresh();
             } 
-            pos.x -= this.sabunX;
-            pos.y -= this.sabunY;
             _guide.refresh(pos);       
         }.bind(this), interval ) ;
 
