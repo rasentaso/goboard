@@ -74,7 +74,7 @@ window.onload = function() {
     _board = new Board(stage);
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,9);
     _board.refresh();
-_debugTxt = new PIXI.Text('test2');
+_debugTxt = new PIXI.Text('test3');
 _debugTxt.x = 100;
 _debugTxt.y = 100;
 stage.addChild(_debugTxt);
