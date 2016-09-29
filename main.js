@@ -173,6 +173,8 @@ Board.prototype.initialize = function(stage) {
     
     this.interactive = true;
     this.buttonMode  = true;
+    this.sabunX = 0;
+    this.sabunY = 0;
 
     var timer;
     var cursorDown = function(event){
@@ -222,7 +224,10 @@ Board.prototype.initialize = function(stage) {
             this.rollBackMove();
         }
         this.refresh();        
-        _guide.clear();                     
+        _guide.clear();
+        this.sabunX = 0;
+        this.sabunY = 0;
+        
     }  
     var cursorMove = function(event){
         clearTimeout(timer);
