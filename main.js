@@ -12,8 +12,8 @@ var _dtxt;
 var _debug = false;
 window.onload = function() {
 
-    var _displayWidth  = innerWidth  * 0.9;
-    var _displayHeight = innerHeight * 0.9;
+    var _displayWidth  = innerWidth;
+    var _displayHeight = innerHeight;
 	var renderer = PIXI.autoDetectRenderer(_displayWidth,
                                            _displayHeight,
                                            { antialias: true, backgroundColor: ColorCode('renderer') });
@@ -109,7 +109,7 @@ stage.addChild(_dtxt);
 
 function adjustBoardSize(smaller,larger){
     expansion = smaller * 1.3;
-    return expansion - larger < 0 ? smaller : smaller - (expansion - larger);
+    return expansion - larger < 0 ? smaller * 0.9 : (smaller - (expansion - larger)) * 0.9;
 }
 
 //
