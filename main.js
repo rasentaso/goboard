@@ -51,9 +51,9 @@ window.onload = function() {
         _init_blacksYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
         _init_blacksStackXPos = _init_blacksXPos - margin - _init_radius * 2;
         _init_blacksStackYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;        
-        _init_whitesXPos = _displayWidth / 2 - _init_radius * 2;
+        _init_whitesXPos = margin + _init_radius;
         _init_whitesYPos = _init_boardYPos / 2;      
-        _init_whitesStackXPos = _displayWidth / 2 + _init_radius * 2;
+        _init_whitesStackXPos = _init_whitesXPos + margin + _init_radius * 2;
         _init_whitesStackYPos = _init_boardYPos / 2;      
         
     }else{
