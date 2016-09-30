@@ -234,6 +234,7 @@ Board.prototype.initialize = function(stage) {
         
     }  
     var cursorMove = function(event){        
+        event.preventDefault();
         clearTimeout(timer);
         var pos = event.data.getLocalPosition(this.parent);        
         if(this.containsPoint(pos)){
