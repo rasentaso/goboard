@@ -46,14 +46,14 @@ window.onload = function() {
         _init_boardXPos  = _displayWidth  / 2 - _init_boardLen / 2;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
         _init_radius     = _init_boardYPos / 3;
+        _init_blacksXPos = _displayWidth - _init_radius;
+        _init_blacksYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
+        _init_blacksStackXPos = _displayWidth - _init_radius * 2 - _init_radius;
+        _init_blacksStackYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;        
         _init_whitesXPos = _displayWidth / 2 - _init_radius * 2;
         _init_whitesYPos = _init_boardYPos / 2;      
         _init_whitesStackXPos = _displayWidth / 2 + _init_radius * 2;
         _init_whitesStackYPos = _init_boardYPos / 2;      
-        _init_blacksXPos = _displayWidth - _init_radius;
-        _init_blacksYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
-        _init_blacksStackXPos = _displayWidth / 2 - _init_radius * 2;
-        _init_blacksStackYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
         
     }else{
         //横長
@@ -109,7 +109,7 @@ stage.addChild(_dtxt);
 
 function adjustBoardSize(smaller,larger){
     expansion = smaller * 1.3;
-    return expansion - larger < 0 ? smaller * 0.9 : (smaller - (expansion - larger)) * 0.9;
+    return expansion - larger < 0 ? smaller : (smaller - (expansion - larger));
 }
 
 //
