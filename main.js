@@ -139,7 +139,7 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
         _guide.clear();
     }
     var cursorMove = function(event){
-        _dtxt.text += 'Back.cursorMove';
+        _dtxt.text += 'BackMove';
         var pos = event.data.getLocalPosition(this.parent);  
         if(this.containsPoint(pos)){  
         _dtxt.text += ' koko2';            
@@ -240,7 +240,7 @@ Board.prototype.initialize = function(stage) {
         
     }  
     var cursorMove = function(event){
-        _dtxt.text = 'Board.cursorMove';
+        _dtxt.text = 'Bd.Mv';
         
         clearTimeout(timer);
         var pos = event.data.getLocalPosition(this.parent);        
