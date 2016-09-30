@@ -149,7 +149,8 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
                 _dtxt.text += ' length ' + _board.movingIds.length ;
                 _dtxt.text += ' pos.x ' + pos.x ;
                 _dtxt.text += ' diffx ' + _board.diffX ;
-                _guide.refresh(pos.x - _board.diffX, pos.y - board.diffY);                                           
+                _guide.refresh(pos.x - _board.diffX, pos.y - _board.diffY);                                           
+                
                 _dtxt.text += 'owari';
             }
         }
