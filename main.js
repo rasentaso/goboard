@@ -12,8 +12,8 @@ var _dtxt;
 var _debug = false;
 window.onload = function() {
 
-    var _displayWidth  = innerWidth;
-    var _displayHeight = innerHeight;
+    var _displayWidth  = innerWidth  * 0.9;
+    var _displayHeight = innerHeight * 0.9;
 	var renderer = PIXI.autoDetectRenderer(_displayWidth,
                                            _displayHeight,
                                            { antialias: true, backgroundColor: ColorCode('renderer') });
