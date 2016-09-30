@@ -596,6 +596,7 @@ Guide.prototype.refresh = function(x,y){
     
     this.clear();   
     if(_input_color !== 'blank'){
+        _dtxt.text += 'kokoka?'        
         this.beginFill(ColorCode(_input_color),0.5);
         this.drawCircle(x,y,_board.cell_half_length);            
         this.endFill();        
