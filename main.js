@@ -46,14 +46,14 @@ window.onload = function() {
         _init_boardXPos  = _displayWidth  / 2 - _init_boardLen / 2;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
         _init_radius     = _init_boardYPos / 3;
-        _init_blacksXPos = _displayWidth / 2 - _init_radius * 2;
-        _init_blacksYPos = _init_boardYPos / 2;      
-        _init_blacksStackXPos = _displayWidth / 2 + _init_radius * 2;
-        _init_blacksStackYPos = _init_boardYPos / 2;      
-        _init_whitesXPos = _displayWidth / 2 + _init_radius * 2;
-        _init_whitesYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
-        _init_whitesStackXPos = _displayWidth / 2 - _init_radius * 2;
-        _init_whitesStackYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
+        _init_whitesXPos = _displayWidth / 2 - _init_radius * 2;
+        _init_whitesYPos = _init_boardYPos / 2;      
+        _init_whitesStackXPos = _displayWidth / 2 + _init_radius * 2;
+        _init_whitesStackYPos = _init_boardYPos / 2;      
+        _init_blacksXPos = _displayWidth / 2 + _init_radius * 2;
+        _init_blacksYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
+        _init_blacksStackXPos = _displayWidth / 2 - _init_radius * 2;
+        _init_blacksStackYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
         
     }else{
         //横長
@@ -74,12 +74,12 @@ window.onload = function() {
     _board = new Board(stage);
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,13);
     _board.refresh();
-    
+/*    
 _dtxt = new PIXI.Text('');
 _dtxt.x = 100;
 _dtxt.y = 300;
 stage.addChild(_dtxt);
-
+*/
     _guide = new Guide(stage);
 
     _blacks = new StoneFactory(stage);
