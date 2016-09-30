@@ -72,7 +72,7 @@ window.onload = function() {
     _back = new Back(0,0,_displayWidth,_displayHeight,stage);
     
     _board = new Board(stage);
-    _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,19);
+    _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,13);
     _board.refresh();
     
 _dtxt = new PIXI.Text('');
