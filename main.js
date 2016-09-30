@@ -608,6 +608,7 @@ Guide.prototype.refresh = function(x,y){
             var sabunX = moveCellX - rootCellX;
             var sabunY = moveCellY - rootCellY;
             this.beginFill(ColorCode(_board.cells[_board.movingIds[i]].stone),0.5);
+            _dtxt.text += 'draw ' + (x + sabunX * _board.cell_length) 
             this.drawCircle(x + sabunX * _board.cell_length,
                             y + sabunY * _board.cell_length,
                             _board.cell_half_length);    
