@@ -139,19 +139,10 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
         _guide.clear();
     }
     var cursorMove = function(event){
-        _dtxt.text += 'BackMove';
         var pos = event.data.getLocalPosition(this.parent);  
         if(this.containsPoint(pos)){  
-        _dtxt.text += ' koko2';            
             if(_isDrag){
-        _dtxt.text += 'koko3';
-
-                _dtxt.text += ' length ' + _board.movingIds.length ;
-                _dtxt.text += ' pos.x ' + pos.x ;
-                _dtxt.text += ' diffx ' + _board.diffX ;
-                _guide.refresh(pos.x - _board.diffX, pos.y - _board.diffY);                                           
-                
-                _dtxt.text += 'owari';
+                _guide.refresh(pos.x - _board.diffX, pos.y - _board.diffY);                                                           
             }
         }
     }
@@ -240,15 +231,12 @@ Board.prototype.initialize = function(stage) {
         this.diffY = 0;
         
     }  
-    var cursorMove = function(event){
-        _dtxt.text = 'Bd.Mv';
-        
+    var cursorMove = function(event){        
         clearTimeout(timer);
         var pos = event.data.getLocalPosition(this.parent);        
         if(this.containsPoint(pos)){
             _guide.clear();    
             if(_isDrag){  
-                _dtxt.text += pos.x + ' ' + _board.diffX;                
                 _guide.refresh(pos.x - this.diffX, pos.y - this.diffY);                            
             }
         }        
@@ -602,15 +590,12 @@ Guide.prototype.initialize = function(stage) {
 Guide.prototype.refresh = function(x,y){
     
     this.clear();   
-    _dtxt.text += 'refle ';
     if(_input_color !== 'blank'){
-    _dtxt.text += 'koko4';
         
         this.beginFill(ColorCode(_input_color),0.5);
         this.drawCircle(x,y,_board.cell_half_length);            
         this.endFill();        
     }else if(_board.movingIds.length > 0){       
-    _dtxt.text += 'koko5 ';
         
         var rootCellX  = _board.CellId2CellX(_board.movingIds[0]);
         var rootCellY  = _board.CellId2CellY(_board.movingIds[0]);
