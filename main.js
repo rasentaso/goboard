@@ -596,7 +596,6 @@ Guide.prototype.refresh = function(x,y){
     
     this.clear();   
     if(_input_color !== 'blank'){
-        _dtxt.text += 'kokoka?'        
         this.beginFill(ColorCode(_input_color),0.5);
         this.drawCircle(x,y,_board.cell_half_length);            
         this.endFill();        
@@ -609,7 +608,6 @@ Guide.prototype.refresh = function(x,y){
             var sabunX = moveCellX - rootCellX;
             var sabunY = moveCellY - rootCellY;
             this.beginFill(ColorCode(_board.cells[_board.movingIds[i]].stone),0.5);
-            _dtxt.text += 'draw ' + (x + sabunX * _board.cell_length) 
             this.drawCircle(x + sabunX * _board.cell_length,
                             y + sabunY * _board.cell_length,
                             _board.cell_half_length);    
