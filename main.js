@@ -42,11 +42,11 @@ window.onload = function() {
     //縦横判定
     if(_displayWidth < _displayHeight){
         //縦長
+        var margin = 20;        
         _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
         _init_boardXPos  = _displayWidth  / 2 - _init_boardLen / 2;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
         _init_radius     = _init_boardYPos / 3;
-        var margin = 20;
         _init_blacksXPos = _displayWidth - margin - _init_radius;
         _init_blacksYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
         _init_blacksStackXPos = _init_blacksXPos - margin - _init_radius * 2;
@@ -219,8 +219,9 @@ Board.prototype.initialize = function(stage) {
         
         if(_input_color !== 'blank' && this.cells[cellId].stone === 'blank'){      
             this.cells[cellId].stone = _input_color;
-            _input_color = 'blank';
         }
+        _input_color = 'blank';
+        
         if(this.movingIds.length > 0 && this.canMovePut(pos)){
             this.commitMove(pos);            
         }else{
