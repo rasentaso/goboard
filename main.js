@@ -146,7 +146,7 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
             if(_isDrag){
         _dtxt.text += 'koko3';
 
-                _dtxt.text += ' length ' + board.movingIds.length ;
+                _dtxt.text += ' length ' + _board.movingIds.length ;
                 _guide.refresh(pos.x - _board.diffX, pos.y - board.diffY);                                            
             }
         }
