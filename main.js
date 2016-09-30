@@ -139,7 +139,7 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
         _guide.clear();
     }
     var cursorMove = function(event){
-        _dtxt.text = 'Back.cursorMove';
+        _dtxt.text += 'Back.cursorMove';
         var pos = event.data.getLocalPosition(this.parent);  
         if(this.containsPoint(pos)){  
             if(_isDrag){  
