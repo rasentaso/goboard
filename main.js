@@ -58,14 +58,18 @@ window.onload = function() {
         
     }else{
         //横長
-        _init_boardLen   = adjustBoardSize(_displayHeight,_displayWidth);    
-        _init_boardXPos  = _displayWidth / 2 - _init_boardLen / 2;
-        _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;;        
-        _init_radius     = _init_boardXPos / 2;
-        _init_whitesXPos = _init_boardXPos / 2 - _init_stonesLen / 2;      ;
-        _init_whitesYPos = _displayHeight / 2 - _init_stonesLen / 2;        
-        _init_blacksXPos  = _init_boardXPos + _init_boardLen + _init_boardXPos / 2 - _init_stonesLen / 2;;
-        _init_blacksYPos  = _displayHeight / 2 - _init_stonesLen / 2;
+        _init_boardLen        = adjustBoardSize(_displayHeight,_displayWidth);    
+        _init_boardXPos       = _displayWidth    / 2 - _init_boardLen / 2;
+        _init_boardYPos       = _displayHeight   / 2 - _init_boardLen / 2;        
+        _init_radius          = _init_boardXPos  / 2;
+        _init_blacksXPos      = _init_boardXPos  + _init_boardLen + _init_boardXPos / 2;
+        _init_blacksYPos      = _init_boardYPos  + margin + _init_radius;
+        _init_blacksStackXPos = _init_boardXPos  + _init_boardLen + _init_boardXPos / 2;
+        _init_blacksStackYPos = _init_blacksYPos + margin + _init_radius * 2);    
+        _init_whitesXPos      = _init_boardXPos  - _init_radius;
+        _init_whitesYPos      = _init_boardYPos  + _init_boardLen - margin - _init_radius;        
+        _init_whitesStackXPos = _init_boardXPos  - _init_radius;
+        _init_whitesStackYPos = _init_whitesYPos - margin - _init_radius * 2;        
 
     }
 
