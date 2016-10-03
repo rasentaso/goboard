@@ -9,7 +9,7 @@ var _blackStack;
 var _isDrag;
 var _dtxt;
 
-var _debug = true;
+var _debug = false;
 window.onload = function() {
 
     var _displayWidth  = innerWidth;
