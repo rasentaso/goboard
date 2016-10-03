@@ -564,9 +564,9 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
         fontWeight : 'bold',
         fill : ColorCode(this.reverse_color),   
     };    
-    this.label.setStyle(style);
-    
-}
+    this.label.style = style;
+
+    }
 
 StoneStack.prototype.refresh = function(){
     
