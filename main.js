@@ -40,9 +40,9 @@ window.onload = function() {
     var _init_blacksStackYPos;
     
     //縦横判定
+    var margin = 20;            
     if(_displayWidth < _displayHeight){
         //縦長
-        var margin = 20;        
         _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
         _init_boardXPos  = _displayWidth  / 2 - _init_boardLen / 2;
         _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
@@ -64,9 +64,6 @@ window.onload = function() {
         _init_radius          = _init_boardXPos  / 3;
         _init_blacksXPos      = _init_boardXPos  + _init_boardLen + _init_boardXPos / 2;
         _init_blacksYPos      = _init_boardYPos  + margin + _init_radius;
-        console.log(_init_boardYPos);
-        console.log(margin);
-        console.log(_init_radius);
         _init_blacksStackXPos = _init_boardXPos  + _init_boardLen + _init_boardXPos / 2;
         _init_blacksStackYPos = _init_blacksYPos + margin + _init_radius * 2;    
         _init_whitesXPos      = _init_boardXPos  - _init_radius;
