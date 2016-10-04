@@ -232,7 +232,7 @@ Board.prototype.initialize = function(stage) {
         
     }  
     var cursorMove = function(event){        
-_dtxt.text = pos.x + '-' + pos.y;                
+_dtxt.text = pos.x + '*' + pos.y;                
         
         clearTimeout(timer);
         var pos = event.data.getLocalPosition(this.parent);        
