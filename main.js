@@ -234,7 +234,9 @@ Board.prototype.initialize = function(stage) {
     var cursorMove = function(event){                
         clearTimeout(timer);
         var pos = event.data.getLocalPosition(this.parent);        
-_dtxt.text = pos.x + '*' + pos.y;                
+        var cellId = this.Pos2CellId(pos);//test
+        
+_dtxt.text = pos.x + '*' + pos.y + "*" + cellId;                
         
         if(this.containsPoint(pos)){
             _guide.clear();    
