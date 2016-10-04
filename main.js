@@ -231,11 +231,11 @@ Board.prototype.initialize = function(stage) {
         this.diffY = 0;
         
     }  
-    var cursorMove = function(event){        
-_dtxt.text = pos.x + '*' + pos.y;                
-        
+    var cursorMove = function(event){                
         clearTimeout(timer);
         var pos = event.data.getLocalPosition(this.parent);        
+_dtxt.text = pos.x + '*' + pos.y;                
+        
         if(this.containsPoint(pos)){
             _guide.clear();    
             if(_isDrag){  
