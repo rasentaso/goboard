@@ -213,9 +213,9 @@ Board.prototype.initialize = function(stage) {
     var cursorUp = function(event){
         clearTimeout(timer);        
         _isDrag = false;
-        var pos = event.data.getLocalPosition(this.parent);                
+        var pos = event.data.getLocalPosition(this.parent);               
+_dtxt.text = pos.x + '-' + pos.y;                
         var cellId = this.Pos2CellId(pos);
-_dtxt.text = cellId;        
         if(_input_color !== 'blank' && this.cells[cellId].stone === 'blank'){      
             this.cells[cellId].stone = _input_color;
         }
