@@ -79,8 +79,10 @@ window.onload = function() {
     _board = new Board(stage);
     _board.setUp(_init_boardX,_init_boardY,_init_boardLen,13);
     _board.refresh();
+/*
 _dtxt = new PIXI.Text('koko');
 _board.addChild(_dtxt);
+*/
     _guide = new Guide(stage);
 
     _blacks = new StoneFactory(stage);
@@ -233,11 +235,7 @@ Board.prototype.initialize = function(stage) {
     }  
     var cursorMove = function(event){                
         clearTimeout(timer);
-        var pos = event.data.getLocalPosition(this);        
-        var cellId = this.Pos2CellId(pos);//test
-        
-_dtxt.text = pos.x + '*' + pos.y + "*" + cellId;                
-        
+        var pos = event.data.getLocalPosition(this);                
         if(this.containsPoint(pos)){
             _guide.clear();    
             if(_isDrag){  
@@ -544,8 +542,6 @@ StoneStack.prototype.setUp = function(x,y,radius,color){
 
     this.x    = x;
     this.y    = y;
-//    this.label.x = radius / 2;
-//    this.label.y = radius / 2;
     this.radius  = radius;
     this.color   = color;
     if(color === 'white')this.reverse_color = 'black';
