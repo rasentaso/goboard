@@ -177,6 +177,7 @@ Board.prototype.initialize = function(stage) {
     PIXI.Graphics.call(this);
     stage.addChild(this);
     
+    this.x = 100;
     this.interactive = true;
     this.buttonMode  = true;
     this.diffX = 0;
