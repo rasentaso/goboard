@@ -27,49 +27,49 @@ window.onload = function() {
     renderer.view.style.paddingRight = "0";
 
     var _init_boardLen;
-    var _init_boardX;
-    var _init_boardY;
+    var _init_boardXPos;
+    var _init_boardYPos;
     var _init_radius;
-    var _init_whitesX;
-    var _init_whitesY;
-    var _init_blacksX;
-    var _init_blacksY;
-    var _init_whitesStackX;
-    var _init_whitesStackY;
-    var _init_blacksStackX;
-    var _init_blacksStackY;
+    var _init_whitesXPos;
+    var _init_whitesYPos;
+    var _init_blacksXPos;
+    var _init_blacksYPos;
+    var _init_whitesStackXPos;
+    var _init_whitesStackYPos;
+    var _init_blacksStackXPos;
+    var _init_blacksStackYPos;
     
     //縦横判定
     var margin = 20;            
     if(_displayWidth < _displayHeight){
         //縦長
         _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
-        _init_boardX  = _displayWidth  / 2 - _init_boardLen / 2;
-        _init_boardY  = _displayHeight / 2 - _init_boardLen / 2;
-        _init_radius     = _init_boardY / 3;
-        _init_blacksX = _displayWidth - margin - _init_radius;
-        _init_blacksY = _init_boardY + _init_boardLen + _init_boardY / 2;
-        _init_blacksStackX = _init_blacksX - margin - _init_radius * 2;
-        _init_blacksStackY = _init_boardY + _init_boardLen + _init_boardY / 2;        
-        _init_whitesX = margin + _init_radius;
-        _init_whitesY = _init_boardY / 2;      
-        _init_whitesStackX = _init_whitesX + margin + _init_radius * 2;
-        _init_whitesStackY = _init_boardY / 2;      
+        _init_boardXPos  = _displayWidth  / 2 - _init_boardLen / 2;
+        _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
+        _init_radius     = _init_boardYPos / 3;
+        _init_blacksXPos = _displayWidth - margin - _init_radius;
+        _init_blacksYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
+        _init_blacksStackXPos = _init_blacksXPos - margin - _init_radius * 2;
+        _init_blacksStackYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;        
+        _init_whitesXPos = margin + _init_radius;
+        _init_whitesYPos = _init_boardYPos / 2;      
+        _init_whitesStackXPos = _init_whitesXPos + margin + _init_radius * 2;
+        _init_whitesStackYPos = _init_boardYPos / 2;      
         
     }else{
         //横長
         _init_boardLen        = adjustBoardSize(_displayHeight,_displayWidth);    
-        _init_boardX       = _displayWidth    / 2 - _init_boardLen / 2;
-        _init_boardY       = _displayHeight   / 2 - _init_boardLen / 2;        
-        _init_radius          = _init_boardX  / 3;
-        _init_blacksX      = _init_boardX  + _init_boardLen + _init_boardX / 2;
-        _init_blacksY      = _init_boardY  + margin + _init_radius;
-        _init_blacksStackX = _init_boardX  + _init_boardLen + _init_boardX / 2;
-        _init_blacksStackY = _init_blacksY + margin + _init_radius * 2;    
-        _init_whitesX      = _init_boardX  / 2;
-        _init_whitesY      = _init_boardY  + _init_boardLen - margin - _init_radius;        
-        _init_whitesStackX = _init_boardX  / 2;
-        _init_whitesStackY = _init_whitesY - margin - _init_radius * 2;        
+        _init_boardXPos       = _displayWidth    / 2 - _init_boardLen / 2;
+        _init_boardYPos       = _displayHeight   / 2 - _init_boardLen / 2;        
+        _init_radius          = _init_boardXPos  / 3;
+        _init_blacksXPos      = _init_boardXPos  + _init_boardLen + _init_boardXPos / 2;
+        _init_blacksYPos      = _init_boardYPos  + margin + _init_radius;
+        _init_blacksStackXPos = _init_boardXPos  + _init_boardLen + _init_boardXPos / 2;
+        _init_blacksStackYPos = _init_blacksYPos + margin + _init_radius * 2;    
+        _init_whitesXPos      = _init_boardXPos  / 2;
+        _init_whitesYPos      = _init_boardYPos  + _init_boardLen - margin - _init_radius;        
+        _init_whitesStackXPos = _init_boardXPos  / 2;
+        _init_whitesStackYPos = _init_whitesYPos - margin - _init_radius * 2;        
 
     }
 
@@ -77,28 +77,30 @@ window.onload = function() {
     _back = new Back(0,0,_displayWidth,_displayHeight,stage);
     
     _board = new Board(stage);
-    _board.setUp(_init_boardX,_init_boardY,_init_boardLen,13);
+    _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,13);
     _board.refresh();
-/*
-_dtxt = new PIXI.Text('koko');
-_board.addChild(_dtxt);
+/*    
+_dtxt = new PIXI.Text('');
+_dtxt.x = 100;
+_dtxt.y = 300;
+stage.addChild(_dtxt);
 */
     _guide = new Guide(stage);
 
     _blacks = new StoneFactory(stage);
-    _blacks.setUp(_init_blacksX,_init_blacksY,_init_radius,'black');
+    _blacks.setUp(_init_blacksXPos,_init_blacksYPos,_init_radius,'black');
     _blacks.refresh();
    
     _whites = new StoneFactory(stage);
-    _whites.setUp(_init_whitesX,_init_whitesY,_init_radius,'white');
+    _whites.setUp(_init_whitesXPos,_init_whitesYPos,_init_radius,'white');
     _whites.refresh();    
 
     _blackStack = new StoneStack(stage);
-    _blackStack.setUp(_init_blacksStackX,_init_blacksStackY,_init_radius,'black');
+    _blackStack.setUp(_init_blacksStackXPos,_init_blacksStackYPos,_init_radius,'black');
     _blackStack.refresh();
 
     _whiteStack = new StoneStack(stage);
-    _whiteStack.setUp(_init_whitesStackX,_init_whitesStackY,_init_radius,'white');
+    _whiteStack.setUp(_init_whitesStackXPos,_init_whitesStackYPos,_init_radius,'white');
     _whiteStack.refresh();
     
 	// run the render loop
@@ -123,14 +125,14 @@ function Back() {
 }
 Back.prototype = Object.create(PIXI.Graphics.prototype);
 Back.prototype.constructor = Back;
-Back.prototype.initialize = function(x,y,width,height,stage) {
+Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
 
     PIXI.Graphics.call(this);
     stage.addChild(this);
 
     this.interactive = true;
     this.beginFill(ColorCode('back',0,0));
-    this.drawRect(x,y,width,height);
+    this.drawRect(xpos,ypos,width,height);
     this.endFill();  
     
     var cursorUp = function(event){
@@ -187,8 +189,9 @@ Board.prototype.initialize = function(stage) {
         
         _isDrag = true;    
         var interval = 500;
-        var pos = event.data.getLocalPosition(this);        
+        var pos = event.data.getLocalPosition(this.parent);        
         var cellId = this.Pos2CellId(pos);
+        
         this.diffX = this.PosDiffCellPosX(pos);
         this.diffY = this.PosDiffCellPosY(pos);
         timer = setTimeout( function() {
@@ -215,8 +218,9 @@ Board.prototype.initialize = function(stage) {
     var cursorUp = function(event){
         clearTimeout(timer);        
         _isDrag = false;
-        var pos = event.data.getLocalPosition(this);               
+        var pos = event.data.getLocalPosition(this.parent);                
         var cellId = this.Pos2CellId(pos);
+        
         if(_input_color !== 'blank' && this.cells[cellId].stone === 'blank'){      
             this.cells[cellId].stone = _input_color;
         }
@@ -233,9 +237,9 @@ Board.prototype.initialize = function(stage) {
         this.diffY = 0;
         
     }  
-    var cursorMove = function(event){                
+    var cursorMove = function(event){        
         clearTimeout(timer);
-        var pos = event.data.getLocalPosition(this);                
+        var pos = event.data.getLocalPosition(this.parent);        
         if(this.containsPoint(pos)){
             _guide.clear();    
             if(_isDrag){  
@@ -255,10 +259,10 @@ Board.prototype.initialize = function(stage) {
 
 
 
-Board.prototype.setUp = function(x,y,length,tract){
+Board.prototype.setUp = function(xpos,ypos,length,tract){
     
-    this.x   = x; 
-    this.y   = y;
+    this.xpos   = xpos; 
+    this.ypos   = ypos;
     this.length = length;
     this.tract  = tract;
     this.cell_length      = this.length  / this.tract ;
@@ -277,12 +281,16 @@ Board.prototype.refresh = function(){
 	this.beginFill(ColorCode('board'));
 	this.lineStyle(2, ColorCode('line'), 1);
 
-    this.drawRect(0,0,this.length,this.length);
+    this.drawRect(this.xpos,this.ypos,this.length,this.length);
     for(var i = 0; i < this.tract; ++i){
-        this.moveTo(this.cell_half_length + (i * this.cell_length),this.cell_half_length);
-        this.lineTo(this.cell_half_length + (i * this.cell_length),this.length -  this.cell_half_length);
-        this.moveTo(this.cell_half_length,this.cell_half_length + (i * this.cell_length));
-        this.lineTo(this.length -  this.cell_half_length,this.cell_half_length + (i * this.cell_length));        
+        this.moveTo(this.xpos +  this.cell_half_length + (i * this.cell_length),
+                        this.ypos +  this.cell_half_length);
+        this.lineTo(this.xpos +  this.cell_half_length + (i * this.cell_length),
+                        this.ypos + this.length -  this.cell_half_length);
+        this.moveTo(this.xpos +  this.cell_half_length,
+                        this.ypos +  this.cell_half_length + (i * this.cell_length));
+        this.lineTo(this.xpos + this.length -  this.cell_half_length,
+                        this.ypos +  this.cell_half_length + (i * this.cell_length));        
     }    
     this.endFill();
 	this.lineStyle(0);
@@ -293,8 +301,8 @@ Board.prototype.refresh = function(){
             this.beginFill(ColorCode(this.cells[i].stone));
             var cellX = this.CellId2CellX(i);
             var cellY = this.CellId2CellY(i);                    
-            this.drawCircle(cellX * this.cell_length + this.cell_half_length,
-                            cellY * this.cell_length + this.cell_half_length,
+            this.drawCircle(this.xpos + cellX * this.cell_length + this.cell_half_length,
+                            this.ypos + cellY * this.cell_length + this.cell_half_length,
                             this.cell_half_length);
         	this.endFill();
         }
@@ -364,11 +372,11 @@ Board.prototype.commitMove = function(pos){
 }
 
 Board.prototype.PosX2CellX = function(x){
-    return Math.floor(x / this.cell_length);
+    return Math.floor((x - this.xpos) / this.cell_length);
 }
 
 Board.prototype.PosY2CellY = function(y){
-    return Math.floor(y / this.cell_length);
+    return Math.floor((y - this.ypos) / this.cell_length);
 }
 Board.prototype.CellXY2CellId = function(cellX,cellY){
     
@@ -386,11 +394,11 @@ Board.prototype.Pos2CellId = function(pos){
 }
 Board.prototype.PosDiffCellPosX = function(pos){
     var cellX = this.PosX2CellX(pos.x);
-    return pos.x - (cellX * this.cell_length + this.cell_half_length);
+    return pos.x - (this.xpos + cellX * this.cell_length + this.cell_half_length);
 }
 Board.prototype.PosDiffCellPosY = function(pos){
     var cellY = this.PosY2CellY(pos.y);
-    return pos.y - (cellY * this.cell_length + this.cell_half_length);
+    return pos.y - (this.ypos + cellY * this.cell_length + this.cell_half_length);
 }
 Board.prototype.getConnectedMoveIds = function(orgId){
     
@@ -469,10 +477,10 @@ StoneFactory.prototype.initialize = function(stage) {
             
 }
 
-StoneFactory.prototype.setUp = function(x,y,radius,color){
+StoneFactory.prototype.setUp = function(xpos,ypos,radius,color){
 
-    this.x    = x;
-    this.y    = y;
+    this.xpos    = xpos;
+    this.ypos    = ypos;
     this.radius  = radius;
     this.color   = color;
     
@@ -481,7 +489,7 @@ StoneFactory.prototype.setUp = function(x,y,radius,color){
 StoneFactory.prototype.refresh = function(){
     
     this.beginFill(ColorCode(this.color));
-    this.drawCircle(0, 0, this.radius);
+    this.drawCircle(this.xpos, this.ypos, this.radius);
     this.endFill();
      
 }
@@ -500,7 +508,7 @@ StoneStack.prototype.initialize = function(stage) {
     stage.addChild(this);
 
     this.label = new PIXI.Text();
-    this.addChild(this.label);
+    stage.addChild(this.label);
     
     this.interactive = true;
     this.buttonMode = true;
@@ -538,10 +546,12 @@ StoneStack.prototype.initialize = function(stage) {
             
 }
 
-StoneStack.prototype.setUp = function(x,y,radius,color){
+StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
 
-    this.x    = x;
-    this.y    = y;
+    this.xpos    = xpos;
+    this.ypos    = ypos;
+    this.label.x = xpos - radius / 2;
+    this.label.y = ypos - radius / 2;
     this.radius  = radius;
     this.color   = color;
     if(color === 'white')this.reverse_color = 'black';
@@ -555,13 +565,13 @@ StoneStack.prototype.setUp = function(x,y,radius,color){
     };    
     this.label.style = style;
 
-}
+    }
 
 StoneStack.prototype.refresh = function(){
     
     this.beginFill(ColorCode(this.color),0.0);
     this.lineStyle(10, ColorCode(this.color), 1);    
-    this.drawCircle(0, 0, this.radius);    
+    this.drawCircle(this.xpos, this.ypos, this.radius);    
     this.label.text = ' ' + this.count;
     this.endFill();
     
@@ -631,5 +641,3 @@ if(_debug){
     
     return undefined;
 }
-
-
