@@ -507,9 +507,9 @@ StoneStack.prototype.initialize = function(stage) {
     PIXI.Graphics.call(this);
     stage.addChild(this);
 
-    this.text = new PIXI.Text();
-//    stage.addChild(this.label);
-    this.addChild(this.text);
+    this.label = new PIXI.Text();
+    stage.addChild(this.label);
+//    this.addChild(this.label);
     
     this.interactive = true;
     this.buttonMode = true;
@@ -551,8 +551,8 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
 
     this.xpos    = xpos;
     this.ypos    = ypos;
-//    this.label.x = xpos - radius / 2;
-//    this.label.y = ypos - radius / 2;
+    this.label.x = xpos - radius / 2;
+    this.label.y = ypos - radius / 2;
     this.radius  = radius;
     this.color   = color;
     if(color === 'white')this.reverse_color = 'black';
@@ -564,7 +564,7 @@ StoneStack.prototype.setUp = function(xpos,ypos,radius,color){
         fontWeight : 'bold',
         fill : ColorCode(this.reverse_color),   
     };    
-    this.text.style = style;
+    this.label.style = style;
 
     }
 
@@ -573,7 +573,7 @@ StoneStack.prototype.refresh = function(){
     this.beginFill(ColorCode(this.color),0.0);
     this.lineStyle(10, ColorCode(this.color), 1);    
     this.drawCircle(this.xpos, this.ypos, this.radius);    
-    this.text.text = ' ' + this.count;
+    this.label.text = ' ' + this.count;
     this.endFill();
     
 }
