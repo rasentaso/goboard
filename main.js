@@ -543,8 +543,8 @@ StoneStack.prototype.setUp = function(x,y,radius,color){
 
     this.x    = x;
     this.y    = y;
-    this.label.x = radius / 2;
-    this.label.y = radius / 2;
+//    this.label.x = radius / 2;
+//    this.label.y = radius / 2;
     this.radius  = radius;
     this.color   = color;
     if(color === 'white')this.reverse_color = 'black';
@@ -565,7 +565,7 @@ StoneStack.prototype.refresh = function(){
     this.beginFill(ColorCode(this.color),0.0);
     this.lineStyle(10, ColorCode(this.color), 1);    
     this.drawCircle(0, 0, this.radius);    
-    this.label.text = 'b' + this.count;
+    this.label.text = ' ' + this.count;
     this.endFill();
     
 }
