@@ -79,10 +79,8 @@ window.onload = function() {
     _board = new Board(stage);
     _board.setUp(_init_boardX,_init_boardY,_init_boardLen,13);
     _board.refresh();
-/*    
 _dtxt = new PIXI.Text('koko');
 _board.addChild(_dtxt);
-*/
     _guide = new Guide(stage);
 
     _blacks = new StoneFactory(stage);
@@ -217,7 +215,7 @@ Board.prototype.initialize = function(stage) {
         _isDrag = false;
         var pos = event.data.getLocalPosition(this.parent);                
         var cellId = this.Pos2CellId(pos);
-        
+_dtxt.text = cellId;        
         if(_input_color !== 'blank' && this.cells[cellId].stone === 'blank'){      
             this.cells[cellId].stone = _input_color;
         }
