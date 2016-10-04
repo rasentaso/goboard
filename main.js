@@ -79,12 +79,10 @@ window.onload = function() {
     _board = new Board(stage);
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,13);
     _board.refresh();
-/*    
-_dtxt = new PIXI.Text('');
-_dtxt.x = 100;
-_dtxt.y = 300;
-stage.addChild(_dtxt);
-*/
+    
+_dtxt = new PIXI.Text('koko');
+_board.addChild(_dtxt);
+
     _guide = new Guide(stage);
 
     _blacks = new StoneFactory(stage);
