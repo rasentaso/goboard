@@ -509,7 +509,7 @@ StoneStack.prototype.initialize = function(stage) {
 
     this.label = new PIXI.Text();
 //    stage.addChild(this.label);
-//    this.addChild(this.label);
+    this.addChild(this.label);
     
     this.interactive = true;
     this.buttonMode = true;
@@ -573,7 +573,7 @@ StoneStack.prototype.refresh = function(){
     this.beginFill(ColorCode(this.color),0.0);
     this.lineStyle(10, ColorCode(this.color), 1);    
     this.drawCircle(this.xpos, this.ypos, this.radius);    
-    this.label.text = 'a' + this.count;
+    this.label.text = ' ' + this.count;
     this.endFill();
     
 }
