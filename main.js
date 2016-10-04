@@ -571,8 +571,8 @@ StoneStack.prototype.refresh = function(){
     this.lineStyle(10, ColorCode(this.color), 1);    
     this.drawCircle(0, 0, this.radius);    
     this.label.text = String(this.count);
-    this.label.x -= this.label.width;
-    this.label.y -= this.label.height;
+    this.label.x -= this.label.width  / 2;
+    this.label.y -= this.label.height / 2;
     this.endFill();
     
 }
