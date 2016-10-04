@@ -214,7 +214,6 @@ Board.prototype.initialize = function(stage) {
         clearTimeout(timer);        
         _isDrag = false;
         var pos = event.data.getLocalPosition(this.parent);               
-_dtxt.text = pos.x + '-' + pos.y;                
         var cellId = this.Pos2CellId(pos);
         if(_input_color !== 'blank' && this.cells[cellId].stone === 'blank'){      
             this.cells[cellId].stone = _input_color;
@@ -233,6 +232,8 @@ _dtxt.text = pos.x + '-' + pos.y;
         
     }  
     var cursorMove = function(event){        
+_dtxt.text = pos.x + '-' + pos.y;                
+        
         clearTimeout(timer);
         var pos = event.data.getLocalPosition(this.parent);        
         if(this.containsPoint(pos)){
