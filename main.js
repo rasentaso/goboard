@@ -509,7 +509,7 @@ StoneStack.prototype.initialize = function(stage) {
 
     this.label = new PIXI.Text();
 //    stage.addChild(this.label);
-    this.addChild(this.label);
+//    this.addChild(this.label);
     
     this.interactive = true;
     this.buttonMode = true;
