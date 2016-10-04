@@ -573,7 +573,7 @@ StoneStack.prototype.refresh = function(){
     this.beginFill(ColorCode(this.color),0.0);
     this.lineStyle(10, ColorCode(this.color), 1);    
     this.drawCircle(this.xpos, this.ypos, this.radius);    
-    this.label.text = ' ' + this.count;
+    this.label.text = 'a' + this.count;
     this.endFill();
     
 }
