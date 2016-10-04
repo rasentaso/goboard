@@ -185,7 +185,7 @@ Board.prototype.initialize = function(stage) {
         
         _isDrag = true;    
         var interval = 500;
-        var pos = event.data.getLocalPosition(this.parent);        
+        var pos = event.data.getLocalPosition(this);        
         var cellId = this.Pos2CellId(pos);
         this.diffX = this.PosDiffCellPosX(pos);
         this.diffY = this.PosDiffCellPosY(pos);
@@ -213,7 +213,7 @@ Board.prototype.initialize = function(stage) {
     var cursorUp = function(event){
         clearTimeout(timer);        
         _isDrag = false;
-        var pos = event.data.getLocalPosition(this.parent);               
+        var pos = event.data.getLocalPosition(this);               
         var cellId = this.Pos2CellId(pos);
         if(_input_color !== 'blank' && this.cells[cellId].stone === 'blank'){      
             this.cells[cellId].stone = _input_color;
@@ -233,7 +233,7 @@ Board.prototype.initialize = function(stage) {
     }  
     var cursorMove = function(event){                
         clearTimeout(timer);
-        var pos = event.data.getLocalPosition(this.parent);        
+        var pos = event.data.getLocalPosition(this);        
         var cellId = this.Pos2CellId(pos);//test
         
 _dtxt.text = pos.x + '*' + pos.y + "*" + cellId;                
