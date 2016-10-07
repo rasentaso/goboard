@@ -81,7 +81,7 @@ window.onload = function() {
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,13);
     _board.refresh();
     
-_dtxt = new PIXI.Text('start');
+_dtxt = new PIXI.Text('astart');
 _dtxt.x = 100;
 _dtxt.y = 300;
 stage.addChild(_dtxt);
@@ -105,6 +105,7 @@ stage.addChild(_dtxt);
     _whiteStack.refresh();
     
     _config = new Config(stage);
+    _config.refresh();
     
 	// run the render loop
 	animate();
@@ -139,7 +140,7 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
     this.endFill();  
 
     var cursorDown = function(event){
-        _config.refresh();
+        _config.visible = true;
     }
     var cursorUp = function(event){
         _board.diffX = 0;
@@ -471,7 +472,6 @@ StoneFactory.prototype.initialize = function(stage) {
     this.buttonMode = true;
 
     var cursorDown = function(event){
-        _config.hide();
         
         _isDrag = true;    
         _input_color = this.color;        
@@ -526,6 +526,7 @@ StoneStack.prototype.initialize = function(stage) {
     this.count = 0;
     
     var cursorDown = function(event){
+        _config.visible = false;
         _isDrag = true;  
         if(this.count > 0){
             _input_color = this.reverse_color;        
@@ -642,6 +643,8 @@ Config.prototype.initialize = function(stage) {
     PIXI.Graphics.call(this);
     stage.addChild(this);    
     this.interactive = true;
+    this.visible = false;
+    
     var cursorDown = function(event){
         _dtxt.text = "Config.down";
     }
@@ -659,16 +662,11 @@ Config.prototype.initialize = function(stage) {
     this.on('touchmove',cursorMove);
     
 }
-Config.prototype.hide = function(){
-    this.clear();   
-}
 Config.prototype.refresh = function(x,y){
-    
     this.clear();   
     this.beginFill(ColorCode('back',0,0));
     this.drawRect(_board.xpos + 100,_board.ypos + 100,300,300);
     this.endFill();  
-    
 }
 
 function ColorCode(name){
