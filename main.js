@@ -80,12 +80,12 @@ window.onload = function() {
     _board = new Board(stage);
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,13);
     _board.refresh();
-/*    
-_dtxt = new PIXI.Text('');
+    
+_dtxt = new PIXI.Text('start');
 _dtxt.x = 100;
 _dtxt.y = 300;
 stage.addChild(_dtxt);
-*/
+
     _guide = new Guide(stage);
 
     _blacks = new StoneFactory(stage);
@@ -640,14 +640,31 @@ Config.prototype.initialize = function(stage) {
     PIXI.Graphics.call(this);
     stage.addChild(this);    
     this.interactive = true;
+    var cursorDown = function(event){
+        _dtxt.text = "Config.down";
+    }
+    var cursorUp = function(event){
+        _dtxt.text = "Config.up";
+    }  
+    var cursorMove = function(event){        
+        _dtxt.text = "Config.move";
+    }        
+    this.on('mousedown',cursorDown);
+    this.on('touchstart',cursorDown);
+    this.on('mouseup',cursorUp);
+    this.on('touchend',cursorUp);
+    this.on('mousemove',cursorMove);
+    this.on('touchmove',cursorMove);
     
 }
-
+Config.prototype.hide = function(){
+    this.clear();   
+}
 Config.prototype.refresh = function(x,y){
     
     this.clear();   
     this.beginFill(ColorCode('back',0,0));
-    this.drawRect(_board.xpos + 50,_board.ypos + 50,100,100);
+    this.drawRect(_board.xpos + 100,_board.ypos + 100,300,300);
     this.endFill();  
     
 }
