@@ -6,6 +6,7 @@ var _whites;
 var _blacks;
 var _whiteStack;
 var _blackStack;
+var _config;
 var _isDrag;
 var _dtxt;
 
@@ -103,6 +104,8 @@ stage.addChild(_dtxt);
     _whiteStack.setUp(_init_whitesStackXPos,_init_whitesStackYPos,_init_radius,'white');
     _whiteStack.refresh();
     
+    _config = new Config(stage);
+    
 	// run the render loop
 	animate();
 	function animate() {        
@@ -134,7 +137,10 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
     this.beginFill(ColorCode('back',0,0));
     this.drawRect(xpos,ypos,width,height);
     this.endFill();  
-    
+
+    var cursorDown = function(event){
+        _config.refresh();
+    }
     var cursorUp = function(event){
         _board.diffX = 0;
         _board.diffY = 0;
@@ -151,6 +157,9 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
             }
         }
     }
+    
+    this.on('mousedown',cursorDown);
+    this.on('touchstart',cursorDown);
     this.on('mouseup',cursorUp);
     this.on('touchend',cursorUp);
     this.on('mousemove',cursorMove);
@@ -617,6 +626,29 @@ Guide.prototype.refresh = function(x,y){
             this.endFill();  
         } 
     }
+}
+
+//
+// Config
+//
+function Config() {
+    this.initialize.apply(this, arguments);
+}
+Config.prototype = Object.create(PIXI.Graphics.prototype);
+Config.prototype.constructor = Config;
+Config.prototype.initialize = function(stage) {
+    PIXI.Graphics.call(this);
+    stage.addChild(this);    
+    this.interactive = true;
+    
+}
+
+Config.prototype.refresh = function(x,y){
+    
+    this.clear();   
+    this.beginFill(ColorCode('back',0,0));
+    this.drawRect(_board.xpos + 50,_board.ypos + 50,100,100);
+    this.endFill();  
     
 }
 
