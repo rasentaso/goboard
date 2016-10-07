@@ -471,6 +471,8 @@ StoneFactory.prototype.initialize = function(stage) {
     this.buttonMode = true;
 
     var cursorDown = function(event){
+        _config.hide();
+        
         _isDrag = true;    
         _input_color = this.color;        
     }
