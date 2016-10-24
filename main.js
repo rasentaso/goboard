@@ -81,7 +81,7 @@ window.onload = function() {
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,13);
     _board.refresh();
     
-_dtxt = new PIXI.Text('astart');
+_dtxt = new PIXI.Text('bstart');
 _dtxt.x = 100;
 _dtxt.y = 300;
 stage.addChild(_dtxt);
@@ -105,6 +105,7 @@ stage.addChild(_dtxt);
     _whiteStack.refresh();
     
     _config = new Config(stage);
+    _config.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen);
     _config.refresh();
     
 	// run the render loop
@@ -267,8 +268,6 @@ Board.prototype.initialize = function(stage) {
     
 };
 
-
-
 Board.prototype.setUp = function(xpos,ypos,length,tract){
     
     this.xpos   = xpos; 
@@ -285,6 +284,21 @@ Board.prototype.setUp = function(xpos,ypos,length,tract){
     }
     
 }
+
+Board.prototype.tractChange = function(tract){
+    
+    this.tract  = tract;
+    this.cell_length      = this.length  / this.tract ;
+    this.cell_half_length = this.cell_length / 2;
+    this.movingIds = [];
+    this.cells = [];
+    for(var i = 0; i < this.tract * this.tract; ++i){
+        var cell = {stone : 'blank'};                
+        this.cells[i] = cell;
+    }
+    
+}
+
 Board.prototype.refresh = function(){
 
     this.clear();
@@ -640,34 +654,89 @@ function Config() {
 Config.prototype = Object.create(PIXI.Graphics.prototype);
 Config.prototype.constructor = Config;
 Config.prototype.initialize = function(stage) {
+    
     PIXI.Graphics.call(this);
     stage.addChild(this);    
     this.interactive = true;
     this.visible = false;
     
-    var cursorDown = function(event){
-        _dtxt.text = "Config.down";
-    }
-    var cursorUp = function(event){
-        _dtxt.text = "Config.up";
-    }  
-    var cursorMove = function(event){        
-        _dtxt.text = "Config.move";
-    }        
-    this.on('mousedown',cursorDown);
-    this.on('touchstart',cursorDown);
-    this.on('mouseup',cursorUp);
-    this.on('touchend',cursorUp);
-    this.on('mousemove',cursorMove);
-    this.on('touchmove',cursorMove);
+}
+
+Config.prototype.setUp = function(xpos,ypos,length){
+    
+    this.xpos   = xpos; 
+    this.ypos   = ypos;
+    this.length = length;
     
 }
-Config.prototype.refresh = function(x,y){
-    this.clear();   
-    this.beginFill(ColorCode('back',0,0));
-    this.drawRect(_board.xpos + 100,_board.ypos + 100,300,300);
-    this.endFill();  
+
+Config.prototype.refresh = function(){
+
+    this.clear();
+	this.beginFill('blue');
+	this.lineStyle(2, 'green', 1);
+    this.drawRect(this.xpos,this.ypos,this.length,this.length);
+    this.endFill();
+    
 }
+
+//
+// 
+//
+function TractButton() {
+    this.initialize.apply(this, arguments);
+}
+TractButton.prototype = Object.create(PIXI.Graphics.prototype);
+TractButton.prototype.constructor = TractButton;
+TractButton.prototype.initialize = function(config,tract) {
+
+    PIXI.Graphics.call(this);
+    config.addChild(this);
+    
+    this.label   = new PIXI.Text(String(tract));
+    this.label.x = -(this.label.width  / 2);
+    this.label.y = -(this.label.height / 2);    
+    this.addChild(this.label);
+    
+    this.interactive = true;
+    this.buttonMode = true;
+    
+    var cursorUp = function(event){
+        
+        var tract = Number(this.text);
+        _board.tractChange(tract);
+        this.refresh();        
+        
+    }
+    this.on('mouseup',cursorUp);    
+    this.on('touchend',cursorUp);    
+            
+}
+
+TractButton.prototype.setUp = function(x,y,radius){
+
+    this.x       = x;
+    this.y       = y;
+    this.radius  = radius;
+    var style = {
+        fontFamily : 'Arial',
+        fontSize : radius + 'px',        
+        fontStyle : 'normal',
+        fontWeight : 'bold',
+        fill : ColorCode('blue'),   
+    };    
+    this.label.style = style;
+}
+
+TractButton.prototype.refresh = function(){
+    
+    this.beginFill('blue',0.0);
+    this.lineStyle(10, 'blue', 1);    
+    this.drawCircle(0, 0, this.radius);    
+    this.endFill();
+    
+}
+
 
 function ColorCode(name){
     
