@@ -81,7 +81,7 @@ window.onload = function() {
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,13);
     _board.refresh();
     
-_dtxt = new PIXI.Text('bstart');
+_dtxt = new PIXI.Text('cstart');
 _dtxt.x = 100;
 _dtxt.y = 300;
 stage.addChild(_dtxt);
