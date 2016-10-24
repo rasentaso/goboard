@@ -81,7 +81,7 @@ window.onload = function() {
     _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,13);
     _board.refresh();
     
-_dtxt = new PIXI.Text('estart');
+_dtxt = new PIXI.Text('fstart');
 _dtxt.x = 100;
 _dtxt.y = 300;
 stage.addChild(_dtxt);
@@ -675,7 +675,7 @@ Config.prototype.refresh = function(){
     this.clear();
 	this.beginFill('0xFF00FF');
 	this.lineStyle(2, '0xFFFF00', 1);
-    this.drawRoundedRect(this.xpos,this.ypos,this.length,this.length,15);
+    this.drawRoundedRect(this.xpos,this.ypos,this.length,this.length,40);
     this.endFill();
     
 }
