@@ -673,8 +673,8 @@ Config.prototype.setUp = function(xpos,ypos,length){
 Config.prototype.refresh = function(){
 
     this.clear();
-	this.beginFill('white');
-	this.lineStyle(2, 'white', 1);
+	this.beginFill('0xFF00FF');
+	this.lineStyle(2, '0xFFFF00', 1);
     this.drawRect(this.xpos,this.ypos,this.length,this.length);
     this.endFill();
     
