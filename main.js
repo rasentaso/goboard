@@ -10,7 +10,7 @@ var _config;
 var _isDrag;
 var _dtxt;
 
-var _debug = true;
+var _debug = false;
 
 window.onload = function() {
 
@@ -656,8 +656,8 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
     
     PIXI.Graphics.call(this);
     stage.addChild(this);    
-    this.xpos   = xpos; 
-    this.ypos   = ypos;
+    this.x   = xpos; 
+    this.y   = ypos;
     this.length = length;    
     this.interactive = true;
     this.visible = false;
@@ -666,7 +666,7 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
     this.clear();
 	this.beginFill('0xFF00FF',0.5);
 	this.lineStyle(0);    
-    this.drawRoundedRect(this.xpos,this.ypos,this.length,this.length,100);
+    this.drawRoundedRect(this.x,this.y,this.length,this.length,100);
     this.endFill();
     
     var style = {
