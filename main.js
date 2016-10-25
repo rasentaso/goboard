@@ -11,6 +11,7 @@ var _isDrag;
 var _dtxt;
 
 var _debug = false;
+
 window.onload = function() {
 
     var _displayWidth  = innerWidth;
@@ -673,7 +674,7 @@ Config.prototype.setUp = function(xpos,ypos,length){
 Config.prototype.refresh = function(){
 
     this.clear();
-	this.beginFill('0xFF00FF');
+	this.beginFill('0xFF00FF',0.5);
 	this.lineStyle(2, '0xFFFF00', 1);
     this.drawRoundedRect(this.xpos,this.ypos,this.length,this.length,100);
     this.endFill();
