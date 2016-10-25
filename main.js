@@ -678,7 +678,7 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
     };  
     var margin = 10;
     var colMax = 6;
-    var button_length = (this.length - margin * 2 * colMax) / colMax;
+    var button_length = Math.floor((this.length - margin * 2 * colMax) / colMax);
     //tract buttons
     var tracts = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
     for(var i = 0; i < tracts.length; ++i){
