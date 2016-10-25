@@ -14,98 +14,53 @@ var _debug = false;
 
 window.onload = function() {
 
-    var _displayWidth  = innerWidth;
-    var _displayHeight = innerHeight;
-	var renderer = PIXI.autoDetectRenderer(_displayWidth,
-                                           _displayHeight,
+    var displayWidth  = innerWidth;
+    var displayHeight = innerHeight;
+	var renderer = PIXI.autoDetectRenderer(displayWidth,
+                                           displayHeight,
                                            { antialias: true, backgroundColor: ColorCode('renderer') });
     document.body.appendChild(renderer.view);
     renderer.view.style.display = "block";
-    renderer.view.style.width = _displayWidth + 'px';
+    renderer.view.style.width = displayWidth + 'px';
     renderer.view.style.marginTop = "0px";
     renderer.view.style.marginLeft = "auto";
     renderer.view.style.marginRight = "auto";
     renderer.view.style.paddingLeft = "0";
     renderer.view.style.paddingRight = "0";
 
-    var _init_boardLen;
-    var _init_boardXPos;
-    var _init_boardYPos;
-    var _init_radius;
-    var _init_whitesXPos;
-    var _init_whitesYPos;
-    var _init_blacksXPos;
-    var _init_blacksYPos;
-    var _init_whitesStackXPos;
-    var _init_whitesStackYPos;
-    var _init_blacksStackXPos;
-    var _init_blacksStackYPos;
-    
-    //縦横判定
-    var margin = 20;            
-    if(_displayWidth < _displayHeight){
-        //縦長
-        _init_boardLen   = adjustBoardSize(_displayWidth,_displayHeight); 
-        _init_boardXPos  = _displayWidth  / 2 - _init_boardLen / 2;
-        _init_boardYPos  = _displayHeight / 2 - _init_boardLen / 2;
-        _init_radius     = _init_boardYPos / 3;
-        _init_blacksXPos = _displayWidth - margin - _init_radius;
-        _init_blacksYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;
-        _init_blacksStackXPos = _init_blacksXPos - margin - _init_radius * 2;
-        _init_blacksStackYPos = _init_boardYPos + _init_boardLen + _init_boardYPos / 2;        
-        _init_whitesXPos = margin + _init_radius;
-        _init_whitesYPos = _init_boardYPos / 2;      
-        _init_whitesStackXPos = _init_whitesXPos + margin + _init_radius * 2;
-        _init_whitesStackYPos = _init_boardYPos / 2;      
-        
-    }else{
-        //横長
-        _init_boardLen        = adjustBoardSize(_displayHeight,_displayWidth);    
-        _init_boardXPos       = _displayWidth    / 2 - _init_boardLen / 2;
-        _init_boardYPos       = _displayHeight   / 2 - _init_boardLen / 2;        
-        _init_radius          = _init_boardXPos  / 3;
-        _init_blacksXPos      = _init_boardXPos  + _init_boardLen + _init_boardXPos / 2;
-        _init_blacksYPos      = _init_boardYPos  + margin + _init_radius;
-        _init_blacksStackXPos = _init_boardXPos  + _init_boardLen + _init_boardXPos / 2;
-        _init_blacksStackYPos = _init_blacksYPos + margin + _init_radius * 2;    
-        _init_whitesXPos      = _init_boardXPos  / 2;
-        _init_whitesYPos      = _init_boardYPos  + _init_boardLen - margin - _init_radius;        
-        _init_whitesStackXPos = _init_boardXPos  / 2;
-        _init_whitesStackYPos = _init_whitesYPos - margin - _init_radius * 2;        
-
-    }
-
+    var init = calcInitPos(displayWidth,displayHeight);
     var stage = new PIXI.Container();
-    _back = new Back(0,0,_displayWidth,_displayHeight,stage);
+    _back = new Back(0,0,displayWidth,displayHeight,stage);
     
     _board = new Board(stage);
-    _board.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen,13);
+    _board.setUp(init.boardXPos,init.boardYPos,init.boardLen,13);
     _board.refresh();
     
+/*
 _dtxt = new PIXI.Text('fstart');
 _dtxt.x = 100;
 _dtxt.y = 300;
 stage.addChild(_dtxt);
-
+*/
     _guide = new Guide(stage);
 
     _blacks = new StoneFactory(stage);
-    _blacks.setUp(_init_blacksXPos,_init_blacksYPos,_init_radius,'black');
+    _blacks.setUp(init.blacksXPos,init.blacksYPos,init.radius,'black');
     _blacks.refresh();
    
     _whites = new StoneFactory(stage);
-    _whites.setUp(_init_whitesXPos,_init_whitesYPos,_init_radius,'white');
+    _whites.setUp(init.whitesXPos,init.whitesYPos,init.radius,'white');
     _whites.refresh();    
 
     _blackStack = new StoneStack(stage);
-    _blackStack.setUp(_init_blacksStackXPos,_init_blacksStackYPos,_init_radius,'black');
+    _blackStack.setUp(init.blacksStackXPos,init.blacksStackYPos,init.radius,'black');
     _blackStack.refresh();
 
     _whiteStack = new StoneStack(stage);
-    _whiteStack.setUp(_init_whitesStackXPos,_init_whitesStackYPos,_init_radius,'white');
+    _whiteStack.setUp(init.whitesStackXPos,init.whitesStackYPos,init.radius,'white');
     _whiteStack.refresh();
     
-    _config = new ConfigBoard(_init_boardXPos,_init_boardYPos,_init_boardLen,stage);
+    _config = new ConfigBoard(init.boardXPos,init.boardYPos,init.boardLen,stage);
     
 	// run the render loop
 	animate();
@@ -115,6 +70,44 @@ stage.addChild(_dtxt);
     }
     
 };
+
+function calcInitPos(displayWidth,displayHeight){
+
+    var init = {};
+    var margin = 20;                
+    if(displayWidth < displayHeight){
+        //縦長
+        init.boardLen   = adjustBoardSize(displayWidth,displayHeight); 
+        init.boardXPos  = displayWidth  / 2 - init.boardLen / 2;
+        init.boardYPos  = displayHeight / 2 - init.boardLen / 2;
+        init.radius     = init.boardYPos / 3;
+        init.blacksXPos = displayWidth - margin - init.radius;
+        init.blacksYPos = init.boardYPos + init.boardLen + init.boardYPos / 2;
+        init.blacksStackXPos = init.blacksXPos - margin - init.radius * 2;
+        init.blacksStackYPos = init.boardYPos + init.boardLen + init.boardYPos / 2;        
+        init.whitesXPos = margin + init.radius;
+        init.whitesYPos = init.boardYPos / 2;      
+        init.whitesStackXPos = init.whitesXPos + margin + init.radius * 2;
+        init.whitesStackYPos = init.boardYPos / 2;      
+        
+    }else{
+        //横長
+        init.boardLen        = adjustBoardSize(displayHeight,displayWidth);    
+        init.boardXPos       = displayWidth    / 2 - init.boardLen / 2;
+        init.boardYPos       = displayHeight   / 2 - init.boardLen / 2;        
+        init.radius          = init.boardXPos  / 3;
+        init.blacksXPos      = init.boardXPos  + init.boardLen + init.boardXPos / 2;
+        init.blacksYPos      = init.boardYPos  + margin + init.radius;
+        init.blacksStackXPos = init.boardXPos  + init.boardLen + init.boardXPos / 2;
+        init.blacksStackYPos = init.blacksYPos + margin + init.radius * 2;    
+        init.whitesXPos      = init.boardXPos  / 2;
+        init.whitesYPos      = init.boardYPos  + init.boardLen - margin - init.radius;        
+        init.whitesStackXPos = init.boardXPos  / 2;
+        init.whitesStackYPos = init.whitesYPos - margin - init.radius * 2;        
+    }
+    
+    return init;
+}
 
 function adjustBoardSize(smaller,larger){
     expansion = smaller * 1.3;
@@ -670,7 +663,7 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
     this.endFill();
     
     var margin = 10;
-    var colMax = 6;
+    var colMax = 4;
     var button_length = Math.floor((this.length - margin * 2 * colMax) / colMax);
     var style = {
         fontFamily : 'Arial',
