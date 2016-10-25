@@ -669,16 +669,17 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
     this.drawRoundedRect(0,0,this.length,this.length,100);
     this.endFill();
     
+    var margin = 10;
+    var colMax = 6;
+    var button_length = Math.floor((this.length - margin * 2 * colMax) / colMax);
     var style = {
         fontFamily : 'Arial',
-        fontSize : 10 + 'px',        
+        fontSize : Math.floor(button_length / 2) + 'px',        
         fontStyle : 'normal',
         fontWeight : 'bold',
         fill : 0xFF00FF,   
     };  
-    var margin = 10;
-    var colMax = 6;
-    var button_length = Math.floor((this.length - margin * 2 * colMax) / colMax);
+    
     //tract buttons
     var tracts = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
     for(var i = 0; i < tracts.length; ++i){
@@ -705,9 +706,6 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
         
         button.beginFill('0xFF0000',0.5);
         button.lineStyle(0);  
-        console.log('button.x ' + button.x);
-        console.log('button.y ' + button.y);
-        console.log('button.len ' + button.length);        
         button.drawRect(0,0,button.length,button.length);
         button.endFill();
     }
