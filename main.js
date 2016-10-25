@@ -684,23 +684,14 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
     for(var i = 0; i < tracts.length; ++i){
         var button = new PIXI.Graphics();
         this.addChild(button);
-        button.x = margin + (i % colMax) * (button_length + margin * 2);
-        button.y = margin + (i / colMax) * (button_length + margin * 2);    
+        button.x = margin + Math.floor(i % colMax) * (button_length + margin * 2);
+        button.y = margin + Math.floor(i / colMax) * (button_length + margin * 2);    
         button.length  = button_length;
-        console.log('i ' + i);
-        console.log('colMax ' + colMax);        
-        console.log('i / colMax ' + i / colMax);
-        console.log('button.x ' + button.x);
-        console.log('button.y ' + button.y);
-        console.log('button.length ' + button.length);
-        
-/*
         button.label   = new PIXI.Text(tracts[i] + '');
         button.label.x = -(button.label.width  / 2);
         button.label.y = -(button.label.height / 2);    
         button.label.style = style;       
         button.addChild(button.label);
-*/
         button.interactive = true;
         button.buttonMode  = true;
         
@@ -714,9 +705,6 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
         
         button.beginFill('0xFF0000',0.5);
         button.lineStyle(0);  
-        if(i == 0 || i == 1){
-            _dtxt.text += 'x ' + button.x + 'y ' + button.y + 'l  ' + button.length;        
-        }
         button.drawRect(button.x,button.y,button.length,button.length);
         button.endFill();
     }
