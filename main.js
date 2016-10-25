@@ -687,6 +687,9 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
         button.x = margin + (i % colMax) * (button_length + margin * 2);
         button.y = margin + (i / colMax) * (button_length + margin * 2);    
         button.length  = button_length;
+        console.log('i ' + i;
+        console.log('colMax ' + colMax;        
+        console.log('i / colMax ' + i / colMax;
         console.log('button.x ' + button.x);
         console.log('button.y ' + button.y);
         console.log('button.length ' + button.length);
