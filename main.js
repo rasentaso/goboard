@@ -105,9 +105,7 @@ stage.addChild(_dtxt);
     _whiteStack.setUp(_init_whitesStackXPos,_init_whitesStackYPos,_init_radius,'white');
     _whiteStack.refresh();
     
-    _config = new Config(stage);
-    _config.setUp(_init_boardXPos,_init_boardYPos,_init_boardLen);
-    _config.refresh();
+    _config = new ConfigBoard(_init_boardXPos,_init_boardYPos,_init_boardLen,stage);
     
 	// run the render loop
 	animate();
@@ -647,98 +645,72 @@ Guide.prototype.refresh = function(x,y){
 }
 
 //
-// Config
+// ConfigBoard
 //
-function Config() {
+function ConfigBoard() {
     this.initialize.apply(this, arguments);
 }
-Config.prototype = Object.create(PIXI.Graphics.prototype);
-Config.prototype.constructor = Config;
-Config.prototype.initialize = function(stage) {
+ConfigBoard.prototype = Object.create(PIXI.Graphics.prototype);
+ConfigBoard.prototype.constructor = ConfigBoard;
+ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
     
     PIXI.Graphics.call(this);
     stage.addChild(this);    
-    this.interactive = true;
-    this.visible = false;
-    
-}
-
-Config.prototype.setUp = function(xpos,ypos,length){
-    
     this.xpos   = xpos; 
     this.ypos   = ypos;
-    this.length = length;
-    
-}
+    this.length = length;    
+    this.interactive = true;
+    this.visible = false;
 
-Config.prototype.refresh = function(){
-
+    //draw
     this.clear();
 	this.beginFill('0xFF00FF',0.5);
-//	this.lineStyle(2, '0xFFFF00', 1);
 	this.lineStyle(0);    
     this.drawRoundedRect(this.xpos,this.ypos,this.length,this.length,100);
     this.endFill();
     
-}
-
-//
-// 
-//
-function TractButton() {
-    this.initialize.apply(this, arguments);
-}
-TractButton.prototype = Object.create(PIXI.Graphics.prototype);
-TractButton.prototype.constructor = TractButton;
-TractButton.prototype.initialize = function(config,tract) {
-
-    PIXI.Graphics.call(this);
-    config.addChild(this);
-    
-    this.label   = new PIXI.Text(String(tract));
-    this.label.x = -(this.label.width  / 2);
-    this.label.y = -(this.label.height / 2);    
-    this.addChild(this.label);
-    
-    this.interactive = true;
-    this.buttonMode = true;
-    
-    var cursorUp = function(event){
-        
-        var tract = Number(this.text);
-        _board.tractChange(tract);
-        this.refresh();        
-        
-    }
-    this.on('mouseup',cursorUp);    
-    this.on('touchend',cursorUp);    
-            
-}
-
-TractButton.prototype.setUp = function(x,y,radius){
-
-    this.x       = x;
-    this.y       = y;
-    this.radius  = radius;
     var style = {
         fontFamily : 'Arial',
-        fontSize : radius + 'px',        
+        fontSize : 10 + 'px',        
         fontStyle : 'normal',
         fontWeight : 'bold',
-        fill : ColorCode('blue'),   
-    };    
-    this.label.style = style;
-}
-
-TractButton.prototype.refresh = function(){
+        fill : 0xFF00FF,   
+    };  
+    var margin = 10;
+    var colMax = 6;
+    var button_length = (this.length - margin * 2 * colMax) / colMax;
     
-    this.beginFill('blue',0.0);
-    this.lineStyle(10, 'blue', 1);    
-    this.drawCircle(0, 0, this.radius);    
-    this.endFill();
+    //tract buttons
+    var tracts = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
+    for(var i = 0; i < tracts.length; ++i){
+        var button = new PIXI.Graphics();
+        this.addChild(button);
+        button.x = margin + (i % colMax) * (button_length + margin * 2);
+        button.y = margin + (i / colMax) * (button_length + margin * 2);    
+        button.length  = button_length;
+        button.label   = new PIXI.Text(tracts[i] + '');
+        button.label.x = -(button.label.width  / 2);
+        button.label.y = -(button.label.height / 2);    
+        button.label.style = style;        
+        button.addChild(button.label);
+        button.interactive = true;
+        button.buttonMode  = true;
+        
+        var cursorUp = function(event){
+            _board.tractChange(Number(button.label.text));
+            _board.refresh();
+            this.visible = false;
+        }    
+        button.on('mouseup',cursorUp);    
+        button.on('touchend',cursorUp);  
+        
+        button.beginFill('0xFF00FF',0.5);
+        button.lineStyle(0);    
+        button.drawRect(button.x,button.y,button.length,button.length);
+        button.endFill();
+    }
     
 }
-
 
 function ColorCode(name){
     
