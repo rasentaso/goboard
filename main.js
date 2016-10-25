@@ -675,7 +675,8 @@ Config.prototype.refresh = function(){
 
     this.clear();
 	this.beginFill('0xFF00FF',0.5);
-	this.lineStyle(2, '0xFFFF00', 1);
+//	this.lineStyle(2, '0xFFFF00', 1);
+	this.lineStyle(0);    
     this.drawRoundedRect(this.xpos,this.ypos,this.length,this.length,100);
     this.endFill();
     
