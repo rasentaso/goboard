@@ -687,11 +687,13 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
         button.x = margin + (i % colMax) * (button_length + margin * 2);
         button.y = margin + (i / colMax) * (button_length + margin * 2);    
         button.length  = button_length;
+/*
         button.label   = new PIXI.Text(tracts[i] + '');
         button.label.x = -(button.label.width  / 2);
         button.label.y = -(button.label.height / 2);    
-        button.label.style = style;        
+        button.label.style = style;       
         button.addChild(button.label);
+*/
         button.interactive = true;
         button.buttonMode  = true;
         
