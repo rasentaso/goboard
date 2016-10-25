@@ -699,7 +699,7 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
         var cursorUp = function(event){
             _board.tractChange(Number(button.label.text));
             _board.refresh();
-            this.visible = false;
+            _config.visible = false;
         }    
         button.on('mouseup',cursorUp);    
         button.on('touchend',cursorUp);  
