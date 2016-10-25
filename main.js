@@ -666,7 +666,7 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
     this.clear();
 	this.beginFill('0xFF00FF',0.5);
 	this.lineStyle(0);    
-    this.drawRoundedRect(this.x,this.y,this.length,this.length,100);
+    this.drawRoundedRect(0,0,this.length,this.length,100);
     this.endFill();
     
     var style = {
