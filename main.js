@@ -10,7 +10,7 @@ var _config;
 var _isDrag;
 var _dtxt;
 
-var _debug = true;
+var _debug = false;
 
 window.onload = function() {
 
@@ -708,7 +708,7 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
         console.log('button.x ' + button.x);
         console.log('button.y ' + button.y);
         console.log('button.len ' + button.length);        
-        button.drawRect(button.x,button.y,button.length,button.length);
+        button.drawRect(0,0,button.length,button.length);
         button.endFill();
     }
     
