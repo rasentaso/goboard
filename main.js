@@ -707,7 +707,7 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
         button.lineStyle(0);  
         console.log('button.x ' + button.x);
         console.log('button.y ' + button.y);
-        console.log('button.len ' + button.len);        
+        console.log('button.len ' + button.length);        
         button.drawRect(button.x,button.y,button.length,button.length);
         button.endFill();
     }
