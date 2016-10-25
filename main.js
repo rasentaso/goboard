@@ -10,7 +10,7 @@ var _config;
 var _isDrag;
 var _dtxt;
 
-var _debug = false;
+var _debug = true;
 
 window.onload = function() {
 
