@@ -687,6 +687,10 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
         button.x = margin + (i % colMax) * (button_length + margin * 2);
         button.y = margin + (i / colMax) * (button_length + margin * 2);    
         button.length  = button_length;
+        console.log('button.x ' + button.x);
+        console.log('button.y ' + button.y);
+        console.log('button.length ' + button.length);
+        
 /*
         button.label   = new PIXI.Text(tracts[i] + '');
         button.label.x = -(button.label.width  / 2);
