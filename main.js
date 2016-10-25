@@ -697,7 +697,7 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
         button.buttonMode  = true;
         
         var cursorUp = function(event){
-            _board.tractChange(Number(button.label.text));
+            _board.tractChange(Number(this.label.text));
             _board.refresh();
             _config.visible = false;
         }    
