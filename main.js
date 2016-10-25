@@ -705,7 +705,9 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
         
         button.beginFill('0xFF0000',0.5);
         button.lineStyle(0);  
-_dtxt.text += 'x ' + button.x + 'y ' + button.y + 'l  ' + button.length;        
+        if(i == 0 || i == 1){
+            _dtxt.text += 'x ' + button.x + 'y ' + button.y + 'l  ' + button.length;        
+        }
         button.drawRect(button.x,button.y,button.length,button.length);
         button.endFill();
     }
