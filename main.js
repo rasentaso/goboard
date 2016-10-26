@@ -28,7 +28,7 @@ window.onload = function() {
     renderer.view.style.paddingLeft = "0";
     renderer.view.style.paddingRight = "0";
 
-    var init = calcInitPos(displayWidth,displayHeight);
+    var init = calcInitInfo(displayWidth,displayHeight);
     var stage = new PIXI.Container();
     _back = new Back(0,0,displayWidth,displayHeight,stage);
     
@@ -71,7 +71,7 @@ stage.addChild(_dtxt);
     
 };
 
-function calcInitPos(displayWidth,displayHeight){
+function calcInitInfo(displayWidth,displayHeight){
 
     var init = {};
     var margin = 20;                
@@ -674,7 +674,7 @@ ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
     };  
     
     //tract buttons
-    var tracts = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
+    var tracts = [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
     for(var i = 0; i < tracts.length; ++i){
         var button = new PIXI.Graphics();
         this.addChild(button);
