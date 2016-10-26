@@ -40,21 +40,16 @@ window.onload = function() {
     _back = new Back(0,0,displayWidth,displayHeight,stage);
     
     _board = new Board(stage,init.boardXPos,init.boardYPos,init.boardLen,13);
-    _board.refresh();
     
     _guide = new Guide(stage);
 
     _blacks = new StoneFactory(stage,init.blacksXPos,init.blacksYPos,init.radius,'black');
-    _blacks.refresh();
    
     _whites = new StoneFactory(stage,init.whitesXPos,init.whitesYPos,init.radius,'white');
-    _whites.refresh();    
 
     _blackStack = new StoneStack(stage,init.blacksStackXPos,init.blacksStackYPos,init.radius,'black');
-    _blackStack.refresh();
 
     _whiteStack = new StoneStack(stage,init.whitesStackXPos,init.whitesStackYPos,init.radius,'white');
-    _whiteStack.refresh();
     
     _config = new ConfigBoard(init.boardXPos,init.boardYPos,init.boardLen,stage);
     
@@ -266,6 +261,8 @@ Board.prototype.initialize = function(stage,xpos,ypos,length,tract) {
     this.on('touchend',cursorUp);
     this.on('mousemove',cursorMove);
     this.on('touchmove',cursorMove);
+    
+    this.refresh();
     
 };
 
@@ -486,6 +483,8 @@ StoneFactory.prototype.initialize = function(stage,xpos,ypos,radius,color) {
     this.on('touchstart',cursorDown);
     this.on('mouseup',cursorUp);    
     this.on('touchend',cursorUp);    
+    
+    this.refresh();
             
 }
 
@@ -505,7 +504,7 @@ function StoneStack() {
 }
 StoneStack.prototype = Object.create(PIXI.Graphics.prototype);
 StoneStack.prototype.constructor = StoneStack;
-StoneStack.prototype.initialize = function(stage) {
+StoneStack.prototype.initialize = function(stage,x,y,radius,color) {
 
     PIXI.Graphics.call(this);
     stage.addChild(this);
@@ -564,6 +563,8 @@ StoneStack.prototype.initialize = function(stage) {
     this.on('touchstart',cursorDown);
     this.on('mouseup',cursorUp);    
     this.on('touchend',cursorUp);    
+    
+    this.refresh();
             
 }
 
