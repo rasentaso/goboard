@@ -9,6 +9,12 @@ var _blackStack;
 var _config;
 var _isDrag;
 var _dtxt;
+/*
+_dtxt = new PIXI.Text('fstart');
+_dtxt.x = 100;
+_dtxt.y = 300;
+stage.addChild(_dtxt);
+*/
 
 var _debug = false;
 
@@ -29,35 +35,25 @@ window.onload = function() {
     renderer.view.style.paddingRight = "0";
 
     var init = calcInitInfo(displayWidth,displayHeight);
+    
     var stage = new PIXI.Container();
     _back = new Back(0,0,displayWidth,displayHeight,stage);
     
-    _board = new Board(stage);
-    _board.setUp(init.boardXPos,init.boardYPos,init.boardLen,13);
+    _board = new Board(stage,init.boardXPos,init.boardYPos,init.boardLen,13);
     _board.refresh();
     
-/*
-_dtxt = new PIXI.Text('fstart');
-_dtxt.x = 100;
-_dtxt.y = 300;
-stage.addChild(_dtxt);
-*/
     _guide = new Guide(stage);
 
-    _blacks = new StoneFactory(stage);
-    _blacks.setUp(init.blacksXPos,init.blacksYPos,init.radius,'black');
+    _blacks = new StoneFactory(stage,init.blacksXPos,init.blacksYPos,init.radius,'black');
     _blacks.refresh();
    
-    _whites = new StoneFactory(stage);
-    _whites.setUp(init.whitesXPos,init.whitesYPos,init.radius,'white');
+    _whites = new StoneFactory(stage,init.whitesXPos,init.whitesYPos,init.radius,'white');
     _whites.refresh();    
 
-    _blackStack = new StoneStack(stage);
-    _blackStack.setUp(init.blacksStackXPos,init.blacksStackYPos,init.radius,'black');
+    _blackStack = new StoneStack(stage,init.blacksStackXPos,init.blacksStackYPos,init.radius,'black');
     _blackStack.refresh();
 
-    _whiteStack = new StoneStack(stage);
-    _whiteStack.setUp(init.whitesStackXPos,init.whitesStackYPos,init.radius,'white');
+    _whiteStack = new StoneStack(stage,init.whitesStackXPos,init.whitesStackYPos,init.radius,'white');
     _whiteStack.refresh();
     
     _config = new ConfigBoard(init.boardXPos,init.boardYPos,init.boardLen,stage);
@@ -177,7 +173,7 @@ function Board() {
 }
 Board.prototype = Object.create(PIXI.Graphics.prototype);
 Board.prototype.constructor = Board;
-Board.prototype.initialize = function(stage) {
+Board.prototype.initialize = function(stage,xpos,ypos,length,tract) {
 
     PIXI.Graphics.call(this);
     stage.addChild(this);
@@ -187,6 +183,19 @@ Board.prototype.initialize = function(stage) {
     this.diffX = 0;
     this.diffY = 0;
 
+    this.xpos   = xpos; 
+    this.ypos   = ypos;
+    this.length = length;
+    this.tract  = tract;
+    this.cell_length      = this.length  / this.tract ;
+    this.cell_half_length = this.cell_length / 2;
+    this.movingIds = [];
+    this.cells = [];
+    for(var i = 0; i < this.tract * this.tract; ++i){
+        var cell = {stone : 'blank'};                
+        this.cells[i] = cell;
+    }
+    
     var timer;
     var cursorDown = function(event){
         
@@ -259,23 +268,6 @@ Board.prototype.initialize = function(stage) {
     this.on('touchmove',cursorMove);
     
 };
-
-Board.prototype.setUp = function(xpos,ypos,length,tract){
-    
-    this.xpos   = xpos; 
-    this.ypos   = ypos;
-    this.length = length;
-    this.tract  = tract;
-    this.cell_length      = this.length  / this.tract ;
-    this.cell_half_length = this.cell_length / 2;
-    this.movingIds = [];
-    this.cells = [];
-    for(var i = 0; i < this.tract * this.tract; ++i){
-        var cell = {stone : 'blank'};                
-        this.cells[i] = cell;
-    }
-    
-}
 
 Board.prototype.tractChange = function(tract){
     
@@ -470,15 +462,18 @@ function StoneFactory() {
 StoneFactory.prototype = Object.create(PIXI.Graphics.prototype);
 StoneFactory.prototype.constructor = StoneFactory;
 
-StoneFactory.prototype.initialize = function(stage) {
+StoneFactory.prototype.initialize = function(stage,xpos,ypos,radius,color) {
 
     PIXI.Graphics.call(this);
     stage.addChild(this);
     this.interactive = true;
     this.buttonMode = true;
+    this.xpos    = xpos;
+    this.ypos    = ypos;
+    this.radius  = radius;
+    this.color   = color;
 
     var cursorDown = function(event){
-        
         _isDrag = true;    
         _input_color = this.color;        
     }
@@ -492,15 +487,6 @@ StoneFactory.prototype.initialize = function(stage) {
     this.on('mouseup',cursorUp);    
     this.on('touchend',cursorUp);    
             
-}
-
-StoneFactory.prototype.setUp = function(xpos,ypos,radius,color){
-
-    this.xpos    = xpos;
-    this.ypos    = ypos;
-    this.radius  = radius;
-    this.color   = color;
-    
 }
 
 StoneFactory.prototype.refresh = function(){
@@ -529,6 +515,23 @@ StoneStack.prototype.initialize = function(stage) {
     
     this.interactive = true;
     this.buttonMode = true;
+    
+    this.x       = x;
+    this.y       = y;
+    this.radius  = radius;
+    this.color   = color;
+    if(color === 'white')this.reverse_color = 'black';
+    else if(color === 'black')this.reverse_color = 'white';
+
+    this.label.style = {
+        fontFamily : 'Arial',
+        fontSize : radius + 'px',        
+        fontStyle : 'normal',
+        fontWeight : 'bold',
+        fill : ColorCode(this.reverse_color),   
+    };    
+
+    
     this.count = 0;
     
     var cursorDown = function(event){
@@ -563,25 +566,6 @@ StoneStack.prototype.initialize = function(stage) {
     this.on('touchend',cursorUp);    
             
 }
-
-StoneStack.prototype.setUp = function(x,y,radius,color){
-
-    this.x       = x;
-    this.y       = y;
-    this.radius  = radius;
-    this.color   = color;
-    if(color === 'white')this.reverse_color = 'black';
-    else if(color === 'black')this.reverse_color = 'white';
-    var style = {
-        fontFamily : 'Arial',
-        fontSize : radius + 'px',        
-        fontStyle : 'normal',
-        fontWeight : 'bold',
-        fill : ColorCode(this.reverse_color),   
-    };    
-    this.label.style = style;
-
-    }
 
 StoneStack.prototype.refresh = function(){
     
