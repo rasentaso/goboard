@@ -49,7 +49,6 @@ window.onload = function() {
 	// run the render loop
 	animate();
 	function animate() {        
-        _dtxt.text = _input_color;
 	    renderer.render(stage);
 	    requestAnimationFrame( animate );
     }
