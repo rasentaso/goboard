@@ -471,7 +471,6 @@ StoneFactory.prototype.initialize = function(stage,xpos,ypos,radius,color) {
 
     var cursorUp = function(event){
         _isDrag = false;
-//        _input_color = 'blank';        
     }
     this.on('mousedown',cursorDown);
     this.on('touchstart',cursorDown);
@@ -524,12 +523,10 @@ StoneStack.prototype.initialize = function(stage,x,y,radius,color) {
         fill : ColorCode(this.reverse_color),   
     };    
 
-    
-    this.count = 0;
-    
+    this.count = 0;    
     var cursorDown = function(event){
         _isDrag = true;  
-        if(this.count > 0){
+        if(this.count > 0 && _input_color === 'blank'){
             _input_color = this.reverse_color;        
             --this.count;
         }
