@@ -9,12 +9,6 @@ var _blackStack;
 var _isDrag;
 var _dtxt;
 
-/*
-_dtxt = new PIXI.Text('fstart');
-_dtxt.x = 100;
-_dtxt.y = 300;
-stage.addChild(_dtxt);
-*/
 
 var _debug = false;
 
@@ -34,7 +28,14 @@ window.onload = function() {
     renderer.view.style.paddingLeft = "0";
     renderer.view.style.paddingRight = "0";
 
+    
     var stage = new PIXI.Container();
+
+_dtxt = new PIXI.Text(_input_color);
+_dtxt.x = 100;
+_dtxt.y = 300;
+stage.addChild(_dtxt);
+    
     _back = new Back(0,0,displayWidth,displayHeight,stage);
     var init = calcInitInfo(displayWidth,displayHeight);
     _board = new Board(stage,init.boardXPos,init.boardYPos,init.boardLen,13);
@@ -463,7 +464,7 @@ StoneFactory.prototype.initialize = function(stage,xpos,ypos,radius,color) {
 
     var cursorUp = function(event){
         _isDrag = false;
-        _input_color = 'blank';        
+//        _input_color = 'blank';        
     }
     this.on('mousedown',cursorDown);
     this.on('touchstart',cursorDown);
