@@ -31,7 +31,7 @@ window.onload = function() {
     
     var stage = new PIXI.Container();
 
-_dtxt = new PIXI.Text(_input_color);
+_dtxt = new PIXI.Text('koko' + _input_color);
 _dtxt.x = 100;
 _dtxt.y = 300;
 stage.addChild(_dtxt);
