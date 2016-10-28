@@ -117,6 +117,10 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
     this.drawRect(xpos,ypos,width,height);
     this.endFill();  
 
+    var cursorDown = function(event){
+        _isDrag = true;            
+    }
+    
     var cursorUp = function(event){
         _board.diffX = 0;
         _board.diffY = 0;
@@ -133,7 +137,8 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
             }
         }
     }
-    
+    this.on('mousedown',cursorDown);
+    this.on('touchstart',cursorDown);    
     this.on('mouseup',cursorUp);
     this.on('touchend',cursorUp);
     this.on('mousemove',cursorMove);
