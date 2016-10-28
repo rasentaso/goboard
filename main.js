@@ -2,14 +2,18 @@ var _input_color = 'blank';
 var _back;
 var _board;
 var _guide;
-var _whites;
-var _blacks;
+var _whiteFactory;
+var _blackFactory;
 var _whiteStack;
 var _blackStack;
 var _isDrag;
 var _dtxt;
-
-
+/*
+_dtxt = new PIXI.Text('koko' + _input_color);
+_dtxt.x = 100;
+_dtxt.y = 300;
+stage.addChild(_dtxt);
+*/
 var _debug = false;
 
 window.onload = function() {
@@ -34,17 +38,12 @@ window.onload = function() {
     
     _back = new Back(0,0,displayWidth,displayHeight,stage);
     var init = calcInitInfo(displayWidth,displayHeight);
-    _board = new Board(stage,init.boardXPos,init.boardYPos,init.boardLen,13);
-    _guide = new Guide(stage);
-    _blacks = new StoneFactory(stage,init.blacksXPos,init.blacksYPos,init.radius,'black');
-    _whites = new StoneFactory(stage,init.whitesXPos,init.whitesYPos,init.radius,'white');
-    _blackStack = new StoneStack(stage,init.blacksStackXPos,init.blacksStackYPos,init.radius,'black');
-    _whiteStack = new StoneStack(stage,init.whitesStackXPos,init.whitesStackYPos,init.radius,'white');
-
-_dtxt = new PIXI.Text('koko' + _input_color);
-_dtxt.x = 100;
-_dtxt.y = 300;
-stage.addChild(_dtxt);
+    _board          = new Board(stage,init.boardXPos,init.boardYPos,init.boardLen,13);
+    _guide          = new Guide(stage);
+    _blackFactory   = new StoneFactory(stage,init.blacksXPos,init.blacksYPos,init.radius,'black');
+    _whiteFactory   = new StoneFactory(stage,init.whitesXPos,init.whitesYPos,init.radius,'white');
+    _blackStack     = new StoneStack(stage,init.blacksStackXPos,init.blacksStackYPos,init.radius,'black');
+    _whiteStack     = new StoneStack(stage,init.whitesStackXPos,init.whitesStackYPos,init.radius,'white');
     
 	// run the render loop
 	animate();
