@@ -31,10 +31,6 @@ window.onload = function() {
     
     var stage = new PIXI.Container();
 
-_dtxt = new PIXI.Text('koko' + _input_color);
-_dtxt.x = 100;
-_dtxt.y = 300;
-stage.addChild(_dtxt);
     
     _back = new Back(0,0,displayWidth,displayHeight,stage);
     var init = calcInitInfo(displayWidth,displayHeight);
@@ -44,6 +40,11 @@ stage.addChild(_dtxt);
     _whites = new StoneFactory(stage,init.whitesXPos,init.whitesYPos,init.radius,'white');
     _blackStack = new StoneStack(stage,init.blacksStackXPos,init.blacksStackYPos,init.radius,'black');
     _whiteStack = new StoneStack(stage,init.whitesStackXPos,init.whitesStackYPos,init.radius,'white');
+
+_dtxt = new PIXI.Text('koko' + _input_color);
+_dtxt.x = 100;
+_dtxt.y = 300;
+stage.addChild(_dtxt);
     
 	// run the render loop
 	animate();
