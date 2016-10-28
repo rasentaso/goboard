@@ -38,6 +38,8 @@ window.onload = function() {
     
     _back = new Back(0,0,displayWidth,displayHeight,stage);
     var init = calcInitInfo(displayWidth,displayHeight);
+    var test = document.getElementById('tract');
+    console.log(test);
     var tract = Number(document.getElementById('tract'));
     _board          = new Board(stage,init.boardXPos,init.boardYPos,init.boardLen,tract);
     _guide          = new Guide(stage);
