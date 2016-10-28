@@ -40,10 +40,10 @@ window.onload = function() {
     
     _back = new Back(0,0,displayWidth,displayHeight,stage);
     var init = calcInitInfo(displayWidth,displayHeight);
-    var test = document.getElementById('tract');
-    console.log(test);
-    var tract = Number(document.getElementById('tract'));
-    _board          = new Board(stage,init.boardXPos,init.boardYPos,init.boardLen,tract);
+//    var test = document.getElementById('tract');
+//    console.log(test);
+//    var tract = Number(document.getElementById('tract'));
+    _board          = new Board(stage,init.boardXPos,init.boardYPos,init.boardLen,8);
     _guide          = new Guide(stage);
     _blackFactory   = new StoneFactory(stage,init.blacksXPos,init.blacksYPos,init.radius,'black');
     _whiteFactory   = new StoneFactory(stage,init.whitesXPos,init.whitesYPos,init.radius,'white');
