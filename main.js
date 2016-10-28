@@ -545,7 +545,8 @@ StoneStack.prototype.initialize = function(stage,x,y,radius,color) {
             }            
             this.count += _board.movingIds.length;                        
         }
-        _board.movingIds = [];        
+        _board.movingIds = [];
+        _board.refresh();
         this.refresh();        
         _guide.clear();                     
     }
