@@ -6,9 +6,9 @@ var _whites;
 var _blacks;
 var _whiteStack;
 var _blackStack;
-var _config;
 var _isDrag;
 var _dtxt;
+
 /*
 _dtxt = new PIXI.Text('fstart');
 _dtxt.x = 100;
@@ -34,24 +34,15 @@ window.onload = function() {
     renderer.view.style.paddingLeft = "0";
     renderer.view.style.paddingRight = "0";
 
-    var init = calcInitInfo(displayWidth,displayHeight);
-    
     var stage = new PIXI.Container();
     _back = new Back(0,0,displayWidth,displayHeight,stage);
-    
+    var init = calcInitInfo(displayWidth,displayHeight);
     _board = new Board(stage,init.boardXPos,init.boardYPos,init.boardLen,13);
-    
     _guide = new Guide(stage);
-
     _blacks = new StoneFactory(stage,init.blacksXPos,init.blacksYPos,init.radius,'black');
-   
     _whites = new StoneFactory(stage,init.whitesXPos,init.whitesYPos,init.radius,'white');
-
     _blackStack = new StoneStack(stage,init.blacksStackXPos,init.blacksStackYPos,init.radius,'black');
-
     _whiteStack = new StoneStack(stage,init.whitesStackXPos,init.whitesStackYPos,init.radius,'white');
-    
-    _config = new ConfigBoard(init.boardXPos,init.boardYPos,init.boardLen,stage);
     
 	// run the render loop
 	animate();
@@ -123,9 +114,6 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
     this.drawRect(xpos,ypos,width,height);
     this.endFill();  
 
-    var cursorDown = function(event){
-        _config.visible = true;
-    }
     var cursorUp = function(event){
         _board.diffX = 0;
         _board.diffY = 0;
@@ -143,8 +131,6 @@ Back.prototype.initialize = function(xpos,ypos,width,height,stage) {
         }
     }
     
-    this.on('mousedown',cursorDown);
-    this.on('touchstart',cursorDown);
     this.on('mouseup',cursorUp);
     this.on('touchend',cursorUp);
     this.on('mousemove',cursorMove);
@@ -534,7 +520,6 @@ StoneStack.prototype.initialize = function(stage,x,y,radius,color) {
     this.count = 0;
     
     var cursorDown = function(event){
-        _config.visible = false;
         _isDrag = true;  
         if(this.count > 0){
             _input_color = this.reverse_color;        
@@ -620,74 +605,6 @@ Guide.prototype.refresh = function(x,y){
             this.endFill();  
         } 
     }
-}
-
-//
-// ConfigBoard
-//
-function ConfigBoard() {
-    this.initialize.apply(this, arguments);
-}
-ConfigBoard.prototype = Object.create(PIXI.Graphics.prototype);
-ConfigBoard.prototype.constructor = ConfigBoard;
-ConfigBoard.prototype.initialize = function(xpos,ypos,length,stage) {
-    
-    PIXI.Graphics.call(this);
-    stage.addChild(this);    
-    this.x   = xpos; 
-    this.y   = ypos;
-    this.length = length;    
-    this.interactive = true;
-    this.visible = false;
-
-    //draw
-    this.clear();
-	this.beginFill('0xFF00FF',0.5);
-	this.lineStyle(0);    
-    this.drawRoundedRect(0,0,this.length,this.length,100);
-    this.endFill();
-    
-    var margin = 10;
-    var colMax = 4;
-    var button_length = Math.floor((this.length - margin * 2 * colMax) / colMax);
-    var style = {
-        fontFamily : 'Arial',
-        fontSize : Math.floor(button_length / 2) + 'px',        
-        fontStyle : 'normal',
-        fontWeight : 'bold',
-        fill : 0xFF00FF,   
-    };  
-    
-    //tract buttons
-    var tracts = [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
-    for(var i = 0; i < tracts.length; ++i){
-        var button = new PIXI.Graphics();
-        this.addChild(button);
-        button.x = margin + Math.floor(i % colMax) * (button_length + margin * 2);
-        button.y = margin + Math.floor(i / colMax) * (button_length + margin * 2);    
-        button.length  = button_length;
-        button.label   = new PIXI.Text(tracts[i] + '');
-        button.label.x = button.label.width  / 2;
-        button.label.y = button.label.height / 2;    
-        button.label.style = style;       
-        button.addChild(button.label);
-        button.interactive = true;
-        button.buttonMode  = true;
-        
-        var cursorUp = function(event){
-            _board.tractChange(Number(this.label.text));
-            _board.refresh();
-            _config.visible = false;
-        }    
-        button.on('mouseup',cursorUp);    
-        button.on('touchend',cursorUp);  
-        
-        button.beginFill('0xFF0000',0.5);
-        button.lineStyle(0);  
-        button.drawRect(0,0,button.length,button.length);
-        button.endFill();
-    }
-    
 }
 
 function ColorCode(name){
