@@ -20,7 +20,6 @@ window.onload = function() {
 
     var displayWidth  = innerWidth;
     var displayHeight = innerHeight;
-    console.log('koko');
     
 	var renderer = PIXI.autoDetectRenderer(displayWidth,
                                            displayHeight,
