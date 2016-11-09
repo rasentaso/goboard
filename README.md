@@ -1,2 +1,2 @@
 # ブラウザ向け碁盤
-http://www.rasentaso.github.io/goboard
+http://rasentaso.github.io/goboard
